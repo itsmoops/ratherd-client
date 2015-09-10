@@ -1,0 +1,98 @@
+.rather-row {
+    margin-top: 5%;
+}
+
+.rather {
+    /*color: black;*/
+}
+
+.ratherPanel {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+    background: #FF3E21;
+    border-bottom: 4px solid #7F1F10;
+    padding: 4px 10px;
+    font-size: 15px;
+    font-size: 25px;
+    padding-top: 15px;
+    min-height: 170px;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+
+    align-items: center;
+    justify-content:center;
+}
+
+.ratherPanel>a {
+    color: white;
+}
+
+.ratherPanel:hover {
+    color:#B6B6B6;
+    text-decoration: none;
+    background: #7F1F10;
+    margin-top: 4px !important;
+    border-bottom: none;
+}
+
+.ratherPanel:hover>a {
+    text-decoration: none;
+    color: #B6B6B6;
+}
+
+.orPanel {
+    padding-top: 50px;
+    /*color: white;*/
+}
+
+.or {
+    color: white;
+}
+
+/* Bootstrap Media Queries */
+/* xs */
+@media(max-width:767px){
+    .ratherPanel {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .orPanel {
+        padding-top: 0px;
+        padding-bottom: 15px;
+    }
+}
+/* s */
+@media(min-width:768px){
+    .ratherPanel {
+        margin-left: 8%;
+        margin-right: 8%;
+    }
+}
+/* m */
+@media(min-width:992px){
+    .ratherPanel {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+/* lg */
+@media(min-width:1200px){
+    .ratherPanel {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+
+@media(max-width:992px) {
+    .orPanel {
+        padding-top: 0px;
+        padding-bottom: 15px;
+    }
+}

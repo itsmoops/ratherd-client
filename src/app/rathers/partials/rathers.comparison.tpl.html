@@ -1,0 +1,22 @@
+<div class="col-lg-12 text-center">
+    <h1 class="title">Would You Rather...</h1>
+    <div class="col-lg-12 rather-row">
+        <div class="col-lg-1">
+        </div>
+        <div ng-click="vote('0')" class="col-lg-4 col-md-5 defaultPanel ratherPanel">
+            <a>{{comparison[0].rather_text}}</a>
+            <!-- </br>
+            <a>{{comparison[0].ratio | number:2}}</a> -->
+        </div>
+        <div class="col-lg-2 col-md-2 orPanel">
+            <h2>OR</h2>
+        </div>
+        <div ng-click="vote('1')" class="col-lg-4 col-md-5 defaultPanel ratherPanel">
+            <a>{{comparison[1].rather_text}}</a>
+            <!-- </br>
+            <a>{{comparison[1].ratio | number:2}}</a> -->
+        </div>
+        <div class="col-lg-1">
+        </div>
+    </div>
+</div>

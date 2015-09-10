@@ -1,0 +1,129 @@
+body {
+    /*color: white;*/
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    background-repeat: repeat;
+    /*background-image: url(../img/brilliant.png);*/
+    background-color: #0A1E3C;
+    background-image: url(../img/bright-squares.png);
+    /*background-color: #222222;*/
+}
+
+h1 {
+    font-size: 100px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #FF8875;
+    margin: 0px -15px;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+.title {
+    margin-top: 8%;
+}
+
+.defaultPanel {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #222222;
+    color: white;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border-bottom: 4px solid #484848;
+}
+
+.panelHeader {
+    font-size: 45px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    text-align: center;
+}
+
+.error {
+    color: #222222;
+}
+
+.button {
+    clear: both;
+    margin-top: -30px;
+    cursor: pointer;
+    color: white;
+    background: #FF3E21;
+    border-bottom: 2px solid #400F08;
+    padding: 4px 10px;
+    font-size: 15px;
+    /*-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;*/
+    text-transform: uppercase;
+}
+
+.button:hover {
+    color:#B6B6B6;
+    text-decoration: none;
+    background: #7F1F10;
+    margin-top: 10px !important;
+}
+
+.buttonImage {
+    background-repeat: no-repeat;
+    height: 15px;
+    width: 15px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.thumbsUp {
+    content: url(../img/thumbs-up-icon-white.png);
+}
+
+.rather-button:hover .thumbsUp {
+    content: url(../img/thumbs-up-icon-gray.png);
+}
+
+.flag {
+    content: url(../img/flag-white.png);
+}
+
+.flag-button:hover .flag {
+    content: url(../img/flag-gray.png);
+}
+
+.flag-button {
+    margin-left: 10px;
+}
+
+/* Bootstrap Media Queries */
+/* xs */
+@media(max-width:767px){
+    h1 {
+        font-size: 25px;
+    }
+}
+/* s */
+@media(min-width:768px){
+    h1 {
+        font-size: 60px;
+    }
+}
+/* m */
+@media(min-width:992px){
+    h1 {
+        font-size: 75px;
+    }
+}
+/* lg */
+@media(min-width:1200px){
+    h1 {
+        font-size: 100px;
+    }
+}
