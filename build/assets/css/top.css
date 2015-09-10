@@ -1,0 +1,32 @@
+.rankPanel {
+	margin-top: 40px;
+	height:600px;
+}
+
+.orderedRather {
+	margin-bottom: 5px;
+	padding-left: 0px !important;
+}
+
+/* Bootstrap Media Queries */
+/* xs */
+@media(max-width:767px){
+	.rankPanel {
+		margin-top: 0px;
+	}
+	.topHeader {
+		font-size: 25px;
+	}
+}
+/* s */
+@media(min-width:768px){
+
+}
+/* m */
+@media(min-width:992px){
+
+}
+/* lg */
+@media(min-width:1200px){
+
+}

@@ -1,0 +1,23 @@
+.banner {
+	margin-bottom: 70px;
+}
+
+.landingButton {
+    font-size: 55px;
+    padding: 10px 35px;
+    text-transform: uppercase;
+    *-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #222222;
+    color: #FF3E21;
+    border-bottom: 2px solid black;
+    margin-top: 40px !important;
+}
+
+.landingButton:hover {
+    margin-top: 44px !important;
+    color:#FF8875;
+    text-decoration: none;
+    background: black;
+}

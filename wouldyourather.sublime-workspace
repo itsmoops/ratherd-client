@@ -1,0 +1,624 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"mo",
+				"module	AngularJS"
+			],
+			[
+				"direc",
+				"directives"
+			],
+			[
+				"max-",
+				"max-width"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"mar",
+				"margin-right"
+			],
+			[
+				"marg",
+				"margin-left"
+			],
+			[
+				"pa",
+				"padding-top"
+			],
+			[
+				"pad",
+				"padding-top"
+			],
+			[
+				"padd",
+				"padding-bottom"
+			],
+			[
+				"u",
+				"ul	Tag"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"b",
+				"background"
+			],
+			[
+				"co",
+				"color"
+			],
+			[
+				"bo",
+				"border"
+			],
+			[
+				"ng-r",
+				"ng-repeat	AngularJS"
+			],
+			[
+				"tex",
+				"text-decoration"
+			],
+			[
+				"fon",
+				"font-style"
+			],
+			[
+				"c",
+				"class	Attr"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"p",
+				"padding"
+			],
+			[
+				"bor",
+				"border-bottom"
+			],
+			[
+				"te",
+				"text-transform"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"h",
+				"h2	Tag"
+			],
+			[
+				"backg",
+				"background-color"
+			],
+			[
+				"d",
+				"display"
+			],
+			[
+				"int",
+				"intro"
+			],
+			[
+				"intro",
+				"intro2"
+			],
+			[
+				"TRANSI",
+				"TRANSITIONS"
+			],
+			[
+				"cu",
+				"curImg"
+			],
+			[
+				"img",
+				"imgDuration〔variable〕"
+			],
+			[
+				"page",
+				"pageLoad"
+			],
+			[
+				"set",
+				"setTimeout〔function〕"
+			],
+			[
+				"st",
+				"style	Tag"
+			],
+			[
+				"s",
+				"sein02"
+			],
+			[
+				"pr",
+				"previousAudio"
+			],
+			[
+				"fun",
+				"function〔keyword〕"
+			],
+			[
+				"is",
+				"is_positive〔argument〕"
+			],
+			[
+				"op",
+				"option2"
+			],
+			[
+				"option",
+				"option_text"
+			],
+			[
+				"ass",
+				"assertEqual〔function〕"
+			],
+			[
+				"as",
+				"assertEqual〔function〕"
+			],
+			[
+				"li",
+				"link	Tag"
+			],
+			[
+				"m",
+				"margin-top"
+			],
+			[
+				"th",
+				"theResults"
+			],
+			[
+				"em",
+				"emailSubject"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "<!doctype html>\n<html ng-app=\"RatherApp\" class=\"no-js\" lang=\"\">\n    <head>\n        <meta charset=\"utf-8\">\n        <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">\n        <title>Would You Rather?</title>\n        <meta name=\"description\" content=\"\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n        <link rel=\"apple-touch-icon\" href=\"apple-touch-icon.png\">\n        <!-- Place favicon.ico in the root directory -->\n\n        <link rel=\"stylesheet\" href=\"css/normalize.css\">\n        <link rel=\"stylesheet\" href=\"css/main.css\">\n\n        <!-- Bootstrap Core CSS -->\n        <link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">\n        <script src=\"js/vendor/modernizr-2.8.3.min.js\"></script>\n\n        <!-- Custom CSS -->\n        <link rel=\"stylesheet\" href=\"css/wouldyourather.css\">\n\n        <!-- Font -->\n        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>\n    </head>\n    <body>\n        <!-- App -->\n        <nav class=\"navbar navbar-inverse\">\n          <div class=\"container-fluid\">\n            <div class=\"navbar-header\">\n              <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#myNavbar\">\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span> \n              </button>\n            </div>\n            <div class=\"collapse navbar-collapse\" id=\"myNavbar\">\n              <ul class=\"nav navbar-nav\">\n                <li class=\"active\"><a href=\"#\">Play</a></li>\n                <li><a href=\"#\">Most Rather'd</a></li>\n                <li><a href=\"#\">Submit a Rather!</a></li> \n              </ul>\n            </div>\n          </div>\n        </nav>\n        <div>\n            <div class=\"col-lg-12 text-center\">\n                <h1 class=\"title\">Would You Rather...</h1>\n                <rather-info></rather-info>\n            </div>\n        </div>\n\n        <!-- Google Analytics -->\n        <script>\n          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\n          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\n          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');\n\n          ga('create', 'UA-65575099-1', 'auto');\n          ga('send', 'pageview');\n        </script>\n\n        <!-- jQuery -->\n        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js\"></script>\n\n        <!-- Bootstrap Core JavaScript -->\n        <script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js\"></script>\n\n        <!-- Angular -->\n        <script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js\"></script>\n        <!-- Angular Route -->\n        <script src=\"js/angular-route.js\"></script>\n        <!-- Angular Modules -->\n        <script src=\"app/app.js\"></script>\n        <!-- Angular Controllers -->\n        <script src=\"\"></script>\n        <!-- Angular Directives -->\n        <script src=\"app/rathers/partials/rather.directives.js\"></script>\n        <!-- Angular Services \n        <script src=\"js/services/serviceName.js\"></script>-->\n\n        <!-- Misc JS -->\n        <script src=\"js/plugins.js\"></script>\n        <script src=\"js/main.js\"></script>\n\n        <!-- Custom JavaScript -->\n        <script src=\"js/wouldyourather.js\"></script> \n    </body>\n</html>\n",
+			"file": "index.html",
+			"file_size": 3515,
+			"file_write_time": 130823156080000000,
+			"settings":
+			{
+				"buffer_size": 3515,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/app.js",
+			"settings":
+			{
+				"buffer_size": 100,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/controllers/RatherController.js",
+			"settings":
+			{
+				"buffer_size": 642,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<div class=\"col-lg-12 rather-row\">\n    <div class=\"col-lg-1\">\n    </div>\n    <div class=\"col-lg-4 col-md-5 ratherPanel\">\n        <h2>be a dog</h2>\n        <br/><br/>\n        <a class=\"rather-button\">I'd Rather this</a>\n    </div>\n    <div class=\"col-lg-2 col-md-2 orPanel\">\n        <h2>OR</h2>\n    </div>\n    <div class=\"col-lg-4 col-md-5 ratherPanel\">\n        <h2>be a cat</h2>\n        <br/><br/>\n        <a class=\"rather-button\">I'd Rather this</a>\n    </div>\n    <div class=\"col-lg-1\">\n    </div>\n</div>",
+			"file": "js/directives/ratherInfo.html",
+			"file_size": 506,
+			"file_write_time": 130823143490000000,
+			"settings":
+			{
+				"buffer_size": 506,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/rathers/rather.directives.js",
+			"settings":
+			{
+				"buffer_size": 207,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 347.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ang",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/wouldyourather"
+	],
+	"file_history":
+	[
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/wouldyourather/js/controllers/RatherController.js",
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/wouldyourather/js/directives/ratherInfo.html",
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/wouldyourather/js/wouldyourather.js",
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/wouldyourather/js/directives/ratherInfo.js",
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/wouldyourather/js/app.js",
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/wouldyourather/css/wouldyourather.css",
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/wouldyourather/css/BootstrapMediaQueries.css",
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/wouldyourather/js/directives/rathers.html",
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/wouldyourather/index2.html",
+		"/Users/ericmoore/Desktop/DJ/dojour-client-master/lib/ment.io/ment.io/peopledata.json",
+		"/Users/ericmoore/Desktop/DJ/dojour-server-master/account/models.py",
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/itsmoops/css/seinfeld.css",
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/itsmoops/js/seinfeld.js",
+		"/Users/ericmoore/Documents/Sites/GitHub Repos/seintransition/js/jquery.easing.min.js",
+		"/Users/ericmoore/Documents/TerminalScripts/HiddenFilesOn",
+		"/Users/ericmoore/Documents/Sites/Reusable Code/Bootstrap Templates/Grayscale/index.html",
+		"/Users/ericmoore/Documents/Sites/wouldyourather-server/server/option/migrations/0001_initial.py",
+		"/Users/ericmoore/Documents/Sites/wouldyourather-server/server/db.sqlite3",
+		"/Users/ericmoore/Documents/Sites/wouldyourather-server/server/option/models.py",
+		"/Users/ericmoore/Desktop/Sites/Tutorial/elements/comparison.tpl.html",
+		"/Users/ericmoore/Desktop/Sites/Tutorial/app.js",
+		"/Users/ericmoore/Desktop/Sites/Tutorial/index.html",
+		"/Users/ericmoore/Desktop/heyneighbor.html",
+		"/Users/ericmoore/Documents/Programming/Bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css",
+		"/Users/ericmoore/Documents/Programming/Bootstrap/bootstrap-3.3.2-dist/grid.html",
+		"/Users/ericmoore/Documents/Programming/Bootstrap/bootstrap-3.3.2-dist/index.html",
+		"/Users/ericmoore/Documents/Programming/Bootstrap/bootstrap-3.3.2-dist/js/respond.js",
+		"/Users/ericmoore/Documents/Programming/Bootstrap/bootstrap-3.3.2-dist/css/custom.css",
+		"/Users/ericmoore/Documents/Programming/Bootstrap/bootstrap-3.3.2-dist/css/bootstrap.min.css",
+		"/Users/ericmoore/Documents/Coda/Jelly Town/css/style.css",
+		"/Users/ericmoore/Documents/Coda/Jelly Town/home.html",
+		"/Users/ericmoore/Documents/Coda/Reusable Code/default.html",
+		"/Users/ericmoore/Documents/Coda/Travel Vixen/contactForm.php"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"background-color: #e7e7e7;",
+			"#e7e7e7",
+			"Date",
+			"border",
+			"curimg",
+			"header",
+			"50px",
+			"@media",
+			"intro",
+			"jq",
+			"intro",
+			"alt=\"",
+			"^\\n",
+			"col-",
+			"col"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/Users/ericmoore/Documents/Sites/GitHub Repos/wouldyourather"
+		}
+	],
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3515,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2998,
+								2998
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 571.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 100,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								53,
+								53
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "js/controllers/RatherController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 642,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								116,
+								116
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "js/directives/ratherInfo.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 506,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								506,
+								506
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/rathers/rather.directives.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 207,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								130,
+								130
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"rather",
+				"app/rathers/rather.directives.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 179.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

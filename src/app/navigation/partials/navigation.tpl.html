@@ -1,0 +1,19 @@
+<div class="navbar navbar-inverse" role="navigation" ng-controller="NavBarCtrl">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" collapse="isCollapsed">
+      <ul class="nav navbar-nav">
+        <li ui-sref-active='active'><a ui-sref='play'>Play</a></li>
+        <li ui-sref-active='active'><a ui-sref='top'>Most Rather'd</a></li>
+        <li ui-sref-active='active'><a ui-sref='submit'>Submit a Rather!</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
