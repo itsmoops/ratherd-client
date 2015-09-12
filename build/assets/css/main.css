@@ -48,8 +48,18 @@ hr {
     text-align: center;
 }
 
-.error {
+.errorNo {
     color: #222222;
+    -webkit-transition: 1s linear;
+    /*to only change opacity*/
+    /*-webkit-transition: opacity 1s linear*/
+   -moz-transition: 1s linear;
+   -o-transition: 1s linear;
+   transition: 1s linear;
+}
+
+.errorYes {
+    color: #FF8875;
 }
 
 .button {

@@ -1,20 +1,29 @@
 <div class="col-lg-12">
 	<div class="col-lg-2 col-md-1"></div>
 	<div class="col-lg-8 col-md-10 defaultPanel rankPanel">
-		<p class="panelHeader topHeader">Top Ranking Rathers</p>
-		<hr/>
-		<!-- repeater -->
-		<div>
-			<div class="col-xs-12 orderedRather">
-				<div class="col-xs-1 text-right">1</div>
-				<div class="col-xs-10">Eat goat meat</div>
-			</div>
+		<p class="panelHeader topHeader">Top 10 Most Rather'd</p>
+		<hr/><!-- 
+		<pre>Sorting by = {{predicate}}; reverse = {{reverse}}</pre>
+		<select ng-model="ranked" ng-change="order('id')">
+		  <option value="-ratio">Best Win Percentage</option>
+		  <option value="ratio">Worst Win Percentage</option>
+		  <option value="-wins">Most Wins Total</option>
+		  <option value="-losses">Most Losses Total</option>
+		</select> -->
+		<div class="text-center">
+			<a id="defaultActive" href="" class="filterBy" ng-click="order('-ratio')">Biggest Winner</a> |
+			<a href="" class="filterBy" ng-click="order('ratio')">Biggest Loser</a> |
+			<a href="" class="filterBy" ng-click="order('-wins')">Most Wins Total</a> |
+			<a href="" class="filterBy" ng-click="order('-losses')">Most Losses Total</a>
 		</div>
-		<!-- second for testing style -->
-		<div>
+
+		<!-- repeater -->
+		<div class="ratherLists" ng-repeat="item in ranked | orderBy:predicate | limitTo:10">
 			<div class="col-xs-12 orderedRather">
-				<div class="col-xs-1 text-right">2</div>
-				<div class="col-xs-10">Cropdust the pope</div>
+				<div class="col-xs-1 text-right">{{$index + 1}}.</div>
+				<div class="col-xs-8">{{item.rather_text}}</div>
+				<div class="col-xs-1">{{ item.wins }} </div>
+				<div class="col-xs-1">{{ item.losses }} </div>
 			</div>
 		</div>
 	</div>

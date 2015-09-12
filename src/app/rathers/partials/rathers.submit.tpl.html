@@ -8,7 +8,7 @@
 		<!-- <br/><br/>
 		<p>or</p>
 		<input type="text" class="submitTextBox" ng-model='rather.rather_text'></input> -->
-		<p id="blankSubmitError" class="error">.</p>
+		<p id="blankSubmitError" ng-class="{toggle: errorYes}" class="errorNo">.</p>
 		<div class="col-lg-12 text-center">
 			<a class="button" ng-click='create()'>
             	Submit!

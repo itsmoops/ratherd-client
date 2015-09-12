@@ -75,7 +75,7 @@ angular.module("rathers/partials/rathers.submit.tpl.html", []).run(["$templateCa
     "		<!-- <br/><br/>\n" +
     "		<p>or</p>\n" +
     "		<input type=\"text\" class=\"submitTextBox\" ng-model='rather.rather_text'></input> -->\n" +
-    "		<p id=\"blankSubmitError\" class=\"error\">.</p>\n" +
+    "		<p id=\"blankSubmitError\" ng-class=\"{toggle: errorYes}\" class=\"errorNo\">.</p>\n" +
     "		<div class=\"col-lg-12 text-center\">\n" +
     "			<a class=\"button\" ng-click='create()'>\n" +
     "            	Submit!\n" +
@@ -91,20 +91,29 @@ angular.module("rathers/partials/rathers.top.tpl.html", []).run(["$templateCache
     "<div class=\"col-lg-12\">\n" +
     "	<div class=\"col-lg-2 col-md-1\"></div>\n" +
     "	<div class=\"col-lg-8 col-md-10 defaultPanel rankPanel\">\n" +
-    "		<p class=\"panelHeader topHeader\">Top Ranking Rathers</p>\n" +
-    "		<hr/>\n" +
-    "		<!-- repeater -->\n" +
-    "		<div>\n" +
-    "			<div class=\"col-xs-12 orderedRather\">\n" +
-    "				<div class=\"col-xs-1 text-right\">1</div>\n" +
-    "				<div class=\"col-xs-10\">Eat goat meat</div>\n" +
-    "			</div>\n" +
+    "		<p class=\"panelHeader topHeader\">Top 10 Most Rather'd</p>\n" +
+    "		<hr/><!-- \n" +
+    "		<pre>Sorting by = {{predicate}}; reverse = {{reverse}}</pre>\n" +
+    "		<select ng-model=\"ranked\" ng-change=\"order('id')\">\n" +
+    "		  <option value=\"-ratio\">Best Win Percentage</option>\n" +
+    "		  <option value=\"ratio\">Worst Win Percentage</option>\n" +
+    "		  <option value=\"-wins\">Most Wins Total</option>\n" +
+    "		  <option value=\"-losses\">Most Losses Total</option>\n" +
+    "		</select> -->\n" +
+    "		<div class=\"text-center\">\n" +
+    "			<a id=\"defaultActive\" href=\"\" class=\"filterBy\" ng-click=\"order('-ratio')\">Biggest Winner</a> |\n" +
+    "			<a href=\"\" class=\"filterBy\" ng-click=\"order('ratio')\">Biggest Loser</a> |\n" +
+    "			<a href=\"\" class=\"filterBy\" ng-click=\"order('-wins')\">Most Wins Total</a> |\n" +
+    "			<a href=\"\" class=\"filterBy\" ng-click=\"order('-losses')\">Most Losses Total</a>\n" +
     "		</div>\n" +
-    "		<!-- second for testing style -->\n" +
-    "		<div>\n" +
+    "\n" +
+    "		<!-- repeater -->\n" +
+    "		<div class=\"ratherLists\" ng-repeat=\"item in ranked | orderBy:predicate | limitTo:10\">\n" +
     "			<div class=\"col-xs-12 orderedRather\">\n" +
-    "				<div class=\"col-xs-1 text-right\">2</div>\n" +
-    "				<div class=\"col-xs-10\">Cropdust the pope</div>\n" +
+    "				<div class=\"col-xs-1 text-right\">{{$index + 1}}.</div>\n" +
+    "				<div class=\"col-xs-8\">{{item.rather_text}}</div>\n" +
+    "				<div class=\"col-xs-1\">{{ item.wins }} </div>\n" +
+    "				<div class=\"col-xs-1\">{{ item.losses }} </div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</div>\n" +

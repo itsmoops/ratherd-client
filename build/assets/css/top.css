@@ -1,6 +1,32 @@
+.filterBy {
+	color: #FF8875 !important;
+	text-decoration: none;
+}
+
+.filterBy:active {
+	color: #FF3E21 !important;
+	text-decoration: none;
+	outline: none;
+}
+
+.filterBy:focus {
+	color: #FF3E21 !important;
+	text-decoration: none;
+	outline: none;
+}
+
+.filterBy:hover {
+	text-decoration: none;
+}
+
+.ratherLists {
+	margin-top: 40px;
+}
+
 .rankPanel {
 	margin-top: 40px;
 	height:600px;
+	font-size: 20px;
 }
 
 .orderedRather {

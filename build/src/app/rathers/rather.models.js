@@ -38,7 +38,15 @@ angular.module('rather.models',[
 
 	_constructor.$ranked = function(obj) {
 		var defer = $q.defer();
-		var url = _constructor.apiBase + _constructor.api;
+		var url = _constructor.apiBase + _constructor.api + 'ranked/';
+		console.log(url);
+		$http({method: 'GET', url:url }).success(function(data, status, headers, config){
+			defer.resolve(data);
+		})
+		.error(function(data, status, headers, config){
+			defer.reject(data);
+		});
+		return defer.promise;
 	};
 
 	_constructor.$create = function(obj) {

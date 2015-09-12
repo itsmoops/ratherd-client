@@ -6,6 +6,7 @@ angular.module("RatherApp", [
 	'rather.models',
 	'templates-app',
 	'templates-common',
+	'ngAnimate',
 	'ui.router'
 ])
 
@@ -53,7 +54,23 @@ angular.module("RatherApp", [
 	})
 	.state('top',{
 		url:'/top',
-		templateUrl:'rathers/partials/rathers.top.tpl.html'
+		templateUrl:'rathers/partials/rathers.top.tpl.html',
+		resolve: {
+			'ranked':function(Rather){
+				return Rather.$ranked();
+			}
+		},
+		controller: function($scope, Rather, ranked){
+			document.getElementById('defaultActive').focus();
+			$scope.ranked = ranked;
+
+			$scope.predicate = '-ratio';
+			$scope.reverse = true;
+			$scope.order = function(predicate) {
+				$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+				$scope.predicate = predicate;
+			};
+		}
 	})
 	.state('submit',{
 		url:'/submit',
@@ -62,13 +79,22 @@ angular.module("RatherApp", [
 			$scope.create = function(){
 				console.log($scope.rather);
 				var error = document.getElementById('blankSubmitError');
+				var successArray = $scope.feedback();
+				var randomNum = Math.floor(Math.random() * successArray.length);
+
 				if ($scope.rather === undefined || $scope.rather.rather_text === null) {
 					error.innerText = '* You gotta enter some text, dummy';
 					error.style.color = '#FF8875';
 				}
 				else {
-					error.innerText = '.';
-					error.style.color = '#222222';
+					error.innerText = successArray[randomNum];
+					error.style.color = '#FF8875';
+					
+					setTimeout(function(){ 
+						error.style.color = '#222222';
+						setTimeout(function(){ error.innerText = '.'; }, 1100);
+					 }, 1100);
+					
 				}
 				Rather.$create($scope.rather).then(function(rather){
 					console.log(rather);
@@ -77,6 +103,19 @@ angular.module("RatherApp", [
 			};
 			$scope.clear = function() {
 				$scope.rather.rather_text = null;
+			};
+
+			$scope.feedback = function() {
+				var successArray = [
+				"...seriously?", 
+				"Ohhhh, good one", 
+				"Nice", 
+				"That's kinda messed up, but ok...", 
+				"lol",
+				"ayyyyy lmao",
+				"Dude."
+				];
+				return successArray;
 			};
 		}
 	})
