@@ -1,5 +1,5 @@
 .banner {
-	margin-bottom: 70px;
+    margin-bottom: 70px;
 }
 
 .landingButton {
@@ -16,6 +16,20 @@
 }
 
 .landingButton:hover {
+    margin-top: 44px !important;
+    color:#FF8875;
+    text-decoration: none;
+    background: black;
+}
+
+.landingButton:active {
+    margin-top: 44px !important;
+    color:#FF8875;
+    text-decoration: none;
+    background: black;
+}
+
+.landingButton:focus {
     margin-top: 44px !important;
     color:#FF8875;
     text-decoration: none;

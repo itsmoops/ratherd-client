@@ -11,10 +11,11 @@ angular.module('rather.models',[
 	_constructor.apiBase = 'http://127.0.0.1:8080';
 	_constructor.api = '/rathers/';
 
-	_constructor.$comparison = function() {
+	_constructor.$comparison = function(parameters) {
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'comparison/';
-		$http({method: 'GET', url:url }).success(function(data, status, headers, config){
+		$http({method: 'GET', url:url, params: parameters }).success(function(data, status, headers, config){
+			console.log(parameters);
 			defer.resolve(data);
 		})
 		.error(function(data, status, headers, config){
@@ -38,7 +39,15 @@ angular.module('rather.models',[
 
 	_constructor.$ranked = function(obj) {
 		var defer = $q.defer();
-		var url = _constructor.apiBase + _constructor.api;
+		var url = _constructor.apiBase + _constructor.api + 'ranked/';
+		console.log(url);
+		$http({method: 'GET', url:url }).success(function(data, status, headers, config){
+			defer.resolve(data);
+		})
+		.error(function(data, status, headers, config){
+			defer.reject(data);
+		});
+		return defer.promise;
 	};
 
 	_constructor.$create = function(obj) {

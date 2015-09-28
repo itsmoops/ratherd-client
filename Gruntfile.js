@@ -18,6 +18,8 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-ng-constant');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   /**
    * Load in our build configuration file.
@@ -29,6 +31,40 @@ module.exports = function ( grunt ) {
    * instructions.
    */
   var taskConfig = {
+    ngconstant: {
+
+      // targets
+      development: {
+        options:{
+          space: '  ',
+          dest: '<%= build_dir %>/src/app/config.js',
+          name: 'wouldyourather.config'
+        },
+        constants: {
+          ENV: 'development',
+          DEV_MODE: true,
+          API_DOMAIN: 'http://localhost:8000',
+          LOCAL_DOMAIN: 'localhost:8001',
+          LOCAL_PROTOCOL: 'http'
+        }
+      },
+
+      production: {
+        options:{
+          space: '  ',
+          dest: '<%= build_dir %>/src/app/config.js',
+          name: 'wouldyourather.config'
+        },
+        constants: {
+          ENV: 'production',
+          DEV_MODE: false,
+          API_DOMAIN: 'https://api.wouldyourather.us',
+          LOCAL_DOMAIN: 'wouldyourather.us',
+          LOCAL_PROTOCOL: 'https'
+        }
+      }
+    },
+
     /**
      * We read in our `package.json` file so we can access the package name and
      * version. It's already there, so we don't repeat ourselves here.

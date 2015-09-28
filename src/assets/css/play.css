@@ -27,6 +27,7 @@
 
     align-items: center;
     justify-content:center;
+    -webkit-justify-content: center;
 }
 
 .ratherPanel>a {
@@ -59,12 +60,14 @@
 /* xs */
 @media(max-width:767px){
     .ratherPanel {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        font-size: 15px;
+        min-height: 125px;
     }
     .orPanel {
         padding-top: 0px;
-        padding-bottom: 15px;
+        padding-bottom: 5px;
     }
 }
 /* s */
