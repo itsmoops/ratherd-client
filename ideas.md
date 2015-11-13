@@ -3,6 +3,7 @@ Need:
 check if username exists
 ability to reset password
 password strength
+only one user per email
 
 
 INFO LINK ON RATHERS
