@@ -1,14 +1,19 @@
 /*jshint smarttabs:true */
+
+// Main App controlling the bulk of the site
 angular.module("RatherApp", [
 	'landing.directives',
+	'account.directives',
 	'navigation.directives',
 	'rather.directives',
 	'rather.models',
+	'account.models',
 	'templates-app',
 	'templates-common',
 	'ui.router'
 ])
 
+// Using ui.router stateProvider to define single page application states
 .config(['$stateProvider', function($stateProvider) {
 	$stateProvider
 	.state('landing',{
@@ -28,7 +33,7 @@ angular.module("RatherApp", [
 		},
 		controller: function($scope, Rather, comparison, $location){
 			function search(Rather) {
-				console.log(Rather, 'hey');
+				console.log(Rather);
 				$scope.comparison = Rather;
 				$location.search("rather1", Rather[0].id);
 				$location.search("rather2", Rather[1].id);
@@ -70,9 +75,8 @@ angular.module("RatherApp", [
 		},
 		controller: function($scope, Rather, ranked){
 			$scope.ranked = ranked;
-			console.log(ranked);
 			document.getElementById("defaultActive").focus();
-
+			$scope.predicate = '-ratio';
 			$scope.order = function(predicate) {
 				$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
 				$scope.predicate = predicate;
@@ -143,6 +147,65 @@ angular.module("RatherApp", [
 				Rather.$comparison().then(function(comparison) {
 					$scope.comparison = comparison;
 				});
+			};
+		}
+	})
+	.state('signup',{
+		url: '/signup',
+		templateUrl: 'account/partials/account.signup.tpl.html',
+		controller: function($scope, Account, $state){
+			$scope.save_user = function(){
+				var error = document.getElementById('blankSubmitError');
+				Account.$save_user($scope.account).then(function(account){
+					$scope.account = account;
+					$state.go("welcome", { u: $scope.account.id });
+				});
+			};
+		}
+	})
+	.state('login',{
+		url: '/login',
+		templateUrl: 'account/partials/account.login.tpl.html',
+		controller: function($scope, Account, $state){
+			$scope.login = function(){
+				Account.$login($scope.account.username, $scope.account.password).then(function(object){
+					$scope.user = object.user;
+					$scope.loggedIn = true;
+					$state.go("welcome", { u: object.user.id });
+				});
+			};
+		}
+	})
+	.state('welcome',{
+		url: '/welcome?u',
+		templateUrl: 'account/partials/account.welcome.tpl.html',
+		resolve: {
+			'current':function(Account, $stateParams){
+				return Account.$current({
+					u: $stateParams.u
+				});
+			}
+		},
+		controller: function($scope, Account, current, $location, $state){
+			$scope.current = current;
+			search(current);
+
+			function search(current) {
+				$scope.current = current;
+				$location.search("u", current[0].id);
+			}
+			$scope.play = function(){
+				$state.go("play");
+			};
+		}
+	})
+	.state('user',{
+		url: '/user',
+		templateUrl: 'account/partials/account.user.tpl.html',
+		controller: function($scope, Account, $state){
+			$scope.logout = function(){
+				Account.$logout();
+				$state.go("play");
 			};
 		}
 	})

@@ -1,0 +1,19 @@
+<div class="col-lg-12">	
+	<div class="col-xs-0 col-md-3">
+	</div>
+	<div class="col-xs-12 col-md-6 defaultPanel submitPanel signUpPanel">		
+		<p class="panelHeader">Sign Up!</p>		
+		<hr/>		
+		<p class="text-center">Create an account and start submitting your own Rathers</p>
+		<input type="username" name="username" class="submitTextBox accountTextBox" placeholder="Username" ng-model="account.username" required="">		
+		<input type="email" name="email" class="submitTextBox accountTextBox" placeholder="Email address" ng-model="account.email" required="">
+		<input type="password" class="submitTextBox accountTextBox" placeholder="Password" ng-model="account.password" required="">	
+		<!-- <input type="password" name="password2" class="submitTextBox" placeholder="Confirm password" ng-model="account.password2" equals="" required=""> -->
+		<p id="blankSubmitError" ng-class="{toggle: errorYes}" class="errorNo">.</p>		
+		<div class="col-lg-12 text-center">			
+			<a class="button" ng-click='save_user()'>Go!</a>		
+		</div>	
+	</div>	
+	<div class="col-xs-0 col-md-3">
+	</div>
+</div>

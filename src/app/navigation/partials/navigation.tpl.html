@@ -1,15 +1,31 @@
-<div class="navbar navbar-inverse" role="navigation">
+<div class="navbar navbar-inverse" role="navigation" ng-controller="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> </div>
+            <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed"> 
+                <span class="sr-only">Toggle navigation</span> 
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span> 
+            </button> 
+        </div>
         <div class="collapse navbar-collapse" collapse="isCollapsed">
             <ul class="nav navbar-nav">
-                <li ui-sref-active= 'active'><a ui-sref= 'play' ng-click="isCollapsed = true">Play</a>
+                <li ui-sref-active= 'active'><a ui-sref='play' ng-click="isCollapsed = true">Play</a>
                 </li>
-                <li ui-sref-active= 'active'><a ui-sref= 'top' ng-click="isCollapsed = true">Most Rather'd</a>
+                <li ui-sref-active= 'active'><a ui-sref='top' ng-click="isCollapsed = true">Most Rather'd</a>
                 </li>
-                <li ui-sref-active= 'active'><a ui-sref= 'submit' ng-click="isCollapsed = true">Submit a Rather!</a>
+                <li ui-sref-active= 'active'><a ui-sref='submit' ng-show="loggedInTrue"  ng-click="isCollapsed = true">Submit a Rather!</a>
                 </li> 
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ui-sref-active='active'><a ui-sref='signup' ng-show="loggedInFalse" ng-click="isCollapsed = true">Sign up</a>
+                </li>
+                <li ui-sref-active='active'><a ui-sref='login' ng-show="loggedInFalse" ng-click="isCollapsed = true">Login</a>
+                </li>
+                <li ui-sref-active='active'><a ui-sref='user' ng-show="loggedInTrue" ng-click="isCollapsed = true">{{ user }}</a>
+                </li>
+                <!-- <li ui-sref-active='active'><a ui-sref='logout' ng-hide="false" ng-click="isCollapsed = true">Logout</a>
+                </li> -->
             </ul> 
         </div>
     </div>
