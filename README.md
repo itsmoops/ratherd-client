@@ -22,6 +22,16 @@ for sharing rather combos
 CONTACT
 maybe in a copyright footer at the bottom
 
+GET LESS IMPLEMENTED SOON FOR STYLING
+
+
+
+
+
+
+
+
+
 timer for how long it takes
 option to go back and change your answers
 view stats stats stats
