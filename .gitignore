@@ -3,5 +3,6 @@
 build/
 bin/
 node_modules/
+vendor/
 npm-debug.log
 .sass-cache/
