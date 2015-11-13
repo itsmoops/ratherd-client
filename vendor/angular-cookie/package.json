@@ -1,0 +1,83 @@
+{
+  "_args": [
+    [
+      "angular-cookie",
+      "/Users/a6001382/wyr/wouldyourather-client"
+    ]
+  ],
+  "_from": "angular-cookie@*",
+  "_id": "angular-cookie@1.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/angular-cookie",
+  "_nodeVersion": "0.12.2",
+  "_npmUser": {
+    "email": "ops@centerstonetech.com",
+    "name": "centerstonetech"
+  },
+  "_npmVersion": "2.12.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "angular-cookie",
+    "raw": "angular-cookie",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "*",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://code.bestbuy.com/artifactory/api/npm/npm-virtual/angular-cookie/-/angular-cookie-1.0.0.tgz",
+  "_shasum": "0fdbafbf24bb72ba5b6af4afd571a35a104d0eb5",
+  "_shrinkwrap": null,
+  "_spec": "angular-cookie",
+  "_where": "/Users/a6001382/wyr/wouldyourather-client",
+  "author": {
+    "name": "Ivan Pusic"
+  },
+  "bugs": {
+    "url": "https://github.com/ivpusic/angular-cookie/issues"
+  },
+  "dependencies": {},
+  "description": "angular module for accessing browser coockies",
+  "devDependencies": {
+    "bower": "~1.3.9",
+    "grunt": "~0.4.1",
+    "grunt-contrib-connect": "~0.5.0",
+    "grunt-minified": "0.0.6",
+    "install": "~0.1.7",
+    "npm": "~1.3.11",
+    "require": "~0.5.0"
+  },
+  "directories": {
+    "example": "example"
+  },
+  "dist": {
+    "shasum": "0fdbafbf24bb72ba5b6af4afd571a35a104d0eb5",
+    "tarball": "https://code.bestbuy.com/artifactory/api/npm/npm-virtual/angular-cookie/-/angular-cookie-1.0.0.tgz"
+  },
+  "gitHead": "67eb8455445dfbf38d23f17e3a0b9af773b03d77",
+  "homepage": "https://github.com/ivpusic/angular-cookie#readme",
+  "keywords": [
+    "cookie"
+  ],
+  "license": "MIT",
+  "main": "angular-cookie.js",
+  "maintainers": [
+    {
+      "name": "centerstonetech",
+      "email": "ops@centerstonetech.com"
+    }
+  ],
+  "name": "angular-cookie",
+  "optionalDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ivpusic/angular-cookie.git"
+  },
+  "scripts": {
+    "test": "echo 'All ok'"
+  },
+  "version": "1.0.0"
+}
