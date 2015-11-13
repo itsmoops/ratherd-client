@@ -13,6 +13,10 @@ angular.module("RatherApp", [
 	'ui.router'
 ])
 
+.config(["$locationProvider", function($locationProvider) {
+  $locationProvider.html5Mode(true);
+}])
+
 // Using ui.router stateProvider to define single page application states
 .config(['$stateProvider', function($stateProvider) {
 	$stateProvider
