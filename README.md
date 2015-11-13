@@ -1,79 +1,85 @@
 # wouldyourather-client
+WYR up and running from scratch:
 
+1. Create base folders:
+wouldyourather
+/wouldyourather-client
+/wouldyourather-server
 
-USER AUTHENTICATION:
-Need:
-check if username exists
-ability to reset password
-password strength
+2. Clone client and server repos into appropriate subfolders:
 
+3. Install command line tools:
+	xcode-select --install
 
-INFO LINK ON RATHERS
-pops up modal with user submitter, and some stats
+4. Install homebrew (easy way to install postgres database and python):
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-USER PAGE
-display stats
-option to log out
-option to reset password
+5. Make sure you have python (2.7 should be ok...): 
+	python --version
+	if not install:
+		brew install python
+		or got to https://www.python.org/downloads/ for a specific version
 
-FACEBOOK API
-for sharing rather combos
+6. Install pip (python package manager) if you don't have it:
+	sudo easy_install pip
 
-CONTACT
-maybe in a copyright footer at the bottom
+6. Install postgres using homebrew:
+	brew install postgres
 
-GET LESS IMPLEMENTED SOON FOR STYLING
+7. Initialize the database:
+	initdb /usr/local/var/postgres
+	
+	If you get an error that starts with "initdb: directory "/usr/local/var/postgres" exists but is not empty
+	If you want to create a new database system..." I believe you can skip to the next step
 
-CHECK NICER FONTS
+	Run the following to start db on load:
+		mkdir -p ~/Library/LaunchAgents
+		ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+		launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+	Or use these commands to start and stop manually:
+		Start: pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+		Stop: pg_ctl -D /usr/local/var/postgres stop -s -m fast
 
+8. Create the database:
+	createdb -h localhost wouldyourather_db
+	List the databases to ensure it was created properly:
+		psql -l
 
-LOOK INTO AMAZON SERVICES FOR DATABASE
+9. Install psycopg2 (PostgreSQL adapter for python):
+	sudo pip install psycopg2
 
+10. Install virtualenv (creates an environment that has its own installation directories):
+	sudo pip install virtualenv
 
+11. Install Django:
+	sudo pip install django
 
+12. Install Django Rest Framework:
+	sudo pip install djangorestframework
 
+13. Install Django Auth Token:
+	sudo pip install django-rest-auth
 
+14. Install Django Cors Headers:
+	sudo pip install django-cors-headers
 
-timer for how long it takes
-option to go back and change your answers
-view stats stats stats
+15. Install node and node package manager:
+	Node & npm:
+		brew install node
+		or http://nodejs.org/
+	Update npm:
+		sudo npm install npm -g
+	Check node version:
+		node -v
 
-PUT is when you return the whole thing, PATCH you can just sent partial data
+16. Install node packages from package.json:
+	cd into wouldyourather-client directory
+	npm install
 
-	.	Allow:GET, PUT, PATCH, DELETE, HEAD, OPTIONS
-	.	
+17. Install Grunt:
+	sudo npm install -g grunt-cli
+	Check version:
+		grunt --version
 
-Maybe keep the winner of each round on the screen and only swap out the loser
-
-have the ability to save favorite pairings, and share them on FB
-(for a user you would save a favorite pairing field which would presumably just store the two id fields)
-
-do i need to make user profiles so people don’t spam the shit out of it?
-
-later on implement a minimum “wins” count on top of the ratio algorithm 
-
-but it would have to be implemented later on
-initially it needs to be open i think
-or maybe on the play screen
-you have an option to "play all rathers"
-or "play best"
-and that filters for rathers with a win score of over 50 or whatever
-and people who play all will kind of be like people who browse new on reddit
-theres gonna be a lot of shit they have to sort through, but they will also be among the first to see new good content
-
-what if
-on the games main screen
-there is a new tab
-and an established tab
-established tab means you have played over 10 rounds or something
-OR
-have a system in place so that if you lose your first 10 matches in a row you just get deleted from the system
-
-maybe an automoderation thing
-have a field called flagged as nonsense
-and once that reaches a certain number
-remove it
-i dunno
-
-start implementing tests
-query params to send someone a url of a good comparison
+18. Install Karma:
+	npm install -g karma
