@@ -24,7 +24,7 @@ maybe in a copyright footer at the bottom
 
 GET LESS IMPLEMENTED SOON FOR STYLING
 
-
+CHECK NICER FONTS
 
 
 
