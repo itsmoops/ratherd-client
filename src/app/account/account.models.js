@@ -48,13 +48,15 @@ angular.module('account.models',[
 			data: {username:username, password:password}
 		})
 		.success(function (data, status, headers, config){
+			console.log(data);
 			_constructor.current_user = data.user;
+			_constructor.setToken(data.token);
 			$rootScope.$broadcast('updateUser');
 			defer.resolve(data);
 		})
 		.error(function (data, status, headers, config){
 			defer.reject(data);
-			console.log(username, password);
+			console.log(data.non_field_errors);
 		});
 		return defer.promise;
 	};
@@ -66,6 +68,7 @@ angular.module('account.models',[
 	};
 
 	_constructor.setToken = function(token){
+		console.log(token);
 		$http.defaults.headers.common['Authorization'] = 'Token ' + token;
 		ipCookie('usertoken', token, {expires: 365});
 	};

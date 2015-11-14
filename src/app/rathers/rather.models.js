@@ -52,6 +52,7 @@ angular.module('rather.models',[
 	_constructor.$create = function(obj) {
 		var defer = $q.defer();
         var url = _constructor.apiBase + _constructor.api;
+        console.log(obj);
         $http({method: 'POST', url:url, data:obj})
         .success(function (data, status, headers, config) {
 			defer.resolve(data);
