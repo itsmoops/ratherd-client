@@ -45,25 +45,39 @@ wouldyourather
 	List the databases to ensure it was created properly:
 		psql -l
 
-9. Install psycopg2 (PostgreSQL adapter for python):
+9. Create database user admin:
+	createuser admin
+
+10. Install psycopg2 (PostgreSQL adapter for python):
 	sudo pip install psycopg2
 
-10. Install virtualenv (creates an environment that has its own installation directories):
+11. Install virtualenv (creates an environment that has its own installation directories):
 	sudo pip install virtualenv
 
-11. Install Django:
+12. Install Django:
 	sudo pip install django
 
-12. Install Django Rest Framework:
+13. Install Django Rest Framework:
 	sudo pip install djangorestframework
 
-13. Install Django Auth Token:
+14. Install Django Auth Token:
 	sudo pip install django-rest-auth
 
-14. Install Django Cors Headers:
+15. Install Django Cors Headers:
 	sudo pip install django-cors-headers
 
-15. Install node and node package manager:
+16. Apply database migrations:
+	python manage.py migrate auth
+	python manage.py migrate
+	(now can verify tables look good in app like Postico)
+
+17. Create a Django admin user to access 127.0.0.1:8080/admin:
+	python manage.py createsuperuser
+	Username: admin
+	Email: your email
+	Password: password of choice
+
+18. Install node and node package manager:
 	Node & npm:
 		brew install node
 		or http://nodejs.org/
@@ -72,14 +86,24 @@ wouldyourather
 	Check node version:
 		node -v
 
-16. Install node packages from package.json:
+19. Install node packages from package.json:
 	cd into wouldyourather-client directory
 	npm install
 
-17. Install Grunt:
+20. Install Grunt:
 	sudo npm install -g grunt-cli
 	Check version:
 		grunt --version
 
-18. Install Karma:
+21. Install Karma:
 	npm install -g karma
+
+22. Run server and client
+	Server:
+		cd to wouldyourather-server
+		python manage.py runserver 8080
+		default is 127.0.0.1:8080
+	Client:
+		cd to wouldyourather-client
+		default is 127.0.0.1:8000
+		grunt
