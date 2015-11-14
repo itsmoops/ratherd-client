@@ -48,9 +48,8 @@ angular.module('account.models',[
 			data: {username:username, password:password}
 		})
 		.success(function (data, status, headers, config){
-			_constructor.current_user = data.user.username;
+			_constructor.current_user = data.user;
 			$rootScope.$broadcast('updateUser');
-			// showItem.getUserInfo(data.user, true);
 			defer.resolve(data);
 		})
 		.error(function (data, status, headers, config){
@@ -61,12 +60,9 @@ angular.module('account.models',[
 	};
 
 	_constructor.$logout = function(){
-		// var defer = $q.defer();
 		_constructor.removeToken();
 		_constructor.current_user = null;
 		$rootScope.$broadcast('updateUser');
-		// $scope.$apply();
-		// return defer.promise;
 	};
 
 	_constructor.setToken = function(token){

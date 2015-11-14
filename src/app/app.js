@@ -13,9 +13,9 @@ angular.module("RatherApp", [
 	'ui.router'
 ])
 
-.config(["$locationProvider", function($locationProvider) {
-  $locationProvider.html5Mode(true);
-}])
+// .config(["$locationProvider", function($locationProvider) {
+//   $locationProvider.html5Mode(true);
+// }])
 
 // Using ui.router stateProvider to define single page application states
 .config(['$stateProvider', function($stateProvider) {
@@ -37,7 +37,6 @@ angular.module("RatherApp", [
 		},
 		controller: function($scope, Rather, comparison, $location){
 			function search(Rather) {
-				console.log(Rather);
 				$scope.comparison = Rather;
 				$location.search("rather1", Rather[0].id);
 				$location.search("rather2", Rather[1].id);
@@ -47,22 +46,17 @@ angular.module("RatherApp", [
 
 			$scope.vote = function(winner) {
 				comparison = $scope.comparison;
-				console.log(comparison[0].id, comparison[1].id);
 
 				if (winner === "0") {
 					Rather.$vote(comparison[0], comparison[0].id, true).then(function(comparison){
-						console.log(comparison);
 					});
 					Rather.$vote(comparison[1], comparison[1].id, false).then(function(comparison){
-						console.log(comparison);
 					});
 				}
 				else if (winner === '1') {
 					Rather.$vote(comparison[0], comparison[0].id, false).then(function(comparison){
-						console.log(comparison);
 					});
 					Rather.$vote(comparison[1], comparison[1].id, true).then(function(comparison){
-						console.log(comparison);
 					});
 				}
 				Rather.$comparison().then(search);
@@ -101,7 +95,6 @@ angular.module("RatherApp", [
 				var error = document.getElementById('blankSubmitError');
 				$scope.response();
 				Rather.$create($scope.rather).then(function(rather){
-					console.log(rather);
 					$scope.clear();
 					$scope.refresh();
 				});
@@ -178,6 +171,10 @@ angular.module("RatherApp", [
 					$state.go("welcome", { u: object.user.id });
 				});
 			};
+
+			$scope.keyDown = function() {
+				alert('hey');
+			};
 		}
 	})
 	.state('welcome',{
@@ -211,6 +208,17 @@ angular.module("RatherApp", [
 				Account.$logout();
 				$state.go("play");
 			};
+
+			$scope.lostPassword = function () {
+				$state.go("lostpassword");
+			};
+		}
+	})
+	.state('lostpassword',{
+		url: '/lostpassword',
+		templateUrl: 'account/partials/account.lostpassword.tpl.html',
+		controller: function() {
+
 		}
 	})
 	.state('otherwise', {

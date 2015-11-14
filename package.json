@@ -13,7 +13,9 @@
     "url": "git@github.com:ngbp/ngbp.git"
   },
   "dependencies": {
-    "less": "^2.5.3"
+    "bluebird": "^3.0.5",
+    "less": "^2.5.3",
+    "requirejs": "^2.1.20"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

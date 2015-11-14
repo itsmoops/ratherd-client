@@ -21,9 +21,9 @@ angular.module('navigation.directives',[
 		$scope.loggedInTrue = false;
 
 		$scope.$on('updateUser', function(event, data) { 
-			$scope.user = Account.current_user;
+			$scope.user = Account.current_user.username;
 			$scope.updateNav();
-			console.log($scope.user);
+			console.log(Account.current_user.email);
 		});
 
 		$scope.updateNav = function() {
