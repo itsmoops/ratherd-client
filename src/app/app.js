@@ -40,6 +40,7 @@ angular.module("RatherApp", [
 				$scope.comparison = Rather;
 				$location.search("rather1", Rather[0].id);
 				$location.search("rather2", Rather[1].id);
+				console.log("git merge");
 			}
 
 			search(comparison);
