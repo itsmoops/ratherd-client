@@ -8,6 +8,7 @@ angular.module('account.directives',[
 			if(event.charCode === 13) {
 				console.log(event.charCode);
 				return true;
+				console.log('branch');
 			}
 		});
 	};
