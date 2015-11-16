@@ -160,7 +160,50 @@ angular.module("RatherApp", [
 			var pw1 = document.querySelector("#txtPassword1");
 			var pw2 = document.querySelector("#txtPassword2");
 			var msg = "Please fill out required fields";
-			$scope.save_user = function(){
+			$scope.save_user = function() {
+				if ($scope.validates()) {
+					Account.$save_user($scope.account).then(function(account){
+						$scope.account = account;
+						$state.go("welcome", { u: $scope.account.id });
+					});
+					$scope.$on('saveUserError', function(event, data) { 
+					var isError = 0;
+					var error = document.querySelector("#blankSubmitError");
+					var errorObj = Account.save_error;
+					
+					if (errorObj.email !== undefined) {
+						isError++;
+						email.classList.add('alert-danger');
+						error.innerText = errorObj.email[0];
+					}
+					else {
+						email.classList.remove('alert-danger');
+					}
+					if (errorObj.username !== undefined) {
+						isError++;
+						username.classList.add('alert-danger');
+						if (errorObj.username[0] === "This field must be unique." || errorObj.username[0] === "A user with that username already exists.") {
+							error.innerText = "This username is already registered";
+						}
+						else {
+							error.innerText = "Username is invalid";
+						}
+					}
+					else {
+						username.classList.remove('alert-danger');
+					}
+					if (isError > 0) {
+						error.classList.remove('errorNo');
+						error.classList.add('errorYes');
+					}
+					else {
+						error.classList.remove('errorYes');
+						error.classList.add('errorNo');
+					}
+				});
+				}
+			};
+			$scope.validates = function() {
 				var isError = 0;
 				if ($scope.account === undefined || $scope.account.username === null || $scope.account.username === undefined) {
 					username.classList.add('alert-danger');
@@ -201,47 +244,9 @@ angular.module("RatherApp", [
 				else {
 					error.classList.remove('errorYes');
 					error.classList.add('errorNo');
-
-					Account.$save_user($scope.account).then(function(account){
-						$scope.account = account;
-						$state.go("welcome", { u: $scope.account.id });
-					});
+					return true;
 				}
-				$scope.$on('saveUserError', function(event, data) { 
-					var isError = 0;
-					var error = document.querySelector("#blankSubmitError");
-					var errorObj = Account.save_error;
-					
-					if (errorObj.email !== undefined) {
-						isError++;
-						email.classList.add('alert-danger');
-						error.innerText = errorObj.email[0];
-					}
-					else {
-						email.classList.remove('alert-danger');
-					}
-					if (errorObj.username !== undefined) {
-						isError++;
-						username.classList.add('alert-danger');
-						if (errorObj.username[0] === "This field must be unique.") {
-							error.innerText = "This username is already registered";
-						}
-						else {
-							error.innerText = "Username is invalid";
-						}
-					}
-					else {
-						username.classList.remove('alert-danger');
-					}
-					if (isError > 0) {
-						error.classList.remove('errorNo');
-						error.classList.add('errorYes');
-					}
-					else {
-						error.classList.remove('errorYes');
-						error.classList.add('errorNo');
-					}
-				});
+				return false;
 			};
 			$scope.changing = function() {
 				var isError = false;
@@ -326,6 +331,9 @@ angular.module("RatherApp", [
 			$scope.keyDown = function() {
 				alert('hey');
 			};
+			$scope.recoverPassword = function () {
+				$state.go("recoverpw");
+			};
 		}
 	})
 	.state('welcome',{
@@ -359,17 +367,22 @@ angular.module("RatherApp", [
 				Account.$logout();
 				$state.go("play");
 			};
-
-			$scope.lostPassword = function () {
-				$state.go("lostpassword");
-			};
 		}
 	})
-	.state('lostpassword',{
-		url: '/lpw',
-		templateUrl: 'account/partials/account.lostpassword.tpl.html',
+	.state('resetpassword',{
+		url: '/resetpw',
+		templateUrl: 'account/partials/account.resetpw.tpl.html',
 		controller: function() {
 
+		}
+	})
+	.state('recoverpw',{
+		url: '/recoverpw',
+		templateUrl: 'account/partials/account.recoverpw.tpl.html',
+		controller: function($scope, Account, $state) {
+			$scope.send_email = function(){
+				Account.$send_email();
+			};
 		}
 	})
 	.state('otherwise', {

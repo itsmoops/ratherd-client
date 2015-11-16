@@ -35,7 +35,6 @@ angular.module('account.models',[
 		.success(function (data, status, headers, config) {
 			_constructor.$login(obj.username, obj.password);
 			defer.resolve(data);
-			console.log(data);
 		})
 		.error(function (data, status, headers, config) {
 			defer.reject(data);
@@ -99,6 +98,10 @@ angular.module('account.models',[
 			defer.resolve(user);
 		});
 		return defer.promise;
+	};
+
+	_constructor.$send_email = function(){
+		alert('models');
 	};
 
 	return Account;

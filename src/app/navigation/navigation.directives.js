@@ -22,7 +22,7 @@ angular.module('navigation.directives',[
 		$scope.loggedInTrue = false;
 
 		var token = $http.defaults.headers.common['Authorization'];
-		console.log($http.request);
+		// console.log($http.request);
 
 		$scope.$on('userLoggedIn', function(event, data) { 
 			$scope.user = Account.current_user.username;
