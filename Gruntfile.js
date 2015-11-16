@@ -4,6 +4,7 @@ module.exports = function ( grunt ) {
    * Load required Grunt tasks. These are installed based on the versions listed
    * in `package.json` when you do `npm install` in this directory.
    */
+  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -12,7 +13,6 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-conventional-changelog');
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-karma');
@@ -311,25 +311,6 @@ module.exports = function ( grunt ) {
       }
     },
 
-    compass: {
-      development: {
-        options: {
-          sassDir: ['src/sass'],
-          cssDir: ['<%= build_dir %>/assets/css/'],
-          environment: 'development',
-          raw: "preferred_syntax = :scss\n"
-        }
-      },
-      production: {
-        options: {
-          sassDir: 'src/sass',
-          cssDir: '<%= compile_dir %>/assets/css/',
-          environment: 'production',
-          raw: "preferred_syntax = :scss\n"
-        }
-      }
-    },
-
     /**
      * `jshint` defines the rules of our linter as well as which files we
      * should check. This file, all javascript sources, and all our unit tests
@@ -444,7 +425,8 @@ module.exports = function ( grunt ) {
           '<%= html2js.common.dest %>',
           '<%= html2js.app.dest %>',
           '<%= vendor_files.css %>',
-          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css',
+          '<%= compass.development.options.cssDir %>*.css'
         ]
       },
 
@@ -458,7 +440,8 @@ module.exports = function ( grunt ) {
         src: [
           '<%= concat.compile_js.dest %>',
           '<%= vendor_files.css %>',
-          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css',
+          '<%= compass.production.options.cssDir %>*.css'
         ]
       }
     },
@@ -581,6 +564,11 @@ module.exports = function ( grunt ) {
         tasks: [ 'html2js' ]
       },
 
+      compass: {
+        files: [ 'src/**/*.scss' ],
+        tasks: ['compass:development']
+      },
+
       /**
        * When the CSS files change, we need to compile and minify them.
        */
@@ -615,9 +603,25 @@ module.exports = function ( grunt ) {
         options: {
           livereload: false
         }
+      }  
+    },
+    compass: {
+      development: {
+        options: {
+          sassDir: ['src/sass'],
+          cssDir: ['<%= build_dir %>/assets/css/'],
+          environment: 'development',
+          raw: "preferred_syntax = :scss\n"
+        }
+      },
+      production: {
+        options: {
+          sassDir: 'src/sass',
+          cssDir: '<%= compile_dir %>/assets/css/',
+          environment: 'production',
+          raw: "preferred_syntax = :scss\n"
+        }
       }
-
-      
     }
   };
 
