@@ -32,7 +32,7 @@ module.exports = {
     html: [ 'src/index.html' ],
     less: 'src/less/main.less',
 
-    css: [ 'src/assets/css/main.css', 'src/assets/css/normalize.css' ]
+    css: [  ]
   },
 
   /**
@@ -74,7 +74,9 @@ module.exports = {
       'vendor/angular-cookie/angular-cookie.js'
     ],
     css: [
-      'vendor/bootstrap/dist/css/bootstrap.css'
+      'vendor/bootstrap/dist/css/bootstrap.css',
+      'assets/css/normalize.css',
+      'assets/css/main.css'
     ],
     assets: [
     ]

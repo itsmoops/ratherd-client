@@ -13,6 +13,8 @@ angular.module('account.models',[
 	_constructor.api = '/users/';
 	_constructor.current_user = null;
 	_constructor.is_user = false;
+	_constructor.save_error = null;
+	_constructor.login_error = null;
 
 	_constructor.$current = function(parameters) {
 		var defer = $q.defer();
@@ -31,10 +33,14 @@ angular.module('account.models',[
 		var url = _constructor.apiBase + _constructor.api;
 		$http({method: 'POST', url:url, data:obj})
 		.success(function (data, status, headers, config) {
+			_constructor.$login(obj.username, obj.password);
 			defer.resolve(data);
+			console.log(data);
 		})
 		.error(function (data, status, headers, config) {
 			defer.reject(data);
+			_constructor.save_error = data;
+			$rootScope.$broadcast('saveUserError');
 		});
 		return defer.promise;
     };
@@ -49,12 +55,14 @@ angular.module('account.models',[
 		})
 		.success(function (data, status, headers, config){
 			_constructor.current_user = data.user;
-			$rootScope.$broadcast('updateUser');
+			_constructor.setToken(data.token);
+			$rootScope.$broadcast('userLoggedIn');
 			defer.resolve(data);
 		})
 		.error(function (data, status, headers, config){
 			defer.reject(data);
-			console.log(username, password);
+			_constructor.login_error = data;
+			$rootScope.$broadcast('loginUserError');
 		});
 		return defer.promise;
 	};
@@ -62,7 +70,7 @@ angular.module('account.models',[
 	_constructor.$logout = function(){
 		_constructor.removeToken();
 		_constructor.current_user = null;
-		$rootScope.$broadcast('updateUser');
+		$rootScope.$broadcast('userLoggedOut');
 	};
 
 	_constructor.setToken = function(token){

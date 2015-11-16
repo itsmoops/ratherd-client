@@ -5,10 +5,10 @@
 		<p class="panelHeader">Sign Up!</p>		
 		<hr/>		
 		<p class="text-center">Create an account and start submitting your own Rathers</p>
-		<input type="username" name="username" class="submitTextBox accountTextBox" placeholder="Username" ng-model="account.username" required>		
-		<input type="email" name="email" class="submitTextBox accountTextBox" placeholder="Email address" ng-model="account.email" required>
-		<input type="password" class="submitTextBox accountTextBox" placeholder="Password" ng-model="account.password" required>	
-		<!-- <input type="password" name="password2" class="submitTextBox" placeholder="Confirm password" ng-model="account.password2" equals="" required=""> -->
+		<input id="txtUsername" type="username" name="username" class="form-control" placeholder="Username" ng-model="account.username" required>
+		<input id="txtEmail" name="email" class="form-control top-buffer-xs" placeholder="Email Address" ng-model="account.email" required>
+		<input id="txtPassword1" type="password" class="form-control top-buffer-xs" placeholder="Password" ng-model="account.password" required>	
+		<input id="txtPassword2" ng-change="changing()" type="password" class="form-control top-buffer-xs" placeholder="Retype Password" ng-model="account.password2" required>
 		<p id="blankSubmitError" ng-class="{toggle: errorYes}" class="errorNo">.</p>		
 		<div class="col-lg-12 text-center">			
 			<a class="button" ng-click='save_user()'>Go!</a>		

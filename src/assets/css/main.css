@@ -25,6 +25,16 @@ hr {
     margin-bottom: 15px;
 }
 
+.link {
+    color: white;
+    cursor: pointer;
+}
+
+.link:hover {
+    color: #FF3E21;
+    text-decoration: none;
+}
+
 .title {
     margin-top: 8%;
 }
@@ -65,15 +75,16 @@ hr {
 .button {
     clear: both;
     margin-top: -30px;
+    min-width: 100%;
     cursor: pointer;
     color: white;
     background: #FF3E21;
     border-bottom: 2px solid #400F08;
     padding: 4px 10px;
     font-size: 15px;
-    /*-moz-border-radius: 5px;
+    -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    border-radius: 5px;*/
+    border-radius: 5px;
     text-transform: uppercase;
 }
 
@@ -110,6 +121,34 @@ hr {
 
 .flag-button {
     margin-left: 10px;
+}
+
+.top-buffer-xs {
+    margin-top: 5px;
+}
+
+.top-buffer-sm {
+    margin-top: 10px;
+}
+
+.top-buffer-md {
+    margin-top: 15px;
+}
+
+.top-buffer-lg {
+    margin-top: 20px
+}
+
+.circled {
+    font-size: 15px;
+    font-family: initial;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    padding: 0px;
+    border: 2px solid #fff;
+    color: #666;
+    text-align: center;
 }
 
 /* Bootstrap Media Queries */

@@ -1,5 +1,6 @@
 /*jshint smarttabs:true */
 angular.module('navigation.directives',[
+	'ipCookie',
 	'RatherApp',
 	'ui.bootstrap',
 	'account.models'
@@ -15,15 +16,21 @@ angular.module('navigation.directives',[
 	};
 })
 
-.controller('navigation', function($scope, Account, $rootScope){
+.controller('navigation', function($scope, Account, $rootScope, $http, ipCookie){
 		$scope.isCollapsed = true;
 		$scope.loggedInFalse = true;
 		$scope.loggedInTrue = false;
 
-		$scope.$on('updateUser', function(event, data) { 
+		var token = $http.defaults.headers.common['Authorization'];
+		console.log($http.request);
+
+		$scope.$on('userLoggedIn', function(event, data) { 
 			$scope.user = Account.current_user.username;
 			$scope.updateNav();
-			console.log(Account.current_user.email);
+		});
+		$scope.$on('userLoggedOut', function(event, data) { 
+			$scope.user = null;
+			$scope.updateNav();
 		});
 
 		$scope.updateNav = function() {
