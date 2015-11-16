@@ -22,10 +22,8 @@
                 </li>
                 <li ui-sref-active='active'><a ui-sref='login' ng-show="loggedInFalse" ng-click="isCollapsed = true">Login</a>
                 </li>
-                <li ui-sref-active='active'><a ui-sref='user' ng-show="loggedInTrue" ng-click="isCollapsed = true">{{ user }}</a>
+                <li ui-sref-active='active'><a ui-sref='user' ng-show="loggedInTrue" ng-click="isCollapsed = true"><span class="nav-icon glyphicon glyphicon-user"></span>{{ user }}</a>
                 </li>
-                <!-- <li ui-sref-active='active'><a ui-sref='logout' ng-hide="false" ng-click="isCollapsed = true">Logout</a>
-                </li> -->
             </ul> 
         </div>
     </div>
