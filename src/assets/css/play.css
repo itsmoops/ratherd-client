@@ -56,6 +56,10 @@
     color: white;
 }
 
+.info-icon {
+    margin-left: 5px;
+}
+
 /* Bootstrap Media Queries */
 /* xs */
 @media(max-width:767px){

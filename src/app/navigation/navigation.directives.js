@@ -21,14 +21,13 @@ angular.module('navigation.directives',[
 		$scope.loggedInFalse = true;
 		$scope.loggedInTrue = false;
 
-		var token = $http.defaults.headers.common['Authorization'];
-		// console.log($http.request);
 
-		$scope.$on('userLoggedIn', function(event, data) { 
+
+		$scope.$on('USER_LOGGED_IN', function(event, data) { 
 			$scope.user = Account.current_user.username;
 			$scope.updateNav();
 		});
-		$scope.$on('userLoggedOut', function(event, data) { 
+		$scope.$on('USER_LOGGED_OUT', function(event, data) { 
 			$scope.user = null;
 			$scope.updateNav();
 		});

@@ -40,6 +40,9 @@
 /* Bootstrap Media Queries */
 /* xs */
 @media(max-width:767px){
+    .navbar-inverse .navbar-nav>li>a {
+        border-bottom: 0px solid #222222;
+    }
     .navbar-inverse .navbar-nav>li>a:hover {
         border-bottom: 0px solid #222;
     }

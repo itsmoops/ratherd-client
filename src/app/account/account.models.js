@@ -3,6 +3,12 @@ angular.module('account.models',[
 	'ipCookie',
 	'navigation.directives'
 ])
+.run(function($state, $rootScope, Account, ipCookie){
+	if (ipCookie('usertoken')) {
+		Account.setToken(ipCookie('usertoken'));
+		Account.requestCurrent();
+	}	
+})
 .factory('Account', function($http, $q, ipCookie, $location, $rootScope){
 	function Account () {
 		
@@ -15,11 +21,13 @@ angular.module('account.models',[
 	_constructor.is_user = false;
 	_constructor.save_error = null;
 	_constructor.login_error = null;
+	_constructor.current = null;
 
 	_constructor.$current = function(parameters) {
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'current/';
 		$http({method: 'GET', url:url, params: parameters }).success(function(data, status, headers, config){
+			console.log(data);
 			defer.resolve(data);
 		})
 		.error(function(data, status, headers, config){
@@ -39,7 +47,7 @@ angular.module('account.models',[
 		.error(function (data, status, headers, config) {
 			defer.reject(data);
 			_constructor.save_error = data;
-			$rootScope.$broadcast('saveUserError');
+			$rootScope.$broadcast('SAVE_USER_ERROR');
 		});
 		return defer.promise;
     };
@@ -55,13 +63,13 @@ angular.module('account.models',[
 		.success(function (data, status, headers, config){
 			_constructor.current_user = data.user;
 			_constructor.setToken(data.token);
-			$rootScope.$broadcast('userLoggedIn');
+			$rootScope.$broadcast('USER_LOGGED_IN');
 			defer.resolve(data);
 		})
 		.error(function (data, status, headers, config){
 			defer.reject(data);
 			_constructor.login_error = data;
-			$rootScope.$broadcast('loginUserError');
+			$rootScope.$broadcast('LOGIN_USER_ERROR');
 		});
 		return defer.promise;
 	};
@@ -69,12 +77,24 @@ angular.module('account.models',[
 	_constructor.$logout = function(){
 		_constructor.removeToken();
 		_constructor.current_user = null;
-		$rootScope.$broadcast('userLoggedOut');
+		$rootScope.$broadcast('USER_LOGGED_OUT');
 	};
 
 	_constructor.setToken = function(token){
 		$http.defaults.headers.common['Authorization'] = 'Token ' + token;
 		ipCookie('usertoken', token, {expires: 365});
+	};
+
+	_constructor.requestCurrent = function(){
+		if (_constructor.currentIsSet()){
+			return $q.when(_constructor.current);
+		} else {
+			return _constructor.getCurrent();
+		}
+	};
+
+	_constructor.currentIsSet = function(){
+		return !!_constructor.current;  
 	};
 
 	_constructor.removeToken = function(){
@@ -85,19 +105,26 @@ angular.module('account.models',[
 	_constructor.getCurrent = function(){
 		var hookback = _constructor.getHookBack();
 		var defer = $q.defer();
-		Profile.$list_route('GET', 'current', {}, {'hookback':hookback}).then(function(user){
-			if (user.id){
-				user = Profile.newInstance(user);
-				_constructor.current = user;
-				$broadcast('USER_LOGGED_IN', user);
+		Account.$current('GET', 'current', {}, {'hookback':hookback}).then(function(user){
+			if (user[0].id){
+				_constructor.current_user = user[0];
+				console.log(user[0].id);
+				$rootScope.$broadcast('USER_LOGGED_IN', user[0]);
 				defer.resolve(user);
 			} else {
+				_constructor.current_user = null;
 				defer.resolve(false);
 			}
 		}, function(data){
 			defer.resolve(user);
 		});
 		return defer.promise;
+	};
+
+	_constructor.getHookBack = function(){
+		var hb = $location.search()['hb'];
+		$location.search('hb', null);
+		return hb;
 	};
 
 	_constructor.$send_email = function(){

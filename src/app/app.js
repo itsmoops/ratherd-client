@@ -61,6 +61,10 @@ angular.module("RatherApp", [
 				}
 				Rather.$comparison().then(search);
 			};
+
+			$scope.popup = function() {
+				alert('hey');
+			};
 		}
 	})
 	.state('top',{
@@ -166,7 +170,7 @@ angular.module("RatherApp", [
 						$scope.account = account;
 						$state.go("welcome", { u: $scope.account.id });
 					});
-					$scope.$on('saveUserError', function(event, data) { 
+					$scope.$on('SAVE_USER_ERROR', function(event, data) { 
 					var isError = 0;
 					var error = document.querySelector("#blankSubmitError");
 					var errorObj = Account.save_error;
@@ -286,7 +290,7 @@ angular.module("RatherApp", [
 					$state.go("welcome", { u: object.user.id });
 				});
 
-				$scope.$on('loginUserError', function(event, data) {
+				$scope.$on('LOGIN_USER_ERROR', function(event, data) {
 					var username = document.querySelector("#txtUsername");
 					var password = document.querySelector("#txtPassword"); 
 					var isError = 0;

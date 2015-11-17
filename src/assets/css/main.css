@@ -153,12 +153,20 @@ hr {
 
 /* Bootstrap Media Queries */
 /* xs */
-@media(max-width:767px){
+@media(max-width:500px){
     h1 {
         font-size: 20px;
     }
     h2 {
         font-size: 20px;
+    }
+}
+@media(min-width:501px){
+    h1 {
+        font-size: 40px;
+    }
+    h2 {
+        font-size: 40px;
     }
 }
 /* s */
