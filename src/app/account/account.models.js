@@ -1,7 +1,8 @@
 /*jshint smarttabs:true */
 angular.module('account.models',[
 	'ipCookie',
-	'navigation.directives'
+	'navigation.directives',
+	'BaseClass'
 ])
 .run(function($state, $rootScope, Account, ipCookie){
 	if (ipCookie('usertoken')) {
@@ -9,13 +10,13 @@ angular.module('account.models',[
 		Account.requestCurrent();
 	}	
 })
-.factory('Account', function($http, $q, ipCookie, $location, $rootScope){
+.factory('Account', function($http, $q, ipCookie, $location, $rootScope, BaseClass){
 	function Account () {
 		
 	}
 	var _constructor = Account;
 	var _prototype = Account.prototype;
-	_constructor.apiBase = 'http://127.0.0.1:8080';
+	_constructor.inherits(BaseClass.Base);
 	_constructor.api = '/users/';
 	_constructor.current_user = null;
 	_constructor.is_user = false;
@@ -41,7 +42,6 @@ angular.module('account.models',[
 		var url = _constructor.apiBase + _constructor.api;
 		$http({method: 'POST', url:url, data:obj})
 		.success(function (data, status, headers, config) {
-			_constructor.$login(obj.username, obj.password);
 			defer.resolve(data);
 		})
 		.error(function (data, status, headers, config) {

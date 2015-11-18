@@ -43,7 +43,7 @@ module.exports = function ( grunt ) {
         constants: {
           ENV: 'development',
           DEV_MODE: true,
-          API_DOMAIN: 'http://localhost:8000',
+          API_DOMAIN: 'http://localhost:8080',
           LOCAL_DOMAIN: 'localhost:8001',
           LOCAL_PROTOCOL: 'http'
         }
@@ -645,7 +645,7 @@ module.exports = function ( grunt ) {
    * The `build` task gets your app ready to run for development and testing.
    */
   grunt.registerTask( 'build', [
-    'clean', 'html2js', 'jshint', 'less:build',
+    'clean', 'html2js', 'jshint', 'ngconstant:development', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'index:build', 'karmaconfig',
     'karma:continuous', 'connect'
@@ -656,7 +656,7 @@ module.exports = function ( grunt ) {
    * minifying your code.
    */
   grunt.registerTask( 'compile', [
-    'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
+    'ngconstant:production', 'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
   ]);
 
   /**

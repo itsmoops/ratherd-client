@@ -10,7 +10,9 @@ angular.module("RatherApp", [
 	'account.models',
 	'templates-app',
 	'templates-common',
-	'ui.router'
+	'ui.router',
+	'BaseClass',
+	'wouldyourather.config'
 ])
 
 // .config(["$locationProvider", function($locationProvider) {
@@ -18,7 +20,7 @@ angular.module("RatherApp", [
 // }])
 
 // Using ui.router stateProvider to define single page application states
-.config(['$stateProvider', function($stateProvider) {
+.config(['$stateProvider', 'BCConfigProvider', 'API_DOMAIN', function($stateProvider, BCConfigProvider, API_DOMAIN) {
 	$stateProvider
 	.state('landing',{
 		url: '/home',
@@ -166,9 +168,10 @@ angular.module("RatherApp", [
 			var msg = "Please fill out required fields";
 			$scope.save_user = function() {
 				if ($scope.validates()) {
-					Account.$save_user($scope.account).then(function(account){
-						$scope.account = account;
-						$state.go("welcome", { u: $scope.account.id });
+					Account.$save_user($scope.account).then(function(data){
+						Account.$login($scope.account.username, $scope.account.password).then(function(object){ 
+							$state.go("welcome", { u: object.user.id });
+						});
 					});
 					$scope.$on('SAVE_USER_ERROR', function(event, data) { 
 					var isError = 0;
@@ -287,7 +290,7 @@ angular.module("RatherApp", [
 				Account.$login($scope.account.username, $scope.account.password).then(function(object){
 					$scope.user = object.user;
 					$scope.loggedIn = true;
-					$state.go("welcome", { u: object.user.id });
+					$state.go("welcome", {});
 				});
 
 				$scope.$on('LOGIN_USER_ERROR', function(event, data) {
@@ -392,7 +395,7 @@ angular.module("RatherApp", [
 	.state('otherwise', {
 		url: '*path',
 		templateUrl: 'landing/partials/landing.tpl.html'
-	})
-	;
+	});
+	BCConfigProvider.setApiBase(API_DOMAIN);
 }])
 ;

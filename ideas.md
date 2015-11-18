@@ -30,8 +30,8 @@ HELP PAGE - LINK IN NAV BAR AND ON SPLASH PAGE
 
 OPTION TO DELETE RATHERS?
 
-
-
+if database is down, would you rather... go outside? because our servers are down. try again later
+...dl pycharm
 
 
 timer for how long it takes
