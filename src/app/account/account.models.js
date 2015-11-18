@@ -27,13 +27,13 @@ angular.module('account.models',[
 	_constructor.$current = function(parameters) {
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'current/';
-		$http({method: 'GET', url:url, params: parameters }).success(function(data, status, headers, config){
-			console.log(data);
-			defer.resolve(data);
-		})
-		.error(function(data, status, headers, config){
-			defer.reject(data);
-		});
+		// $http({method: 'GET', url:url, params: parameters }).success(function(data, status, headers, config){
+		// 	console.log(data);
+		// 	defer.resolve(data);
+		// })
+		// .error(function(data, status, headers, config){
+		// 	defer.reject(data);
+		// });
 		return defer.promise;
 	};
 
