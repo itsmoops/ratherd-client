@@ -660,8 +660,10 @@ module.exports = function ( grunt ) {
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
    */
+
+   //include 'uglify', before index:compile
   grunt.registerTask( 'compile', [
-    'ngconstant:production', 'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
+    'ngconstant:production', 'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'index:compile'
   ]);
 
   /**

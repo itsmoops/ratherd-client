@@ -33,6 +33,8 @@ OPTION TO DELETE RATHERS?
 if database is down, would you rather... go outside? because our servers are down. try again later
 ...dl pycharm
 
+have a different color rather panel if one rather is submitted by the user
+
 
 timer for how long it takes
 option to go back and change your answers
