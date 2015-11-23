@@ -19,7 +19,7 @@ angular.module('account.models',[
 	_constructor.inherits(BaseClass.Base);
 	_constructor.api = '/users/';
 	_constructor.current_user = null;
-	_constructor.is_user = false;
+	_constructor.logged_in = false;
 	_constructor.save_error = null;
 	_constructor.login_error = null;
 	_constructor.current = null;
@@ -27,13 +27,13 @@ angular.module('account.models',[
 	_constructor.$current = function(parameters) {
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'current/';
-		// $http({method: 'GET', url:url, params: parameters }).success(function(data, status, headers, config){
-		// 	console.log(data);
-		// 	defer.resolve(data);
-		// })
-		// .error(function(data, status, headers, config){
-		// 	defer.reject(data);
-		// });
+		$http({method: 'GET', url:url, params: parameters }).success(function(data, status, headers, config){
+			console.log(data);
+			defer.resolve(data);
+		})
+		.error(function(data, status, headers, config){
+			defer.reject(data);
+		});
 		return defer.promise;
 	};
 
@@ -63,6 +63,7 @@ angular.module('account.models',[
 		.success(function (data, status, headers, config){
 			_constructor.current_user = data.user;
 			_constructor.setToken(data.token);
+			_constructor.logged_in = true;
 			$rootScope.$broadcast('USER_LOGGED_IN');
 			defer.resolve(data);
 		})
@@ -77,6 +78,7 @@ angular.module('account.models',[
 	_constructor.$logout = function(){
 		_constructor.removeToken();
 		_constructor.current_user = null;
+		_constructor.logged_in = false;
 		$rootScope.$broadcast('USER_LOGGED_OUT');
 	};
 
@@ -106,10 +108,10 @@ angular.module('account.models',[
 		var hookback = _constructor.getHookBack();
 		var defer = $q.defer();
 		Account.$current('GET', 'current', {}, {'hookback':hookback}).then(function(user){
-			if (user[0].id){
-				_constructor.current_user = user[0];
-				console.log(user[0].id);
-				$rootScope.$broadcast('USER_LOGGED_IN', user[0]);
+			if (user.id){
+				_constructor.current_user = user;
+				_constructor.logged_in = true;
+				$rootScope.$broadcast('USER_LOGGED_IN', user);
 				defer.resolve(user);
 			} else {
 				_constructor.current_user = null;

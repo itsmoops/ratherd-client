@@ -95,7 +95,10 @@ angular.module("RatherApp", [
 				return Rather.$comparison();
 			}
 		},
-		controller: function ($scope, Rather, comparison) {
+		controller: function ($scope, $state, Rather, Account, comparison) {
+			if (!Account.logged_in) {
+				$state.go("otherwise");
+			}
 			$scope.comparison = comparison;
 			$scope.create = function(){
 				var error = document.querySelector('#blankSubmitError');
@@ -169,8 +172,8 @@ angular.module("RatherApp", [
 			$scope.save_user = function() {
 				if ($scope.validates()) {
 					Account.$save_user($scope.account).then(function(data){
-						Account.$login($scope.account.username, $scope.account.password).then(function(object){ 
-							$state.go("welcome", { u: object.user.id });
+						Account.$login($scope.account.username, $scope.account.password).then(function(object){
+							$state.go("welcome");
 						});
 					});
 					$scope.$on('SAVE_USER_ERROR', function(event, data) { 
@@ -288,9 +291,7 @@ angular.module("RatherApp", [
 		controller: function($scope, Account, $state){
 			$scope.login = function(){
 				Account.$login($scope.account.username, $scope.account.password).then(function(object){
-					$scope.user = object.user;
-					$scope.loggedIn = true;
-					$state.go("welcome", {});
+					$state.go("welcome");
 				});
 
 				$scope.$on('LOGIN_USER_ERROR', function(event, data) {
@@ -348,19 +349,14 @@ angular.module("RatherApp", [
 		templateUrl: 'account/partials/account.welcome.tpl.html',
 		resolve: {
 			'current':function(Account, $stateParams){
-				return Account.$current({
-					u: $stateParams.u
-				});
+				return Account.current_user;
 			}
 		},
-		controller: function($scope, Account, current, $location, $state){
+		controller: function($scope, Account, current, $state){
 			$scope.current = current;
-			search(current);
-
-			function search(current) {
-				$scope.current = current;
-				$location.search("u", current[0].id);
-			}
+			$scope.$on('USER_LOGGED_IN', function(event, data) { 
+				$scope.current = Account.current_user;
+			});
 			$scope.play = function(){
 				$state.go("play");
 			};
@@ -369,7 +365,14 @@ angular.module("RatherApp", [
 	.state('user',{
 		url: '/user',
 		templateUrl: 'account/partials/account.user.tpl.html',
-		controller: function($scope, Account, $state){
+		resolve: {
+			'user_rathers':function(Rather){
+				return Rather.$user_data();
+			}
+		},
+		controller: function($scope, Account, Rather, $state, user_rathers){
+			$scope.user_rathers = user_rathers;
+			
 			$scope.logout = function(){
 				Account.$logout();
 				$state.go("play");

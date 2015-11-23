@@ -21,8 +21,6 @@ angular.module('navigation.directives',[
 		$scope.loggedInFalse = true;
 		$scope.loggedInTrue = false;
 
-
-
 		$scope.$on('USER_LOGGED_IN', function(event, data) { 
 			$scope.user = Account.current_user.username;
 			$scope.updateNav();
@@ -33,7 +31,6 @@ angular.module('navigation.directives',[
 		});
 
 		$scope.updateNav = function() {
-			// $scope.loggedIn = true;
 			if ($scope.loggedInFalse === true && $scope.loggedInTrue === false) {
 				$scope.loggedInFalse = false;
 				$scope.loggedInTrue = true;
