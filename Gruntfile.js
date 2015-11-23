@@ -58,7 +58,7 @@ module.exports = function ( grunt ) {
         constants: {
           ENV: 'production',
           DEV_MODE: false,
-          API_DOMAIN: 'https://api.wouldyourather.us',
+          API_DOMAIN: 'http://api.wouldyourather.us',
           LOCAL_DOMAIN: 'wouldyourather.us',
           LOCAL_PROTOCOL: 'https'
         }
@@ -635,8 +635,13 @@ module.exports = function ( grunt ) {
    * before watching for changes.
    */
   grunt.renameTask( 'watch', 'delta' );
-  grunt.registerTask( 'watch', [ 'build', 'karma:unit', 'delta' ] );
-
+  grunt.registerTask( 'watch', [ 'build_dev', 'karma:unit', 'delta' ] );
+  grunt.registerTask( 'build_dev', [
+    'clean', 'html2js', 'jshint', 'ngconstant:development', 'less:build',
+    'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'index:build', 'karmaconfig',
+    'karma:continuous', 'connect'
+  ]);
   /**
    * The default task is to build and compile.
    */
@@ -645,7 +650,7 @@ module.exports = function ( grunt ) {
    * The `build` task gets your app ready to run for development and testing.
    */
   grunt.registerTask( 'build', [
-    'clean', 'html2js', 'jshint', 'ngconstant:development', 'less:build',
+    'clean', 'html2js', 'jshint', 'ngconstant:production', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'index:build', 'karmaconfig',
     'karma:continuous', 'connect'

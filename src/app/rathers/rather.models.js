@@ -8,7 +8,7 @@ angular.module('rather.models',[
 	}
 	var _constructor = Rather;
 	var _prototype = Rather.prototype;
-	_constructor.apiBase = 'http://127.0.0.1:8080';
+	_constructor.inherits(BaseClass.Base);
 	_constructor.api = '/rathers/';
 
 	_constructor.$comparison = function(parameters) {
