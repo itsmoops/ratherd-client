@@ -21,6 +21,7 @@ Finish user system:
 Login/Signup Pages:
 * Look at Facebook and some other login pages. Tighten up the styles. Panels are too wide.
 * Make signup/login buttons stretch to be the same size as the input fields. Round Edges. Make bigger.
+* Signup: make it so input fields don't turn yellow on blur
 
 Recover Password:
 * Check if username exists, respond with message if not
