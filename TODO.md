@@ -22,6 +22,10 @@ Login/Signup Pages:
 * Look at Facebook and some other login pages. Tighten up the styles. Panels are too wide.
 * Make signup/login buttons stretch to be the same size as the input fields. Round Edges. Make bigger.
 
+Recover Password:
+* Check if username exists, respond with message if not
+* Send email from django with a link to reset the password
+
 Play Page:
 * Have a different color rather panel if one rather is submitted by the user?
 * Timer for how long it takes?
@@ -50,6 +54,8 @@ Play Page:
 Submit Page
 * On submit in django, convert to lowercase and check against database to make sure not a duplicate
 * Probably have submit button match the styles of signup/login buttons
+* Think about fixing the fading success messages
+* Think about whether the success messages should be funny or just "success"
 
 Info Page:
 * Icon glyphicon in top right?
@@ -73,9 +79,7 @@ User Page:
 ** "This sucks" votes (+ reason?)
 ** Think about tracking more historical data like who it won against
 ** Each Rather should have the option to delete (with a warning)
-* Option to reset password:
-** Message saying an email was sent to the address associated with this account
-** Send email from django with a link to reset the password
+* ** Send email from django with a link to reset the password
 
 Include Facebook API:
 * Ability to log in through Facebook
