@@ -1,14 +1,3 @@
-
-if database is down, would you rather... go outside? because our servers are down. try again later
-...dl pycharm
-
-have a different color rather panel if one rather is submitted by the user
-
-
-timer for how long it takes
-option to go back and change your answers
-view stats stats stats
-
 PUT is when you return the whole thing, PATCH you can just sent partial data
 
 	.	Allow:GET, PUT, PATCH, DELETE, HEAD, OPTIONS
