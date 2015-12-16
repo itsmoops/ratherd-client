@@ -1,17 +1,21 @@
 TODO
 
-Finish user system
-Integrate LESS or SASS to improve styling productivity
-Live reload from grunt would be nice
+Finish user system:
+* Check if username exists
+* Ability to reset password
+* Password strength
+* Only one user per email
 
-Contact Link at bottom (right/center) of Info page
+Play Page:
+* Have a different color rather panel if one rather is submitted by the user?
+* Timer for how long it takes?
 
 "This sucks" button:
 * Display under Rather button
 * Flag glyphicon
 * Incrementing this_sucks field on rather model
 * Need to add active flag on rather model - default value is 1
-* On PUT, if ((this_sucks > arbitrary number) && (ratio < arbitrary_number) && (total_games > arbitrary_number)), set active flag to 0
+* On PUT, if ((this_sucks > arbitrary_number) && (ratio < arbitrary_number) && (total_games > arbitrary_number)), set active flag to 0
 * Inactive rathers should not be allowed to be displayed in the game
 * Possible popup with options (ex. Nonsense, Not funny, etc.)
 
@@ -36,7 +40,33 @@ Info Page:
 ** Specifics about:
 *** How many games a Rather must have played before it can be considered for a leaderboard
 *** How your Rather can be deactivated if it meets certain criteria
+* Contact Link
+
+User Page:
+* Display all Rathers in Sortable, Paginated List
+* Click a Rather and go to stats:
+** Wins
+** Losses
+** Win ratio
+** "This sucks" votes (+ reason?)
+** Think about tracking more historical data like who it won against
+** Each Rather should have the option to delete (with a warning)
+* Option to reset password:
+** Message saying an email was sent to the address associated with this account
+** Send email from django with a link to reset the password
 
 Include Facebook API:
 * Ability to log in through Facebook
 * Ability to share funny question to Facebook
+
+Integrate LESS or SASS to improve styling productivity
+
+Live reload from grunt would be nice
+
+Check for better font
+
+Consider different background image/gradient
+
+Info link should be on splash page as well as navbar
+
+Tf database is down, would you rather... go outside? because our servers are down. Try again later

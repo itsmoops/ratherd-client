@@ -1,34 +1,3 @@
-USER AUTHENTICATION:
-Need:
-check if username exists
-ability to reset password
-password strength
-only one user per email
-
-
-INFO LINK ON RATHERS
-pops up modal with user submitter, and some stats
-
-USER PAGE
-display stats
-option to log out
-option to reset password
-
-FACEBOOK API
-for sharing rather combos
-
-CONTACT
-maybe in a copyright footer at the bottom
-
-GET LESS IMPLEMENTED SOON FOR STYLING
-
-CHECK NICER FONTS
-
-CHANGE BUTTONS TO BE LONGER - STRETCH WIDER AND LARGER
-
-HELP PAGE - LINK IN NAV BAR AND ON SPLASH PAGE
-
-OPTION TO DELETE RATHERS?
 
 if database is down, would you rather... go outside? because our servers are down. try again later
 ...dl pycharm
