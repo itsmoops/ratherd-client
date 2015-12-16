@@ -1,4 +1,16 @@
-TODO
+TODO:
+
+Integrate LESS or SASS to improve styling productivity
+
+Live reload from grunt would be nice
+
+Check for better font
+
+Consider different background image/gradient
+
+Info link should be on splash page as well as navbar
+
+If database is down, would you rather... go outside? because our servers are down. Try again later
 
 Finish user system:
 * Check if username exists
@@ -6,13 +18,17 @@ Finish user system:
 * Password strength
 * Only one user per email
 
+Login/Signup Pages:
+* Look at Facebook and some other login pages. Tighten up the styles. Panels are too wide.
+* Make signup/login buttons stretch to be the same size as the input fields. Round Edges. Make bigger.
+
 Play Page:
 * Have a different color rather panel if one rather is submitted by the user?
 * Timer for how long it takes?
 
 "This sucks" button:
 * Display under Rather button
-* Flag glyphicon
+* Flag/Thumbs Down glyphicon
 * Incrementing this_sucks field on rather model
 * Need to add active flag on rather model - default value is 1
 * On PUT, if ((this_sucks > arbitrary_number) && (ratio < arbitrary_number) && (total_games > arbitrary_number)), set active flag to 0
@@ -33,6 +49,7 @@ Play Page:
 
 Submit Page
 * On submit in django, convert to lowercase and check against database to make sure not a duplicate
+* Probably have submit button match the styles of signup/login buttons
 
 Info Page:
 * Icon glyphicon in top right?
@@ -63,15 +80,3 @@ User Page:
 Include Facebook API:
 * Ability to log in through Facebook
 * Ability to share funny question to Facebook
-
-Integrate LESS or SASS to improve styling productivity
-
-Live reload from grunt would be nice
-
-Check for better font
-
-Consider different background image/gradient
-
-Info link should be on splash page as well as navbar
-
-Tf database is down, would you rather... go outside? because our servers are down. Try again later
