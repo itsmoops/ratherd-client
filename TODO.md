@@ -25,10 +25,14 @@ Play Page:
 * Stats glyphicon
 * Stats should include
 ** User
+** Date submitted
 ** Wins
 ** Losses
 ** Win ratio
 ** "This sucks" votes (+ reason?)
+
+Submit Page
+* On submit in django, convert to lowercase and check against database to make sure not a duplicate
 
 Info Page:
 * Icon glyphicon in top right?
@@ -45,6 +49,7 @@ Info Page:
 User Page:
 * Display all Rathers in Sortable, Paginated List
 * Click a Rather and go to stats:
+** Date submitted
 ** Wins
 ** Losses
 ** Win ratio
