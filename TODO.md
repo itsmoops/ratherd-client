@@ -2,6 +2,8 @@ TODO:
 
 Integrate LESS or SASS to improve styling productivity
 
+Replace vanilla javascript with jQuery
+
 Live reload from grunt would be nice
 
 Check for better font
