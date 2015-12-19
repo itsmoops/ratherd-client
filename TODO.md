@@ -1,8 +1,8 @@
 TODO:
 
-Integrate LESS or SASS to improve styling productivity
+Set up SSH to webfaction
 
-Replace vanilla javascript with jQuery
+Integrate LESS or SASS to improve styling productivity
 
 Live reload from grunt would be nice
 
@@ -23,6 +23,7 @@ Finish user system:
 Login/Signup Pages:
 * Look at Facebook and some other login pages. Tighten up the styles. Panels are too wide.
 * Make signup/login buttons stretch to be the same size as the input fields. Round Edges. Make bigger.
+* Keep me logged in?
 
 Recover Password:
 * Check if username exists, respond with message if not

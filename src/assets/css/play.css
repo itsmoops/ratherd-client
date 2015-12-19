@@ -2,18 +2,15 @@
     margin-top: 5%;
 }
 
-.rather {
-    /*color: black;*/
-}
-
-.ratherPanel {
+.rather-button {
     padding-top: 20px;
     padding-bottom: 20px;
+    width: 100%;
     cursor: pointer;
     background: #FF3E21;
     border-bottom: 4px solid #7F1F10;
+    white-space: normal;
     padding: 4px 10px;
-    font-size: 15px;
     font-size: 25px;
     padding-top: 15px;
     min-height: 170px;
@@ -30,11 +27,11 @@
     -webkit-justify-content: center;
 }
 
-.ratherPanel>a {
+.rather-button>a {
     color: white;
 }
 
-.ratherPanel:hover {
+.rather-button:hover {
     color:#B6B6B6;
     text-decoration: none;
     background: #7F1F10;
@@ -42,63 +39,102 @@
     border-bottom: none;
 }
 
-.ratherPanel:hover>a {
-    text-decoration: none;
-    color: #B6B6B6;
+.rather-button:focus {
+  color:white;
+  outline: none !important;
 }
 
-.orPanel {
-    padding-top: 50px;
-    /*color: white;*/
+.rather-button:hover:focus {
+    color:#B6B6B6;
+    outline: none !important;
 }
 
-.or {
+.detail-button {
+    margin-top: 20px;
+    height: 25px;
+    min-width: 100%;
+    cursor: pointer;
     color: white;
+    background: #FF3E21;
+    border-bottom: 2px solid #400F08;
+    padding: 4px 10px;
+    font-size: 10px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    text-transform: uppercase;
+    word-spacing: -5px !important;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.detail-button:hover {
+    color:#B6B6B6;
+    text-decoration: none;
+    background: #7F1F10;
+}
+
+.detail-button:hover:focus {
+    color:#B6B6B6;
+    outline: none !important;
+}
+
+.detail-button:focus {
+  color:white;
+  outline: none !important;
+}
+
+.or-panel {
+    padding-top: 50px;
 }
 
 .info-icon {
     margin-left: 5px;
 }
 
+.glyphicon:before {
+  margin-right: 5px;
+}
+
 /* Bootstrap Media Queries */
 /* xs */
 @media(max-width:767px){
-    .ratherPanel {
+    .rather-panel {
         padding-top: 2px;
         padding-bottom: 2px;
         font-size: 15px;
         min-height: 125px;
     }
-    .orPanel {
+    .or-panel {
         padding-top: 0px;
         padding-bottom: 5px;
     }
 }
 /* s */
 @media(min-width:768px){
-    .ratherPanel {
+    .rather-panel {
         margin-left: 8%;
         margin-right: 8%;
     }
 }
 /* m */
 @media(min-width:992px){
-    .ratherPanel {
+    .rather-panel {
         margin-left: 0px;
         margin-right: 0px;
     }
 }
 /* lg */
 @media(min-width:1200px){
-    .ratherPanel {
+    .rather-panel {
         margin-left: 0px;
         margin-right: 0px;
     }
 }
 
-
 @media(max-width:992px) {
-    .orPanel {
+    .or-panel {
         padding-top: 0px;
         padding-bottom: 15px;
     }

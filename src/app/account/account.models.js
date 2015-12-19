@@ -8,11 +8,11 @@ angular.module('account.models',[
 	if (ipCookie('usertoken')) {
 		Account.setToken(ipCookie('usertoken'));
 		Account.requestCurrent();
-	}	
+	}
 })
 .factory('Account', function($http, $q, ipCookie, $location, $rootScope, BaseClass){
 	function Account () {
-		
+
 	}
 	var _constructor = Account;
 	var _prototype = Account.prototype;
@@ -28,7 +28,6 @@ angular.module('account.models',[
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'current/';
 		$http({method: 'GET', url:url, params: parameters }).success(function(data, status, headers, config){
-			console.log(data);
 			defer.resolve(data);
 		})
 		.error(function(data, status, headers, config){
@@ -50,30 +49,30 @@ angular.module('account.models',[
 			$rootScope.$broadcast('SAVE_USER_ERROR');
 		});
 		return defer.promise;
-    };
+  };
 
     _constructor.$login = function(username, password){
-		var defer = $q.defer();
-		var url = _constructor.apiBase + '/api-token-auth/';
-		$http({
-			method:'POST',
-			url: url,
-			data: {username:username, password:password}
-		})
-		.success(function (data, status, headers, config){
-			_constructor.current_user = data.user;
-			_constructor.setToken(data.token);
-			_constructor.logged_in = true;
-			$rootScope.$broadcast('USER_LOGGED_IN');
-			defer.resolve(data);
-		})
-		.error(function (data, status, headers, config){
-			defer.reject(data);
-			_constructor.login_error = data;
-			$rootScope.$broadcast('LOGIN_USER_ERROR');
-		});
-		return defer.promise;
-	};
+			var defer = $q.defer();
+			var url = _constructor.apiBase + '/api-token-auth/';
+			$http({
+				method:'POST',
+				url: url,
+				data: {username:username, password:password}
+			})
+			.success(function (data, status, headers, config){
+				_constructor.current_user = data.user;
+				_constructor.setToken(data.token);
+				_constructor.logged_in = true;
+				$rootScope.$broadcast('USER_LOGGED_IN');
+				defer.resolve(data);
+			})
+			.error(function (data, status, headers, config){
+				defer.reject(data);
+				_constructor.login_error = data;
+				$rootScope.$broadcast('LOGIN_USER_ERROR');
+			});
+			return defer.promise;
+		};
 
 	_constructor.$logout = function(){
 		_constructor.removeToken();
@@ -96,7 +95,7 @@ angular.module('account.models',[
 	};
 
 	_constructor.currentIsSet = function(){
-		return !!_constructor.current;  
+		return !!_constructor.current;
 	};
 
 	_constructor.removeToken = function(){

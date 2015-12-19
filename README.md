@@ -14,7 +14,7 @@ wouldyourather
 4. Install homebrew (easy way to install postgres database and python):
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-5. Make sure you have python (2.7 should be ok...): 
+5. Make sure you have python (2.7 should be ok...):
 	python --version
 	if not install:
 		brew install python
@@ -28,17 +28,19 @@ wouldyourather
 
 7. Initialize the database:
 	initdb /usr/local/var/postgres
-	
+
 	If you get an error that starts with "initdb: directory "/usr/local/var/postgres" exists but is not empty
 	If you want to create a new database system..." I believe you can skip to the next step
 
 	Run the following to start db on load:
 		mkdir -p ~/Library/LaunchAgents
-		ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+		ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents* (disregard trailing asterisk)
 		launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 	Or use these commands to start and stop manually:
 		Start: pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
 		Stop: pg_ctl -D /usr/local/var/postgres stop -s -m fast
+
+
 
 8. Create the database:
 	createdb -h localhost wouldyourather_db
@@ -68,6 +70,9 @@ wouldyourather
 
 16. Apply database migrations:
 	python manage.py migrate auth
+	python manage.py migrate
+
+	python manage.py makemigrations rathers
 	python manage.py migrate
 	(now can verify tables look good in app like Postico)
 

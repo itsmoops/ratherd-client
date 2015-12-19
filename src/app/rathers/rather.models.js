@@ -4,7 +4,7 @@ angular.module('rather.models',[
 ])
 .factory('Rather', function($http, $q){
 	function Rather () {
-		
+
 	}
 	var _constructor = Rather;
 	var _prototype = Rather.prototype;
@@ -15,6 +15,7 @@ angular.module('rather.models',[
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'comparison/';
 		$http({method: 'GET', url:url, params: parameters }).success(function(data, status, headers, config){
+			console.log(data);
 			defer.resolve(data);
 		})
 		.error(function(data, status, headers, config){
@@ -27,6 +28,19 @@ angular.module('rather.models',[
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + primaryKey + '/vote/';
 		$http({method: 'POST', url:url, data:obj, params:{'win':win}})
+		.success(function (data, status, headers, config) {
+			defer.resolve(data);
+		})
+		.error(function (data, status, headers, config) {
+			defer.reject(data);
+		});
+		return defer.promise;
+	};
+
+	_constructor.$sucks = function(obj, primaryKey) {
+		var defer = $q.defer();
+		var url = _constructor.apiBase + _constructor.api + primaryKey + '/sucks/';
+		$http({method: 'POST', url:url, data:obj })
 		.success(function (data, status, headers, config) {
 			defer.resolve(data);
 		})
@@ -63,18 +77,17 @@ angular.module('rather.models',[
 
 
 	_constructor.$create = function(obj) {
-		var defer = $q.defer();
-        var url = _constructor.apiBase + _constructor.api;
-        $http({method: 'POST', url:url, data:obj})
-        .success(function (data, status, headers, config) {
-			defer.resolve(data);
-        })
-        .error(function (data, status, headers, config) {
-			defer.reject(data);
-        });
-        return defer.promise;
+			var defer = $q.defer();
+			var url = _constructor.apiBase + _constructor.api;
+      $http({method: 'POST', url:url, data:obj})
+			.success(function (data, status, headers, config) {
+				defer.resolve(data);
+			})
+			.error(function (data, status, headers, config) {
+				defer.reject(data);
+			});
+			return defer.promise;
     };
-
-	return Rather;
-})
+		return Rather;
+	})
 ;
