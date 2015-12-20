@@ -1,7 +1,5 @@
 TODO:
 
-Set up SSH to webfaction
-
 Integrate LESS or SASS to improve styling productivity
 
 Live reload from grunt would be nice
@@ -41,6 +39,7 @@ Play Page:
 * On PUT, if ((this_sucks > arbitrary_number) && (ratio < arbitrary_number) && (total_games > arbitrary_number)), set active flag to 0
 * Inactive rathers should not be allowed to be displayed in the game
 * Possible popup with options (ex. Nonsense, Not funny, etc.)
+* User may only say a rather sucks once (You've already said this one sucks you gigantic bummer.)
 
 "Info" or "Stats" button:
 * Display: Possible button underneath Rather button or possibly an icon on the bottom right of the button iteslf

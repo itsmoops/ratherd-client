@@ -2,8 +2,21 @@
     margin-top: 5%;
 }
 
+.rather-flex {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+
+  align-items: center;
+  justify-content:center;
+  -webkit-justify-content: center;
+}
+
 .rather-button {
-    padding-top: 20px;
     padding-bottom: 20px;
     width: 100%;
     cursor: pointer;
@@ -12,19 +25,8 @@
     white-space: normal;
     padding: 4px 10px;
     font-size: 25px;
-    padding-top: 15px;
     min-height: 170px;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
 
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-
-    align-items: center;
-    justify-content:center;
-    -webkit-justify-content: center;
 }
 
 .rather-button>a {
@@ -42,6 +44,10 @@
 .rather-button:focus {
   color:white;
   outline: none !important;
+}
+
+.rather-button:visited {
+  color: #FF3E21;
 }
 
 .rather-button:hover:focus {
@@ -81,8 +87,8 @@
 }
 
 .detail-button:focus {
-  color:white;
-  outline: none !important;
+    color:white;
+    outline: none !important;
 }
 
 .or-panel {
@@ -94,7 +100,7 @@
 }
 
 .glyphicon:before {
-  margin-right: 5px;
+    margin-right: 5px;
 }
 
 /* Bootstrap Media Queries */
@@ -108,7 +114,11 @@
     }
     .or-panel {
         padding-top: 0px;
-        padding-bottom: 5px;
+        padding-bottom: 0px;
+    }
+    .rather-button {
+        min-height: 120px;
+        font-size: 15px;
     }
 }
 /* s */
