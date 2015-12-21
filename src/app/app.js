@@ -48,7 +48,7 @@ angular.module("RatherApp", [
 								debugger;
 								var title = comparison[rather].rather_text;
 								$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
-								$scope.user = comparison[rather].user;
+								$scope.user = comparison[rather].user.username;
 								$scope.date = $filter('date')(comparison[rather].date_submitted, "MM/dd/yyyy");
 								$scope.wins = comparison[rather].wins;
 								$scope.losses = comparison[rather].losses;
