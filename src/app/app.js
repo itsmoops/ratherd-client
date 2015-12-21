@@ -40,19 +40,20 @@ angular.module("RatherApp", [
 			}
 		},
 		controller: function($scope, $uibModal, Rather, comparison, $location){
+			var newRather;
 			$scope.stats = function (rather) {
 		    var modalInstance = $uibModal.open({
 						animation: true,
 						templateUrl: 'ratherstats.html',
-						controller: function($scope, $filter, $uibModalInstance, Rather) {
-								var title = comparison[rather].rather_text;
+						controller: function($scope, $filter, $uibModalInstance) {
+								var title = newRather[rather].rather_text;
 								$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
-								$scope.user = comparison[rather].user.username;
-								$scope.date = $filter('date')(comparison[rather].date_submitted, "MM/dd/yyyy");
-								$scope.wins = comparison[rather].wins;
-								$scope.losses = comparison[rather].losses;
-								$scope.score = comparison[rather].ratio;
-								$scope.sucks = comparison[rather].this_sucks;
+								$scope.user = newRather[rather].user.username;
+								$scope.date = $filter('date')(newRather[rather].date_submitted, "MM/dd/yyyy");
+								$scope.wins = newRather[rather].wins;
+								$scope.losses = newRather[rather].losses;
+								$scope.score = newRather[rather].ratio;
+								$scope.sucks = newRather[rather].this_sucks;
 
 								$scope.close = function () {
 									$uibModalInstance.close();
@@ -64,6 +65,7 @@ angular.module("RatherApp", [
 
 			function search(Rather) {
 				$scope.comparison = Rather;
+				newRather = Rather;
 				$location.search("r1", Rather[0].id);
 				$location.search("r2", Rather[1].id);
 			}
