@@ -1,5 +1,5 @@
 .submitPanel {
-    margin-top: 15%;    
+    margin-top: 15%;
 }
 
 .submitTextBox {
@@ -23,9 +23,8 @@
     .panelHeader {
         font-size: 20px;
     }
-    
     .submitPanel {
-        margin-top: 20%;
+        margin-top: 35%;
     }
 }
 /* s */

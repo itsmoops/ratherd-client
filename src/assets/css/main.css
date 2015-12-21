@@ -113,26 +113,6 @@ hr {
     margin-right: 5px;
 }
 
-.thumbsUp {
-    content: url(../img/thumbs-up-icon-white.png);
-}
-
-.rather-button:hover .thumbsUp {
-    content: url(../img/thumbs-up-icon-gray.png);
-}
-
-.flag {
-    content: url(../img/flag-white.png);
-}
-
-.flag-button:hover .flag {
-    content: url(../img/flag-gray.png);
-}
-
-.flag-button {
-    margin-left: 10px;
-}
-
 .top-buffer-xs {
     margin-top: 5px;
 }
@@ -164,6 +144,41 @@ hr {
     border: 2px solid #fff;
     color: #666;
     text-align: center;
+}
+
+.rather-modal .modal-dialog .modal-content {
+  background: #222222 !important;
+}
+
+.rather-modal .modal-dialog {
+  margin-top: 20% !important;
+}
+
+.rather-modal-body {
+  height:150px;
+}
+
+.btn-modal-close {
+  color: white;
+  background: #FF3E21;
+  border-bottom: 2px solid #7F1F10;
+}
+
+.btn-modal-close:hover {
+  color:#B6B6B6;
+  text-decoration: none;
+  background: #7F1F10;
+  border-bottom: 2px solid #7F1F10;
+}
+
+.btn-modal-close:hover:focus {
+  color:#B6B6B6;
+  outline: none !important;
+}
+
+.btn-modal-close:focus {
+  color:white;
+  outline: none !important;
 }
 
 /* Bootstrap Media Queries */

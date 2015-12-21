@@ -43,9 +43,8 @@
 		margin-bottom: 5px;
 	}
 	.rankPanel {
-		margin-top: 0px;
-		height: 425px;
-		margin-top: -15px;
+		height: 100%;
+		margin-top: 10%;
 	}
 	.topHeader {
 		font-size: 20px;

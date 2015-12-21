@@ -61,8 +61,8 @@
     min-width: 100%;
     cursor: pointer;
     color: white;
-    background: #FF3E21;
-    border-bottom: 2px solid #400F08;
+    background: #222222;
+    border-bottom: 2px solid black;
     padding: 4px 10px;
     font-size: 10px;
     -moz-border-radius: 0px;
@@ -78,7 +78,7 @@
 .detail-button:hover {
     color:#B6B6B6;
     text-decoration: none;
-    background: #7F1F10;
+    background: black;
 }
 
 .detail-button:hover:focus {

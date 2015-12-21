@@ -12,7 +12,9 @@ angular.module("RatherApp", [
 	'templates-common',
 	'ui.router',
 	'BaseClass',
-	'wouldyourather.config'
+	'wouldyourather.config',
+	'ngAnimate',
+	'ui.bootstrap'
 ])
 
 // .config(["$locationProvider", function($locationProvider) {
@@ -37,7 +39,29 @@ angular.module("RatherApp", [
 				});
 			}
 		},
-		controller: function($scope, Rather, comparison, $location){
+		controller: function($scope, $uibModal, Rather, comparison, $location){
+			$scope.stats = function (rather) {
+		    var modalInstance = $uibModal.open({
+						animation: true,
+						templateUrl: 'ratherstats.html',
+						controller: function($scope, $filter, $uibModalInstance) {
+								var title = comparison[rather].rather_text;
+								$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
+								$scope.user = comparison[rather].user;
+								$scope.date = $filter('date')(comparison[rather].date_submitted, "MM/dd/yyyy");
+								$scope.wins = comparison[rather].wins;
+								$scope.losses = comparison[rather].losses;
+								$scope.score = comparison[rather].ratio;
+								$scope.sucks = comparison[rather].this_sucks;
+
+								$scope.close = function () {
+									$uibModalInstance.close();
+								};
+						},
+						windowClass: 'rather-modal'
+				});
+			};
+
 			function search(Rather) {
 				$scope.comparison = Rather;
 				$location.search("r1", Rather[0].id);
@@ -48,14 +72,14 @@ angular.module("RatherApp", [
 
 			$scope.vote = function(winner) {
 				comparison = $scope.comparison;
-				if (winner === "0") {
+				if (winner === 0) {
 					Rather.$vote(comparison[0], comparison[0].id, true).then(function(comparison){
 					});
 					Rather.$vote(comparison[1], comparison[1].id, false).then(function(comparison){
 					});
 					$("#btnRather1").unbind("mouseenter mouseleave");
 				}
-				else if (winner === "1") {
+				else if (winner === 1) {
 					Rather.$vote(comparison[0], comparison[0].id, false).then(function(comparison){
 					});
 					Rather.$vote(comparison[1], comparison[1].id, true).then(function(comparison){
@@ -69,16 +93,12 @@ angular.module("RatherApp", [
 
 			$scope.sucks = function(rather) {
 				comparison = $scope.comparison;
-				if (rather === "0") {
+				if (rather === 0) {
 					Rather.$sucks(comparison[0], comparison[0].id).then(function(comparison){});
 				}
-				else if (rather === "1") {
+				else if (rather === 1) {
 					Rather.$sucks(comparison[1], comparison[1].id).then(function(comparison){});
 				}
-			};
-
-			$scope.popup = function() {
-				alert('hey');
 			};
 		}
 	})
@@ -392,7 +412,6 @@ angular.module("RatherApp", [
 		controller: function($scope, Account, current, $state){
 			$scope.current = current;
 			$scope.$on('USER_LOGGED_IN', function(event, data) {
-				debugger;
 				$scope.current = Account.current_user;
 			});
 			$scope.play = function(){

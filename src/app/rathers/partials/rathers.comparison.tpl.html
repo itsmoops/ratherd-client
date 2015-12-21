@@ -1,18 +1,36 @@
+<div>
+    <script type="text/ng-template" id="ratherstats.html">
+        <div class="modal-header">
+            <h3 class="modal-title">{{header_text}}</h3>
+        </div>
+        <div class="modal-body rather-modal-body">
+            <div class="col-xs-12">Submitted by: {{user}}</div>
+            <div class="col-xs-12">Date submitted: {{date}}</div>
+            <div class="col-xs-12">Total wins: {{wins}}</div>
+            <div class="col-xs-12">Total losses: {{losses}}</div>
+            <div class="col-xs-12">Current score: {{score * 100| number :1 }}%</div>
+            <div class="col-xs-12">People who think this sucks: {{sucks}}</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-modal-close" type="button" ng-click="close()">Close</button>
+        </div>
+    </script>
+</div>
 <div class="col-xs-12 text-center">
     <h1 class="title">Would You Rather...</h1>
     <div class="col-xs-12 rather-row remove-side-padding">
         <div class="col-xs-0 col-lg-1"/>
         <div class="col-xs-12 col-lg-4 col-md-5">
             <div class="col-xs-12 remove-side-padding rather-flex">
-              <button id="btnRather1" type="button" ng-click="vote('0')" class="btn default-panel rather-button">{{comparison[0].rather_text}}</button>
+              <button id="btnRather1" type="button" ng-click="vote(0)" class="btn default-panel rather-button">{{comparison[0].rather_text}}</button>
             </div>
             <div class="col-xs-12">
               <div class="col-xs-0 col-md-2"></div>
               <div class="col-xs-6 col-md-4">
-                <button id="btnStats1" type="button" class="btn detail-button glyphicon glyphicon-stats">Stats</button>
+                <button id="btnStats1" type="button" class="btn detail-button glyphicon glyphicon-stats" ng-click="stats(0)">Stats</button>
               </div>
               <div class="col-xs-6 col-md-4">
-                <button id="btnSucks1" type="button" ng-click="sucks('0')" class="btn detail-button glyphicon glyphicon-thumbs-down">This Sucks</button>
+                <button id="btnSucks1" type="button" ng-click="sucks(0)" class="btn detail-button glyphicon glyphicon-thumbs-down">This Sucks</button>
               </div>
               <div class="col-xs-0 col-md-2"></div>
             </div>
@@ -22,15 +40,15 @@
         </div>
         <div class="col-xs-12 col-lg-4 col-md-5">
             <div class="col-xs-12 remove-side-padding rather-flex">
-              <button id="btnRather2" type="button" ng-click="vote('1')" class="btn default-panel rather-button">{{comparison[1].rather_text}}</button>
+              <button id="btnRather2" type="button" ng-click="vote(1)" class="btn default-panel rather-button">{{comparison[1].rather_text}}</button>
             </div>
             <div class="col-xs-12">
               <div class="col-xs-0 col-md-2"></div>
               <div class="col-xs-6 col-md-4">
-                <button id="btnStats2" type="button" class="btn detail-button glyphicon glyphicon-stats">Stats</button>
+                <button id="btnStats2" type="button" class="btn detail-button glyphicon glyphicon-stats" ng-click="stats(1)">Stats</button>
               </div>
               <div class="col-xs-6 col-md-4">
-                <button id="btnSucks2" type="button" ng-click="sucks('1')" class="btn detail-button glyphicon glyphicon-thumbs-down">This Sucks</button>
+                <button id="btnSucks2" type="button" ng-click="sucks(1)" class="btn detail-button glyphicon glyphicon-thumbs-down">This Sucks</button>
               </div>
               <div class="col-xs-0 col-md-2"></div>
             </div>
