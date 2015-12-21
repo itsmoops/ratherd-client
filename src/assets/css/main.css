@@ -190,6 +190,9 @@ hr {
     h2 {
         font-size: 20px;
     }
+    .rather-modal .modal-dialog {
+      margin-top: 45% !important;
+    }
 }
 @media(min-width:501px){
     h1 {
