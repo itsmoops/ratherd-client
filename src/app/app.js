@@ -44,7 +44,8 @@ angular.module("RatherApp", [
 		    var modalInstance = $uibModal.open({
 						animation: true,
 						templateUrl: 'ratherstats.html',
-						controller: function($scope, $filter, $uibModalInstance) {
+						controller: function($scope, $filter, $uibModalInstance, Rather) {
+								debugger;
 								var title = comparison[rather].rather_text;
 								$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
 								$scope.user = comparison[rather].user;
@@ -87,17 +88,17 @@ angular.module("RatherApp", [
 					$("#btnRather2").unbind("mouseenter mouseleave");
 				}
 				Rather.$comparison().then(search);
-				$("#btnRather1").unbind("mouseenter mouseleave");
-				$("#btnRather2").unbind("mouseenter mouseleave");
 			};
 
 			$scope.sucks = function(rather) {
 				comparison = $scope.comparison;
 				if (rather === 0) {
-					Rather.$sucks(comparison[0], comparison[0].id).then(function(comparison){});
+					Rather.$sucks(comparison[0], comparison[0].id).then(function(comparison){
+					});
 				}
 				else if (rather === 1) {
-					Rather.$sucks(comparison[1], comparison[1].id).then(function(comparison){});
+					Rather.$sucks(comparison[1], comparison[1].id).then(function(comparison){
+					});
 				}
 			};
 		}

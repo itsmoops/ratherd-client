@@ -30,6 +30,7 @@ Recover Password:
 Play Page:
 * Have a different color rather panel if one rather is submitted by the user?
 * Timer for how long it takes?
+* Bingo approach? Once a rather has been seen it is pulled out until all others have been seen
 
 "This sucks" button:
 * Display under Rather button
@@ -52,6 +53,7 @@ Play Page:
 ** Losses
 ** Win ratio
 ** "This sucks" votes (+ reason?)
+* Ability to click username and see all the rathers they have submitted
 
 Submit Page
 * On submit in django, convert to lowercase and check against database to make sure not a duplicate
