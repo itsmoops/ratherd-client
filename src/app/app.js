@@ -45,7 +45,6 @@ angular.module("RatherApp", [
 						animation: true,
 						templateUrl: 'ratherstats.html',
 						controller: function($scope, $filter, $uibModalInstance, Rather) {
-								debugger;
 								var title = comparison[rather].rather_text;
 								$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
 								$scope.user = comparison[rather].user.username;

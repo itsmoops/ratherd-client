@@ -64,7 +64,6 @@ angular.module('rather.models',[
 	_constructor.$user_data = function(obj) {
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'user_rathers/';
-		console.log(url);
 		$http({method: 'GET', url:url }).success(function(data, status, headers, config){
 			defer.resolve(data);
 		})
