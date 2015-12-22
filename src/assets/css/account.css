@@ -19,6 +19,28 @@
 	margin-bottom:35px;
 }
 
+.my-rathers {
+	cursor:pointer;
+	color:white;
+}
+
+.my-rathers:hover {
+	color: #FF3E21;
+	text-decoration: none;
+}
+
+.my-rathers:visited {
+	color: #FF8875;
+}
+
+.rather-info-modal .modal-dialog .modal-content {
+  background: #222222 !important;
+}
+
+.rather-info-modal .modal-dialog {
+  margin-top: 20% !important;
+}
+
 @media(max-width:767px) {
 	.signUpPanel {
 		margin-top: 20%;

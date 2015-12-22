@@ -76,13 +76,13 @@
 }
 
 .detail-button:hover {
-    color:#B6B6B6;
+    color:#FF3E21;
     text-decoration: none;
     background: black;
 }
 
 .detail-button:hover:focus {
-    color:#B6B6B6;
+    color:#FF3E21;
     outline: none !important;
 }
 

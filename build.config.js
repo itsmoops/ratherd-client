@@ -69,6 +69,7 @@ module.exports = {
       'vendor/angular/angular.js',
       'vendor/angular-animate/angular-animate.js',
       'vendor/angular-bootstrap/ui-bootstrap.min.js',
+      'vendor/angular-lodash/ng-lodash.js',
       'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
       'vendor/angular-ui-utils/modules/route/route.js',

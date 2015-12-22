@@ -155,7 +155,12 @@ hr {
 }
 
 .rather-modal-body {
+  padding-top: 10px;
   height:150px;
+}
+
+.rather-modal-item {
+  margin-bottom: 5px;
 }
 
 .btn-modal-close {

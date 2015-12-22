@@ -4,12 +4,12 @@
             <h3 class="modal-title">{{header_text}}</h3>
         </div>
         <div class="modal-body rather-modal-body">
-            <div class="col-xs-12">Submitted by: {{user}}</div>
-            <div class="col-xs-12">Date submitted: {{date}}</div>
-            <div class="col-xs-12">Total wins: {{wins}}</div>
-            <div class="col-xs-12">Total losses: {{losses}}</div>
-            <div class="col-xs-12">Current score: {{score * 100| number :1 }}%</div>
-            <div class="col-xs-12">People who think this sucks: {{sucks}}</div>
+            <div class="col-xs-12 rather-modal-item">Submitted by: {{user}}</div>
+            <div class="col-xs-12 rather-modal-item">Date submitted: {{date}}</div>
+            <div class="col-xs-12 rather-modal-item">Total wins: {{wins}}</div>
+            <div class="col-xs-12 rather-modal-item">Total losses: {{losses}}</div>
+            <div class="col-xs-12 rather-modal-item">Current score: {{score * 100| number :1 }}%</div>
+            <div class="col-xs-12 rather-modal-item">People who think this sucks: {{sucks}}</div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-modal-close" type="button" ng-click="close()">Close</button>

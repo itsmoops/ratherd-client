@@ -13,6 +13,7 @@ angular.module("RatherApp", [
 	'ui.router',
 	'BaseClass',
 	'wouldyourather.config',
+	'ngLodash',
 	'ngAnimate',
 	'ui.bootstrap'
 ])
@@ -112,13 +113,36 @@ angular.module("RatherApp", [
 				return Rather.$ranked();
 			}
 		},
-		controller: function($scope, Rather, ranked){
+		controller: function($scope, $uibModal, Rather, ranked, lodash){
 			$scope.ranked = ranked;
 			$("#defaultActive").focus();
 			$scope.predicate = '-ratio';
 			$scope.order = function(predicate) {
 				$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
 				$scope.predicate = predicate;
+			};
+
+			$scope.rather_info = function (rather) {
+		    var modalInstance = $uibModal.open({
+						animation: true,
+						templateUrl: 'ratherinfo.html',
+						controller: function($scope, $filter, $uibModalInstance) {
+								var obj = lodash.find(ranked, {"id": rather});
+								var title = obj.rather_text;
+								$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
+								$scope.user = obj.user.username;
+								$scope.date = $filter('date')(obj.date_submitted, "MM/dd/yyyy");
+								$scope.wins = obj.wins;
+								$scope.losses = obj.losses;
+								$scope.score = obj.ratio;
+								$scope.sucks = obj.this_sucks;
+
+								$scope.close = function () {
+									$uibModalInstance.close();
+								};
+						},
+						windowClass: 'rather-info-modal'
+				});
 			};
 		}
 	})
@@ -429,12 +453,35 @@ angular.module("RatherApp", [
 				return Rather.$user_data();
 			}
 		},
-		controller: function($scope, Account, Rather, $state, user_rathers){
+		controller: function($scope, $uibModal, Account, Rather, $state, user_rathers, lodash){
 			$scope.user_rathers = user_rathers;
 
 			$scope.logout = function(){
 				Account.$logout();
 				$state.go("play");
+			};
+
+			$scope.rather_info = function (rather) {
+		    var modalInstance = $uibModal.open({
+						animation: true,
+						templateUrl: 'ratherinfo.html',
+						controller: function($scope, $filter, $uibModalInstance) {
+								var obj = lodash.find(user_rathers, {"id": rather});
+								var title = obj.rather_text;
+								$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
+								$scope.date = $filter('date')(obj.date_submitted, "MM/dd/yyyy");
+								$scope.wins = obj.wins;
+								$scope.losses = obj.losses;
+								$scope.score = obj.ratio;
+								$scope.sucks = obj.this_sucks;
+								$scope.active = (obj.active) ? "Yep" : "Nope";
+
+								$scope.close = function () {
+									$uibModalInstance.close();
+								};
+						},
+						windowClass: 'rather-info-modal'
+				});
 			};
 		}
 	})

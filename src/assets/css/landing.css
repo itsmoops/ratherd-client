@@ -10,28 +10,28 @@
     -webkit-border-radius: 5px;
     border-radius: 5px;
     background-color: #222222;
-    color: #FF3E21;
+    color: white;
     border-bottom: 2px solid black;
     margin-top: 40px !important;
 }
 
 .landingButton:hover {
     margin-top: 44px !important;
-    color:#FF8875;
+    color:#FF3E21;
     text-decoration: none;
     background: black;
 }
 
 .landingButton:active {
     margin-top: 44px !important;
-    color:#FF8875;
+    color:#FF3E21;
     text-decoration: none;
     background: black;
 }
 
 .landingButton:focus {
     margin-top: 44px !important;
-    color:#FF8875;
+    color:#FF3E21;
     text-decoration: none;
     background: black;
 }
