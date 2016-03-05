@@ -207,6 +207,12 @@ module.exports = function ( grunt ) {
             dest: '<%= compile_dir %>/',
             cwd: '.',
             expand: true
+          },
+          {
+            src: [ '<%= vendor_files.eot %>', '<%= vendor_files.svg %>', '<%= vendor_files.ttf %>', '<%= vendor_files.woff %>' ],
+            dest: '<%= compile_dir %>/',
+            cwd: '.',
+            expand: true
           }
         ]
       }
