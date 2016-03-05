@@ -184,6 +184,16 @@ module.exports = function ( grunt ) {
           }
         ]
       },
+      build_vendor_fonts: {
+        files: [
+          {
+            src: [ '<%= vendor_files.eot %>', '<%= vendor_files.svg %>', '<%= vendor_files.ttf %>', '<%= vendor_files.woff %>' ],
+            dest: '<%= build_dir %>/',
+            cwd: '.',
+            expand: true
+          }
+        ]
+      },
       compile_assets: {
         files: [
           {
@@ -551,7 +561,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build_dev', [
     'clean', 'html2js', 'jshint', 'ngconstant:development', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'index:build', 'karmaconfig',
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'copy:build_vendor_fonts', 'index:build', 'karmaconfig',
     'karma:continuous', 'connect'
   ]);
   /**
@@ -564,7 +574,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'ngconstant:production', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'index:build', 'karmaconfig',
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'copy:build_vendor_fonts', 'index:build', 'karmaconfig',
     'karma:continuous', 'connect'
   ]);
 
