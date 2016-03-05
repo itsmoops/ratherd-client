@@ -41,18 +41,9 @@
         <!-- font awesome from BootstrapCDN -->
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
-        <!-- compiled CSS --> 
+        <!-- compiled CSS -->
         <% styles.forEach( function ( file ) { %>
         <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
-        
-        <link href="assets/css/normalize.css" rel="stylesheet">
-        <link href="assets/css/main.css" rel="stylesheet">
-        <link href="assets/css/landing.css" rel="stylesheet">
-        <link href="assets/css/navigation.css" rel="stylesheet">
-        <link href="assets/css/play.css" rel="stylesheet">
-        <link href="assets/css/top.css" rel="stylesheet">
-        <link href="assets/css/submit.css" rel="stylesheet">
-        <link href="assets/css/account.css" rel="stylesheet">
 
         <!-- Font -->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -60,8 +51,7 @@
     <body>
         <!-- App -->
         <navigation-bar></navigation-bar>
-        <div ui-view>
-        </div>
+        <div ui-view></div>
 
         <!-- Google Analytics -->
         <script>

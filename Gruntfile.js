@@ -4,7 +4,6 @@ module.exports = function ( grunt ) {
    * Load required Grunt tasks. These are installed based on the versions listed
    * in `package.json` when you do `npm install` in this directory.
    */
-  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -239,26 +238,6 @@ module.exports = function ( grunt ) {
     },
 
     /**
-     * `grunt coffee` compiles the CoffeeScript sources. To work well with the
-     * rest of the build, we have a separate compilation task for sources and
-     * specs so they can go to different places. For example, we need the
-     * sources to live with the rest of the copied JavaScript so we can include
-     * it in the final build, but we don't want to include our specs there.
-     */
-    coffee: {
-      source: {
-        options: {
-          bare: true
-        },
-        expand: true,
-        cwd: '.',
-        src: [ '<%= app_files.coffee %>' ],
-        dest: '<%= build_dir %>',
-        ext: '.js'
-      }
-    },
-
-    /**
      * `ngAnnotate` annotates the sources before minifying. That is, it allows us
      * to code without the array syntax.
      */
@@ -343,24 +322,6 @@ module.exports = function ( grunt ) {
     },
 
     /**
-     * `coffeelint` does the same as `jshint`, but for CoffeeScript.
-     * CoffeeScript is not the default in ngBoilerplate, so we're just using
-     * the defaults here.
-     */
-    coffeelint: {
-      src: {
-        files: {
-          src: [ '<%= app_files.coffee %>' ]
-        }
-      },
-      test: {
-        files: {
-          src: [ '<%= app_files.coffeeunit %>' ]
-        }
-      }
-    },
-
-    /**
      * HTML2JS is a Grunt plugin that takes all of your template files and
      * places them into JavaScript files as strings that are added to
      * AngularJS's template cache. This means that the templates too become
@@ -426,8 +387,7 @@ module.exports = function ( grunt ) {
           '<%= html2js.common.dest %>',
           '<%= html2js.app.dest %>',
           '<%= vendor_files.css %>',
-          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css',
-          '<%= compass.development.options.cssDir %>*.css'
+          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
         ]
       },
 
@@ -441,8 +401,7 @@ module.exports = function ( grunt ) {
         src: [
           '<%= concat.compile_js.dest %>',
           '<%= vendor_files.css %>',
-          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css',
-          '<%= compass.production.options.cssDir %>*.css'
+          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
         ]
       }
     },
@@ -525,17 +484,6 @@ module.exports = function ( grunt ) {
       },
 
       /**
-       * When our CoffeeScript source files change, we want to run lint them and
-       * run our unit tests.
-       */
-      coffeesrc: {
-        files: [
-          '<%= app_files.coffee %>'
-        ],
-        tasks: [ 'coffeelint:src', 'coffee:source', 'karma:unit:run', 'copy:build_appjs' ]
-      },
-
-      /**
        * When assets are changed, copy them. Note that this will *not* copy new
        * files, so this is probably not very useful.
        */
@@ -565,11 +513,6 @@ module.exports = function ( grunt ) {
         tasks: [ 'html2js' ]
       },
 
-      compass: {
-        files: [ 'src/**/*.scss' ],
-        tasks: ['compass:development']
-      },
-
       /**
        * When the CSS files change, we need to compile and minify them.
        */
@@ -589,38 +532,6 @@ module.exports = function ( grunt ) {
         tasks: [ 'jshint:test', 'karma:unit:run' ],
         options: {
           livereload: false
-        }
-      },
-
-      /**
-       * When a CoffeeScript unit test file changes, we only want to lint it and
-       * run the unit tests. We don't want to do any live reloading.
-       */
-      coffeeunit: {
-        files: [
-          '<%= app_files.coffeeunit %>'
-        ],
-        tasks: [ 'coffeelint:test', 'karma:unit:run' ],
-        options: {
-          livereload: false
-        }
-      }
-    },
-    compass: {
-      development: {
-        options: {
-          sassDir: ['src/sass'],
-          cssDir: ['<%= build_dir %>/assets/css/'],
-          environment: 'development',
-          raw: "preferred_syntax = :scss\n"
-        }
-      },
-      production: {
-        options: {
-          sassDir: 'src/sass',
-          cssDir: '<%= compile_dir %>/assets/css/',
-          environment: 'production',
-          raw: "preferred_syntax = :scss\n"
         }
       }
     }

@@ -67,8 +67,8 @@ angular.module("RatherApp", [
 			function search(Rather) {
 				$scope.comparison = Rather;
 				newRather = Rather;
-				$location.search("r1", Rather[0].id);
-				$location.search("r2", Rather[1].id);
+				$location.search("rather1", Rather[0].id);
+				$location.search("rather2", Rather[1].id);
 			}
 
 			search(comparison);
