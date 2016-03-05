@@ -1,14 +1,13 @@
 @import "source.less";
 
 body {
-    /*color: white;*/
-    color: white;
+    color: @font-color-1;
     font-family: 'Open Sans', sans-serif;
     background-repeat: repeat;
     /*background-image: url(../img/brilliant.png);*/
-    background-color: @background;
-    background-image: url(./img/bright-squares.png);
-    /*background-color: #222222;*/
+    background-color: @background-color;
+    background-image: @background-image;
+    /*background-color: @navigation-bar; */
 }
 
 h1 {
@@ -21,19 +20,19 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #FF8875;
+    border-top: 1px solid @accent-color-1;
     margin: 0px -15px;
     padding: 0;
     margin-bottom: 15px;
 }
 
 .link {
-    color: white;
+    color: @font-color-1;
     cursor: pointer;
 }
 
 .link:hover {
-    color: #FF3E21;
+    color: @main-color;
     text-decoration: none;
 }
 
@@ -44,24 +43,24 @@ hr {
 .default-panel {
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color: #222222;
-    color: white;
+    background-color: @navigation-bar;
+    color: @font-color-1;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    border-bottom: 4px solid #484848;
+    border-bottom: 4px solid @navigation-bar-dark;
 }
 
 .panelHeader {
     font-size: 45px;
     font-weight: bold;
     text-transform: uppercase;
-    color: white;
+    color: @font-color-1;
     text-align: center;
 }
 
 .errorNo {
-    color: #222222;
+    color: @navigation-bar;
     -webkit-transition: 1s linear;
     /*to only change opacity*/
     /*-webkit-transition: opacity 1s linear*/
@@ -71,7 +70,7 @@ hr {
 }
 
 .errorYes {
-    color: #FF8875;
+    color: @accent-color-1;
 }
 
 .button {
@@ -79,9 +78,9 @@ hr {
     height: 45px;
     min-width: 100%;
     cursor: pointer;
-    color: white;
-    background: #FF3E21;
-    border-bottom: 2px solid #400F08;
+    color: @font-color-1;
+    background: @main-color;
+    border-bottom: 2px solid @main-color-dark;
     padding: 4px 10px;
     font-size: 20px;
     -moz-border-radius: 5px;
@@ -91,19 +90,19 @@ hr {
 }
 
 .button:hover {
-    color:#B6B6B6;
+    color:@font-color-1-dark;
     text-decoration: none;
-    background: #7F1F10;
+    background: @main-color-dark;
     margin-top: 10px !important;
 }
 
 .button:hover:focus {
-    color:#B6B6B6;
+    color:@font-color-1-dark;
     outline: none !important;
 }
 
 .button:focus {
-  color:white;
+  color:@font-color-1;
   outline: none !important;
 }
 
@@ -143,13 +142,13 @@ hr {
     width: 22px;
     height: 22px;
     padding: 0px;
-    border: 2px solid #fff;
-    color: #666;
+    border: 2px solid @font-color-1;
+    color: @font-color-1-dark;
     text-align: center;
 }
 
 .rather-modal .modal-dialog .modal-content {
-  background: #222222 !important;
+  background: @navigation-bar !important;
 }
 
 .rather-modal .modal-dialog {
@@ -166,25 +165,25 @@ hr {
 }
 
 .btn-modal-close {
-  color: white;
-  background: #FF3E21;
-  border-bottom: 2px solid #7F1F10;
+  color: @font-color-1;
+  background: @main-color;
+  border-bottom: 2px solid @main-color-dark;
 }
 
 .btn-modal-close:hover {
-  color:#B6B6B6;
+  color:@font-color-1-dark;
   text-decoration: none;
-  background: #7F1F10;
-  border-bottom: 2px solid #7F1F10;
+  background: @main-color-dark;
+  border-bottom: 2px solid @main-color-dark;
 }
 
 .btn-modal-close:hover:focus {
-  color:#B6B6B6;
+  color:@font-color-1-dark;
   outline: none !important;
 }
 
 .btn-modal-close:focus {
-  color:white;
+  color:@font-color-1;
   outline: none !important;
 }
 
