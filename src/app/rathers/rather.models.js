@@ -15,6 +15,7 @@ angular.module('rather.models',[
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'comparison/';
 		$http({method: 'GET', url:url, params: parameters }).success(function(data, status, headers, config){
+			console.log(data);
 			defer.resolve(data);
 		})
 		.error(function(data, status, headers, config){
@@ -36,7 +37,7 @@ angular.module('rather.models',[
 		return defer.promise;
 	};
 
-	_constructor.$sucks = function(obj, primaryKey) {
+	_constructor.$sucks = function(obj, primaryKey, userId) {
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + primaryKey + '/sucks/';
 		$http({method: 'POST', url:url, data:obj })

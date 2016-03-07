@@ -591,7 +591,7 @@ module.exports = function ( grunt ) {
 
    //include 'uglify', before index:compile
   grunt.registerTask( 'compile', [
-    'ngconstant:production', 'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'index:compile'
+    'ngconstant:production', 'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
   ]);
 
   /**

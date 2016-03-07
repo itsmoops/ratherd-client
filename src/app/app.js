@@ -93,15 +93,11 @@ angular.module("RatherApp", [
 			};
 
 			$scope.sucks = function(rather) {
+				var btn = $("#btnSucks"+(rather+1));
 				comparison = $scope.comparison;
-				if (rather === 0) {
-					Rather.$sucks(comparison[0], comparison[0].id).then(function(comparison){
-					});
-				}
-				else if (rather === 1) {
-					Rather.$sucks(comparison[1], comparison[1].id).then(function(comparison){
-					});
-				}
+				if (btn.hasClass("btn-sucks-pressed")) {btn.removeClass("btn-sucks-pressed");} else {btn.addClass("btn-sucks-pressed");}
+					Rather.$sucks(comparison[rather], comparison[rather].id).then(function(comparison){
+				});
 			};
 		}
 	})
@@ -164,7 +160,7 @@ angular.module("RatherApp", [
 			$scope.comparison = comparison;
 			$scope.create = function(){
 				var newRather = {
-					rather_text: $scope.rather.rather_text,
+					rather_text: ($scope.rather) ? $scope.rather.rather_text : "",
 					user: current_user.id
 				};
 				var error = $('#blankSubmitError');
@@ -183,10 +179,14 @@ angular.module("RatherApp", [
 					error.removeClass('errorNo');
 					error.addClass('errorYes');
 					error.text("* You gotta enter some text, dummy");
+					setTimeout(function() { error.removeClass('errorYes');error.addClass('errorNo');
+						setTimeout(function() { error.text("."); }, 1100);
+					}, 1100);
 					return false;
 				}
 				else {
 					error.text(feedback[randomNum]);
+					error.addClass('errorYes');
 					setTimeout(function() { error.removeClass('errorYes');error.addClass('errorNo');
 						setTimeout(function() { error.text("."); }, 1100);
 					}, 1100);
