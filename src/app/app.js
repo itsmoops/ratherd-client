@@ -65,10 +65,20 @@ angular.module("RatherApp", [
 			};
 
 			function search(Rather) {
-				$scope.comparison = Rather;
-				newRather = Rather;
-				$location.search("rather1", Rather[0].id);
-				$location.search("rather2", Rather[1].id);
+				$scope.comparison = Rather.rathers;
+				newRather = Rather.rathers;
+				$location.search("rather1", Rather.rathers[0].id);
+				$location.search("rather2", Rather.rathers[1].id);
+
+				btn1 = $("#btnSucks1");
+				btn2 = $("#btnSucks2");
+
+				if (Rather.user_sucks.rather1 > 0) {
+					btn1.addClass("btn-sucks-pressed");
+				}
+				if (Rather.user_sucks.rather2 > 0) {
+					btn2.addClass("btn-sucks-pressed");
+				}
 			}
 
 			search(comparison);
@@ -95,8 +105,13 @@ angular.module("RatherApp", [
 			$scope.sucks = function(rather) {
 				var btn = $("#btnSucks"+(rather+1));
 				comparison = $scope.comparison;
-				if (btn.hasClass("btn-sucks-pressed")) {btn.removeClass("btn-sucks-pressed");} else {btn.addClass("btn-sucks-pressed");}
-					Rather.$sucks(comparison[rather], comparison[rather].id).then(function(comparison){
+				if (btn.hasClass("btn-sucks-pressed")) {
+					btn.removeClass("btn-sucks-pressed");
+				}
+				else {
+					btn.addClass("btn-sucks-pressed");
+				}
+				Rather.$sucks(comparison[rather], comparison[rather].id).then(function(comparison){
 				});
 			};
 		}
@@ -157,7 +172,8 @@ angular.module("RatherApp", [
 			if (!Account.logged_in) {
 				$state.go("otherwise");
 			}
-			$scope.comparison = comparison;
+			$scope.comparison = comparison.rathers;
+			debugger;
 			$scope.create = function(){
 				var newRather = {
 					rather_text: ($scope.rather) ? $scope.rather.rather_text : "",
@@ -220,7 +236,7 @@ angular.module("RatherApp", [
 			};
 			$scope.refresh = function() {
 				Rather.$comparison().then(function(comparison) {
-					$scope.comparison = comparison;
+					$scope.comparison = comparison.rathers;
 				});
 			};
 		}

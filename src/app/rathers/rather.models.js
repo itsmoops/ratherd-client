@@ -15,7 +15,6 @@ angular.module('rather.models',[
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'comparison/';
 		$http({method: 'GET', url:url, params: parameters }).success(function(data, status, headers, config){
-			console.log(data);
 			defer.resolve(data);
 		})
 		.error(function(data, status, headers, config){
