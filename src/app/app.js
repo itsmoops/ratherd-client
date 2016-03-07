@@ -523,6 +523,13 @@ angular.module("RatherApp", [
 			};
 		}
 	})
+	.state('about',{
+		url: '/about',
+		templateUrl: 'landing/partials/about.tpl.html',
+		controller: function() {
+
+		}
+	})
 	.state('otherwise', {
 		url: '*path',
 		templateUrl: 'landing/partials/landing.tpl.html'
