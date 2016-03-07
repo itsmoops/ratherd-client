@@ -18,9 +18,9 @@ angular.module("RatherApp", [
 	'ui.bootstrap'
 ])
 
-.config(["$locationProvider", function($locationProvider) {
-  $locationProvider.html5Mode(true);
-}])
+// .config(["$locationProvider", function($locationProvider) {
+//   $locationProvider.html5Mode(true);
+// }])
 
 // Using ui.router stateProvider to define single page application states
 .config(['$stateProvider', 'BCConfigProvider', 'API_DOMAIN', function($stateProvider, BCConfigProvider, API_DOMAIN) {
@@ -76,8 +76,14 @@ angular.module("RatherApp", [
 				if (Rather.user_sucks.rather1 > 0) {
 					btn1.addClass("btn-sucks-pressed");
 				}
+				else {
+					btn1.removeClass("btn-sucks-pressed");
+				}
 				if (Rather.user_sucks.rather2 > 0) {
 					btn2.addClass("btn-sucks-pressed");
+				}
+				else {
+					btn2.removeClass("btn-sucks-pressed");
 				}
 			}
 
