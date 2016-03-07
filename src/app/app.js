@@ -18,9 +18,9 @@ angular.module("RatherApp", [
 	'ui.bootstrap'
 ])
 
-// .config(["$locationProvider", function($locationProvider) {
-//   $locationProvider.html5Mode(true);
-// }])
+.config(["$locationProvider", function($locationProvider) {
+  $locationProvider.html5Mode(true);
+}])
 
 // Using ui.router stateProvider to define single page application states
 .config(['$stateProvider', 'BCConfigProvider', 'API_DOMAIN', function($stateProvider, BCConfigProvider, API_DOMAIN) {
