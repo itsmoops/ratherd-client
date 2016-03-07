@@ -60,6 +60,7 @@ Submit Page
 * Probably have submit button match the styles of signup/login buttons
 * Think about fixing the fading success messages
 * Think about whether the success messages should be funny or just "success"
+* Press enter to submit
 
 Info Page:
 * Icon glyphicon in top right?
