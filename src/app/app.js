@@ -102,10 +102,12 @@ angular.module("RatherApp", [
 			$scope.vote = function(winner) {
 				comparison = $scope.comparison;
 				if (winner === 0) {
+					//$("#divRather1").animate({right: '50%'}, 500 );
 					Rather.$vote(comparison[0], comparison[0].id, true).then(function(comparison){
 					});
 					Rather.$vote(comparison[1], comparison[1].id, false).then(function(comparison){
 					});
+
 					$("#btnRather1").unbind("mouseenter mouseleave");
 				}
 				else if (winner === 1) {
