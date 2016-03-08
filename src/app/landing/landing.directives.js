@@ -12,4 +12,14 @@ angular.module('landing.directives',[
 	};
 })
 
+.directive('aboutPage', function() {
+	return {
+		restrict: 'E',
+		scope: {
+			info: '='
+		},
+		templateUrl: 'landing/partials/about.tpl.html'
+	};
+})
+
 ;

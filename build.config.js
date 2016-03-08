@@ -67,13 +67,16 @@ module.exports = {
       'vendor/angular-animate/angular-animate.js',
       'vendor/angular-bootstrap/ui-bootstrap.min.js',
       'vendor/angular-lodash/ng-lodash.js',
+      'vendor/chart.js/Chart.js',
+      'vendor/angular-chart.js/dist/angular-chart.js',
       'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
       'vendor/angular-ui-utils/modules/route/route.js',
       'vendor/angular-cookie/angular-cookie.js'
     ],
     css: [
-      'vendor/bootstrap/dist/css/bootstrap.css'
+      'vendor/bootstrap/dist/css/bootstrap.css',
+      'vendor/angular-chart.js/dist/angular-chart.css'
     ],
     eot: [
       'vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.eot'

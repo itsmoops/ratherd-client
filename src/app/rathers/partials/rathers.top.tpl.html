@@ -1,15 +1,34 @@
 <div>
     <script type="text/ng-template" id="ratherinfo.html">
         <div class="modal-header text-center">
-            <h3 class="modal-title">{{header_text}}</h3>
+            <h3 class="modal-title modal-title-text">{{header_text}}</h3>
         </div>
         <div class="modal-body rather-modal-body">
-            <div class="col-xs-12 rather-modal-item">Submitted by: {{user}}</div>
-            <div class="col-xs-12 rather-modal-item">Date submitted: {{date}}</div>
-            <div class="col-xs-12 rather-modal-item">Total wins: {{wins}}</div>
-            <div class="col-xs-12 rather-modal-item">Total losses: {{losses}}</div>
-            <div class="col-xs-12 rather-modal-item">Current score: {{score * 100| number :1 }}%</div>
-            <div class="col-xs-12 rather-modal-item">People who think this sucks: {{sucks}}</div>
+            <div class="col-xs-12 text-left rather-modal-item">Submitted by <span class="modal-highlight">{{user}}</span> on {{date}}</div>
+            <div class="col-xs-12 chart-row">
+                <div class="col-xs-6">
+                    <canvas id="doughnut"
+                        class="chart chart-doughnut"
+                        chart-data="data"
+                        chart-labels="labels"
+                        height="200" >
+                    </canvas>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-12">
+                        This rather wins:
+                    </div>
+                    <div class="col-xs-12 win-percentage text-center">
+                        {{score * 100| number :1 }}%
+                    </div>
+                    <div class="col-xs-12 text-right">
+                        of the time
+                    </div>
+                </div>
+                <div class="col-xs-12 rather-modal-item chart-sucks">
+                    <div class="col-xs-6">This Sucks Votes: <span class="modal-highlight">{{sucks}}</span></div>
+                </div>
+            </div>
         </div>
         <div class="modal-footer custom-footer">
             <button class="btn btn-modal-close" type="button" ng-click="close()">Close</button>

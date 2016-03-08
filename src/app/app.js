@@ -14,6 +14,7 @@ angular.module("RatherApp", [
 	'BaseClass',
 	'wouldyourather.config',
 	'ngLodash',
+	'chart.js',
 	'ngAnimate',
 	'ui.bootstrap'
 ])
@@ -40,7 +41,7 @@ angular.module("RatherApp", [
 				});
 			}
 		},
-		controller: function($scope, $uibModal, Rather, comparison, $location){
+		controller: function($scope, $uibModal, Rather, ChartJs, comparison, $location){
 			var newRather;
 			$scope.stats = function (rather) {
 		    var modalInstance = $uibModal.open({
@@ -48,13 +49,22 @@ angular.module("RatherApp", [
 						templateUrl: 'ratherstats.html',
 						controller: function($scope, $filter, $uibModalInstance) {
 								var title = newRather[rather].rather_text;
-								$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
+								//$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
+								$scope.header_text = title.toUpperCase();
 								$scope.user = newRather[rather].user.username;
 								$scope.date = $filter('date')(newRather[rather].date_submitted, "MM/dd/yyyy");
 								$scope.wins = newRather[rather].wins;
 								$scope.losses = newRather[rather].losses;
 								$scope.score = newRather[rather].ratio;
 								$scope.sucks = newRather[rather].this_sucks;
+
+								// Doughnut
+								$scope.labels = ["Wins", "Losses"];
+								$scope.data = [newRather[rather].wins, newRather[rather].losses];
+								Chart.defaults.global.colours = [
+							    '#5197A2',
+							    '#D63D52'
+							  ];
 
 								$scope.close = function () {
 									$uibModalInstance.close();
@@ -109,12 +119,15 @@ angular.module("RatherApp", [
 			};
 
 			$scope.sucks = function(rather) {
+				debugger;
 				var btn = $("#btnSucks"+(rather+1));
 				comparison = $scope.comparison;
 				if (btn.hasClass("btn-sucks-pressed")) {
+					newRather[rather].this_sucks -= 1;
 					btn.removeClass("btn-sucks-pressed");
 				}
 				else {
+					newRather[rather].this_sucks += 1;
 					btn.addClass("btn-sucks-pressed");
 				}
 				Rather.$sucks(comparison[rather], comparison[rather].id).then(function(comparison){
@@ -153,6 +166,13 @@ angular.module("RatherApp", [
 								$scope.losses = obj.losses;
 								$scope.score = obj.ratio;
 								$scope.sucks = obj.this_sucks;
+
+								$scope.labels = ["Wins", "Losses"];
+								$scope.data = [obj.wins, obj.losses];
+								Chart.defaults.global.colours = [
+							    '#5197A2',
+							    '#D63D52'
+							  ];
 
 								$scope.close = function () {
 									$uibModalInstance.close();
@@ -497,6 +517,13 @@ angular.module("RatherApp", [
 								$scope.score = obj.ratio;
 								$scope.sucks = obj.this_sucks;
 								$scope.active = (obj.active) ? "Yep" : "Nope";
+
+								$scope.labels = ["Wins", "Losses"];
+								$scope.data = [obj.wins, obj.losses];
+								Chart.defaults.global.colours = [
+							    '#5197A2',
+							    '#D63D52'
+							  ];
 
 								$scope.close = function () {
 									$uibModalInstance.close();
