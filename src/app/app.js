@@ -47,7 +47,7 @@ angular.module("RatherApp", [
 		    var modalInstance = $uibModal.open({
 						animation: true,
 						templateUrl: 'ratherstats.html',
-						controller: function($scope, $filter, $uibModalInstance) {
+						controller: ['$scope', '$filter', '$uibModalInstance', function($scope, $filter, $uibModalInstance) {
 								var title = newRather[rather].rather_text;
 								//$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
 								$scope.header_text = title.toUpperCase();
@@ -69,7 +69,7 @@ angular.module("RatherApp", [
 								$scope.close = function () {
 									$uibModalInstance.close();
 								};
-						},
+						}],
 						windowClass: 'rather-modal'
 				});
 			};
@@ -102,26 +102,50 @@ angular.module("RatherApp", [
 			$scope.vote = function(winner) {
 				comparison = $scope.comparison;
 				if (winner === 0) {
-					//$("#divRather1").animate({right: '50%'}, 500 );
 					Rather.$vote(comparison[0], comparison[0].id, true).then(function(comparison){
 					});
 					Rather.$vote(comparison[1], comparison[1].id, false).then(function(comparison){
 					});
-
-					$("#btnRather1").unbind("mouseenter mouseleave");
 				}
 				else if (winner === 1) {
 					Rather.$vote(comparison[0], comparison[0].id, false).then(function(comparison){
 					});
 					Rather.$vote(comparison[1], comparison[1].id, true).then(function(comparison){
 					});
-					$("#btnRather2").unbind("mouseenter mouseleave");
 				}
-				Rather.$comparison().then(search);
+
+				//Rather.$comparison().then(search);
+
+				// jquery animation
+				$("#divRather1").animate({
+							left: '-150%'
+					}, 200, function() {
+					$("#divRather1").animate({
+								left: '0%'
+						}, 200);
+				});
+
+				$("#divRather2").animate({
+							right: '-150%'
+					}, 200, function() {
+					$("#divRather2").animate({
+								right: '0%'
+						}, 200);
+					setTimeout(function(){ Rather.$comparison().then(search); }, 200);
+				});
+
+				// css transition classes
+				// $("#divRather1").addClass('move-left');
+				// setTimeout(function(){
+				// 	$("#divRather1").removeClass('move-left');
+				// }, 1000);
+				// $("#divRather2").addClass('move-right');
+				// setTimeout(function(){
+				// 	$("#divRather2").removeClass('move-right');
+				// }, 1200);
 			};
 
 			$scope.sucks = function(rather) {
-				debugger;
 				var btn = $("#btnSucks"+(rather+1));
 				comparison = $scope.comparison;
 				if (btn.hasClass("btn-sucks-pressed")) {
@@ -147,9 +171,21 @@ angular.module("RatherApp", [
 		},
 		controller: function($scope, $uibModal, Rather, ranked, lodash){
 			$scope.ranked = ranked;
-			$("#defaultActive").focus();
+			$("#biggestWinner").focus();
 			$scope.predicate = '-ratio';
-			$scope.order = function(predicate) {
+			$scope.order = function(predicate, sender) {
+				if (sender === "wins") {
+					$('#biggestWinner').removeClass('inactive-sort');
+					$('#biggestWinner').addClass('active-sort');
+					$('#biggestLoser').removeClass('active-sort');
+					$('#biggestLoser').addClass('inactive-sort');
+				}
+				else if (sender === "losses") {
+					$('#biggestWinner').removeClass('active-sort');
+					$('#biggestWinner').addClass('inactive-sort');
+					$('#biggestLoser').removeClass('inactive-sort');
+					$('#biggestLoser').addClass('active-sort');
+				}
 				$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
 				$scope.predicate = predicate;
 			};
@@ -158,10 +194,11 @@ angular.module("RatherApp", [
 		    var modalInstance = $uibModal.open({
 						animation: true,
 						templateUrl: 'ratherinfo.html',
-						controller: function($scope, $filter, $uibModalInstance) {
+						controller: ['$scope', '$filter', '$uibModalInstance', function($scope, $filter, $uibModalInstance) {
 								var obj = lodash.find(ranked, {"id": rather});
 								var title = obj.rather_text;
-								$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
+								//$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
+								$scope.header_text = title.toUpperCase();
 								$scope.user = obj.user.username;
 								$scope.date = $filter('date')(obj.date_submitted, "MM/dd/yyyy");
 								$scope.wins = obj.wins;
@@ -179,7 +216,7 @@ angular.module("RatherApp", [
 								$scope.close = function () {
 									$uibModalInstance.close();
 								};
-						},
+						}],
 						windowClass: 'rather-info-modal'
 				});
 			};
@@ -201,7 +238,6 @@ angular.module("RatherApp", [
 				$state.go("otherwise");
 			}
 			$scope.comparison = comparison.rathers;
-			debugger;
 			$scope.create = function(){
 				var newRather = {
 					rather_text: ($scope.rather) ? $scope.rather.rather_text : "",
@@ -509,10 +545,11 @@ angular.module("RatherApp", [
 		    var modalInstance = $uibModal.open({
 						animation: true,
 						templateUrl: 'ratherinfo.html',
-						controller: function($scope, $filter, $uibModalInstance) {
+						controller: ['$scope', '$filter', '$uibModalInstance', function($scope, $filter, $uibModalInstance) {
 								var obj = lodash.find(user_rathers, {"id": rather});
 								var title = obj.rather_text;
-								$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
+								//$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
+								$scope.header_text = title.toUpperCase();
 								$scope.date = $filter('date')(obj.date_submitted, "MM/dd/yyyy");
 								$scope.wins = obj.wins;
 								$scope.losses = obj.losses;
@@ -530,7 +567,7 @@ angular.module("RatherApp", [
 								$scope.close = function () {
 									$uibModalInstance.close();
 								};
-						},
+						}],
 						windowClass: 'rather-info-modal'
 				});
 			};
@@ -548,7 +585,8 @@ angular.module("RatherApp", [
 		templateUrl: 'account/partials/account.recoverpw.tpl.html',
 		controller: function($scope, Account, $state) {
 			$scope.send_email = function(){
-				Account.$send_email();
+				var username = { username: $('#txtUsername').val() };
+				Account.$send_email(username);
 			};
 		}
 	})

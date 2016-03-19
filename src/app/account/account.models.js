@@ -128,8 +128,16 @@ angular.module('account.models',[
 		return hb;
 	};
 
-	_constructor.$send_email = function(){
-		alert('models');
+	_constructor.$send_email = function(parameters) {
+		var defer = $q.defer();
+		var url = _constructor.apiBase + _constructor.api + 'send_email/';
+		$http({method: 'POST', url:url, data: parameters }).success(function(data, status, headers, config){
+			defer.resolve(data);
+		})
+		.error(function(data, status, headers, config){
+			defer.reject(data);
+		});
+		return defer.promise;
 	};
 
 	return Account;

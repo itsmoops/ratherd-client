@@ -1,11 +1,11 @@
-<div class="col-lg-12">
+<div class="col-lg-12 flex-container">
 	<div class="col-xs-0 col-md-3">
 	</div>
-	<div class="col-xs-12 col-md-6 default-panel submitPanel">
+	<div class="col-xs-12 col-md-6 default-panel">
 		<p class="panelHeader">Submit a Rather</p>
 		<hr/>
 		<p>Would you rather {{comparison[0].rather_text}} OR</p>
-		<input type="text" class="submitTextBox" placeholder="...get creative" ng-model='rather.rather_text'>
+		<input type="text" class="submit-text-box" placeholder="...get creative" ng-model='rather.rather_text'>
 		<p id="blankSubmitError" ng-class="{toggle: errorYes}" class="errorNo">.</p>
 		<div class="col-xs-0 col-md-3"></div>
 		<div class="col-xs-0 col-md-6">

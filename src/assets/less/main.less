@@ -4,8 +4,6 @@ body {
     color: @font-color-1;
     font-family: @font-1;
     font-size: 20px;
-    font-weight: 500;
-    background-repeat: repeat;
     /* Regular Background */
    //  background: @background-color;
    //  background-image: @background-image;
@@ -46,6 +44,21 @@ hr {
     margin-top: 10%;
     font-family: @title-font;
 }
+
+.flex-container {
+   width: 100%;
+   height: 90%;
+   display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+
+	align-items: center;
+   position: absolute;
+ }
 
 .default-panel {
     padding-top: 20px;
@@ -213,6 +226,14 @@ hr {
 
 .custom-footer {
    margin-top: 65px;
+}
+
+.user-score {
+   padding-left: 7px;
+}
+
+.top-score {
+   padding-left: 15px;
 }
 
 /* Bootstrap Media Queries */

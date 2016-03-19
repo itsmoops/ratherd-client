@@ -20,12 +20,26 @@ angular.module('navigation.directives',[
 		$scope.isCollapsed = true;
 		$scope.loggedInFalse = true;
 		$scope.loggedInTrue = false;
+		checkSize();
+		
+		$( window ).resize(function() {
+			checkSize();
+		});
 
-		$scope.$on('USER_LOGGED_IN', function(event, data) { 
+		function checkSize() {
+			if (window.innerWidth < 768) {
+				$scope.info = "About";
+			}
+			else {
+				$scope.info = "";
+			}
+		}
+
+		$scope.$on('USER_LOGGED_IN', function(event, data) {
 			$scope.user = Account.current_user.username;
 			$scope.updateNav();
 		});
-		$scope.$on('USER_LOGGED_OUT', function(event, data) { 
+		$scope.$on('USER_LOGGED_OUT', function(event, data) {
 			$scope.user = null;
 			$scope.updateNav();
 		});

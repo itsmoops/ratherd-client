@@ -16,6 +16,11 @@ Finish user system:
 * Check if username exists
 * Ability to reset password
 * Password strength
+**"shit password m8"
+"better m8"
+"oh yeah m8"
+"oh fuck yeah m8"
+"FUCK EYAH GR8 PASSWORD M8"**
 * Only one user per email
 
 Login/Signup Pages:
@@ -31,6 +36,7 @@ Play Page:
 * Have a different color rather panel if one rather is submitted by the user?
 * Timer for how long it takes?
 * Bingo approach? Once a rather has been seen it is pulled out until all others have been seen
+* If a user says a rather sucks, they should not see that item in their play queue
 
 "This sucks" button:
 * Display under Rather button
@@ -88,4 +94,6 @@ User Page:
 
 Include Facebook API:
 * Ability to log in through Facebook
-* Ability to share funny question to Facebook
+* Ability to share funny question to Facebook (include link to website, but also the text of the question in the share so it might generate discussion on FB)
+
+How to do a staging site?

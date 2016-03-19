@@ -29,6 +29,7 @@
     font-size: 30px;
     font-weight: 500;
     min-height: 170px;
+    position:relative;
 
 }
 
@@ -42,6 +43,32 @@
     background: @main-color-dark;
     margin-top: 4px !important;
     border-bottom: none;
+}
+
+.move-left {
+  -webkit-animation-name: left; /* Chrome, Safari, Opera */
+  -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+  animation-name: left;
+  animation-duration: 1s;
+}
+
+.move-right {
+  -webkit-animation-name: right; /* Chrome, Safari, Opera */
+  -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+  animation-name: right;
+  animation-duration: 1.2s;
+}
+
+@-webkit-keyframes left {
+    0%   {left:0px;}
+    50%  {left:-50%;}
+    100% {left:0px;}
+}
+
+@-webkit-keyframes right {
+    0%   {right:0px;}
+    50%  {right:-50%;}
+    100% {right:0px;}
 }
 
 .rather-button:focus {
