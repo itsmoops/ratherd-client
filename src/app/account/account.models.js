@@ -132,6 +132,20 @@ angular.module('account.models',[
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'send_email/';
 		$http({method: 'POST', url:url, data: parameters }).success(function(data, status, headers, config){
+			_constructor.email_response = data;
+			defer.resolve(data);
+		})
+		.error(function(data, status, headers, config){
+			defer.reject(data);
+		});
+		return defer.promise;
+	};
+
+	_constructor.$check_code = function(parameters) {
+		var defer = $q.defer();
+		var url = _constructor.apiBase + _constructor.api + 'check_code/';
+		$http({method: 'POST', url:url, data: parameters }).success(function(data, status, headers, config){
+			_constructor.code_response = data;
 			defer.resolve(data);
 		})
 		.error(function(data, status, headers, config){

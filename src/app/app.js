@@ -573,7 +573,7 @@ angular.module("RatherApp", [
 			};
 		}
 	})
-	.state('resetpassword',{
+	.state('resetpw',{
 		url: '/resetpw',
 		templateUrl: 'account/partials/account.resetpw.tpl.html',
 		controller: function() {
@@ -586,7 +586,55 @@ angular.module("RatherApp", [
 		controller: function($scope, Account, $state) {
 			$scope.send_email = function(){
 				var username = { username: $('#txtUsername').val() };
-				Account.$send_email(username);
+				Account.$send_email(username).then(function() {
+					var message = Account.email_response;
+					$state.go("sent");
+				});
+			};
+		}
+	})
+	.state('sent',{
+		url: '/sent',
+		templateUrl: 'account/partials/account.sent.tpl.html',
+		controller: function($scope, Account, $state) {
+			if (Account.email_response === undefined) {
+				$scope.response = "How the hell did you end up here?";
+			}
+			else {
+				if (Account.email_response) {
+					$scope.response = "An email with a code and a reset link has been sent to " + Account.email_response + ". Until then...";
+				}
+				else {
+					$scope.response = "Shucks, couldn't find that username. Anyways...";
+				}
+			}
+			$scope.play = function(){
+				$state.go("play");
+			};
+		}
+	})
+	.state('verify',{
+		url: '/verify?u',
+		templateUrl: 'account/partials/account.verify.tpl.html',
+		controller: function($scope, Account, $state, $stateParams) {
+			$scope.check_code = function(){
+				var error = $("#blankSubmitError");
+				var userId = $stateParams.u;
+				var code = $("#txtResetCode").val();
+				var data = { code: code, user: userId };
+				Account.$check_code(data).then(function(){
+					if (Account.code_response) {
+						error.removeClass("errorYes");
+						error.addClass("errorNo");
+						$scope.response = "Found you!";
+						$state.go("resetpw");
+					}
+					else {
+						error.removeClass("errorNo");
+						error.addClass("errorYes");
+						$scope.response = "Wrong. That code doesn't match.";
+					}
+				});
 			};
 		}
 	})

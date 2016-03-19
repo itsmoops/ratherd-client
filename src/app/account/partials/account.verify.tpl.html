@@ -1,0 +1,16 @@
+<div class="col-lg-12 flex-container">
+	<div class="col-xs-0 col-md-4">
+	</div>
+	<div class="col-xs-12 col-md-4 default-panel">
+		<p class="panelHeader">Recover Password</p>
+		<hr/>
+		<p class="">Enter the 4 digit code you received in your email. Unless of course you're a liar. You're not a liar, are you?</p>
+		<input id="txtResetCode" auto-focus="" type="text" name="reset_code" class="form-control" placeholder="Code" maxlength="4" required>
+		<p id="blankSubmitError" ng-class="{toggle: errorYes}" class="errorNo">{{response}}</p>
+		<div class="col-xs-12 text-center">
+			<a class="button" ng-click='check_code()'>Submit</a>
+		</div>
+	</div>
+	<div class="col-xs-0 col-md-4">
+	</div>
+</div>
