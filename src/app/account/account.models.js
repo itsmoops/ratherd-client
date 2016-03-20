@@ -154,6 +154,18 @@ angular.module('account.models',[
 		return defer.promise;
 	};
 
+	_constructor.$update_password = function(parameters) {
+		var defer = $q.defer();
+		var url = _constructor.apiBase + _constructor.api + 'update_password/';
+		$http({method: 'POST', url:url, data: parameters }).success(function(data, status, headers, config){
+			defer.resolve(data);
+		})
+		.error(function(data, status, headers, config){
+			defer.reject(data);
+		});
+		return defer.promise;
+	};
+
 	return Account;
 })
 ;

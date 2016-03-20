@@ -5,11 +5,11 @@
 		<p class="panelHeader">Change Password</p>
 		<hr/>
 		<p class="text-center">That's embarassing</p>
-			<input type="password" class="form-control" placeholder="Password" ng-model="account.password" required>
-			<input type="password" class="form-control top-buffer-xs" placeholder="Retype Password" required>
+			<input id="txtPassword1" type="password" class="form-control" placeholder="Password" ng-model="account.password" required>
+			<input id="txtPassword2" type="password" class="form-control top-buffer-xs" ng-change="passwordsMatch()" placeholder="Retype Password"  ng-model="account.password2"required>
 		<p id="blankSubmitError" ng-class="{toggle: errorYes}" class="errorNo"></p>
 		<div class="col-lg-12 text-center">
-			<a class="button" ng-click='login()'>Submit</a>
+			<a class="button" ng-click='update_password()'>Submit</a>
 		</div>
 	</div>
 	<div class="col-xs-0 col-md-4">

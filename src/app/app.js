@@ -576,8 +576,100 @@ angular.module("RatherApp", [
 	.state('resetpw',{
 		url: '/resetpw',
 		templateUrl: 'account/partials/account.resetpw.tpl.html',
-		controller: function() {
+		controller: function($scope, Account, $state) {
+			var error = $('#blankSubmitError');
+			var pw1 = $("#txtPassword1");
+			var pw2 = $("#txtPassword2");
+			var msg = "Please fill out required fields";
+			$scope.update_password = function() {
+				var isError = 0;
+				if (Account.code_response !== undefined) {
+					error.removeClass("errorYes");
+					error.addClass("errorNo");
+					var data = {
+						username: Account.code_response.username,
+						password: $scope.account.password
+					};
+					if ($scope.validates()) {
+						Account.$update_password(data).then(function() {
+							Account.$login(data.username, data.password).then(function(object){
+								$state.go("welcome");
+							});
+						});
+					}
+				}
+				else {
+					error.text("Well shit. Something went wrong...");
+					error.removeClass("errorNo");
+					error.addClass("errorYes");
+				}
+			};
 
+			$scope.validates = function() {
+				var isError = 0;
+				if ($scope.account === undefined || $scope.account.password === null || $scope.account.password === undefined) {
+					pw1.addClass('alert-danger');
+					error.text(msg);
+					isError++;
+				}
+				else {
+					if ($scope.account.password.length < 6) {
+						error.text("Password must be at least 6 characters long");
+						isError++;
+					}
+					else {
+						pw1.removeClass('alert-danger');
+					}
+				}
+				if ($scope.account === undefined || $scope.account.password2 === null || $scope.account.password2 === undefined) {
+					pw2.addClass('alert-danger');
+					error.text(msg);
+					isError++;
+				}
+				else {
+					if ($scope.passwordsMatch()) {
+						isError++;
+					}
+					else {
+						pw2.removeClass('alert-danger');
+					}
+				}
+				if (isError > 0) {
+					error.removeClass('errorNo');
+					error.addClass('errorYes');
+				}
+				else {
+					error.removeClass('errorYes');
+					error.addClass('errorNo');
+					return true;
+				}
+				return false;
+			};
+			$scope.passwordsMatch = function() {
+				var isError = false;
+				if ($scope.account !== undefined) {
+					if ($scope.account.password !== undefined) {
+						if ($scope.account.password === $scope.account.password2 || $scope.account.password2 === undefined) {
+							pw2.removeClass('alert-danger');
+							isError = false;
+						}
+						else {
+							error.text("Passwords do not match");
+							pw2.addClass('alert-danger');
+							isError = true;
+						}
+					}
+					if (isError) {
+						error.removeClass('errorNo');
+						error.addClass('errorYes');
+					}
+					else {
+						error.removeClass('errorYes');
+						error.addClass('errorNo');
+					}
+				}
+				return isError;
+			};
 		}
 	})
 	.state('recoverpw',{
