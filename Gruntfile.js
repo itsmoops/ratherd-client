@@ -20,6 +20,7 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-ng-constant');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-concurrent');
 
   /**
    * Load in our build configuration file.
@@ -40,6 +41,12 @@ module.exports = function ( grunt ) {
             },
             command: 'cd ../wouldyourather-server/; python manage.py runserver 8080'
         }
+    },
+    concurrent: {
+      serve: ['shell:django', 'watch'],
+      options: {
+				logConcurrentOutput: true
+			}
     },
     ngconstant: {
 
@@ -578,7 +585,8 @@ module.exports = function ( grunt ) {
    * before watching for changes.
    */
   grunt.renameTask( 'watch', 'delta' );
-  grunt.registerTask( 'watch', [ 'build_dev', 'karma:unit', 'delta', 'shell:django' ] );
+  grunt.registerTask( 'watch', [ 'build_dev', 'karma:unit', 'delta' ] );
+  grunt.registerTask( 'serve', [ 'concurrent:serve'] );
   grunt.registerTask( 'build_dev', [
     'clean', 'html2js', 'jshint', 'ngconstant:development', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
