@@ -26,11 +26,6 @@ Finish user system:
 Login/Signup Pages:
 * Look at Facebook and some other login pages. Tighten up the styles. Panels are too wide.
 * Make signup/login buttons stretch to be the same size as the input fields. Round Edges. Make bigger.
-* Keep me logged in?
-
-Recover Password:
-* Check if username exists, respond with message if not
-* Send email from django with a link to reset the password
 
 Play Page:
 * Have a different color rather panel if one rather is submitted by the user?
@@ -47,19 +42,6 @@ Play Page:
 * Inactive rathers should not be allowed to be displayed in the game
 * Possible popup with options (ex. Nonsense, Not funny, etc.)
 * User may only say a rather sucks once (You've already said this one sucks you gigantic bummer.)
-
-"Info" or "Stats" button:
-* Display: Possible button underneath Rather button or possibly an icon on the bottom right of the button iteslf
-* Pops up modal (on top of the rather which it was selected? in the center?) to display stats about a specific Rather
-* Stats glyphicon
-* Stats should include
-** User
-** Date submitted
-** Wins
-** Losses
-** Win ratio
-** "This sucks" votes (+ reason?)
-* Ability to click username and see all the rathers they have submitted
 
 Submit Page
 * On submit in django, convert to lowercase and check against database to make sure not a duplicate

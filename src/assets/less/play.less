@@ -1,7 +1,11 @@
 @import "source.less";
 
+.rather-container {
+  overflow: hidden;
+}
+
 .rather-row {
-    margin-top: 10%;
+    margin-top: 7%;
 }
 
 .rather-flex {
@@ -30,7 +34,23 @@
     font-weight: 500;
     min-height: 170px;
     position:relative;
+}
 
+.btn-rather-mobile {
+  background: @main-color;
+  color:@font-color-1 !important;
+  text-decoration: none;
+  padding-bottom: 20px;
+  width: 100%;
+  cursor: pointer;
+  background: @main-color;
+  border-bottom: 4px solid @main-color-dark;
+  white-space: normal;
+  padding: 4px 10px;
+  font-size: 30px;
+  font-weight: 500;
+  min-height: 170px;
+  position:relative;
 }
 
 .rather-button>a {
@@ -47,27 +67,29 @@
 
 .move-left {
   -webkit-animation-name: left; /* Chrome, Safari, Opera */
-  -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+  -webkit-animation-duration: 0.5s; /* Chrome, Safari, Opera */
   animation-name: left;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
+  overflow: hidden;
 }
 
 .move-right {
   -webkit-animation-name: right; /* Chrome, Safari, Opera */
-  -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+  -webkit-animation-duration: 0.5s; /* Chrome, Safari, Opera */
   animation-name: right;
-  animation-duration: 1.2s;
+  animation-duration: 0.5s;
+  overflow: hidden;
 }
 
 @-webkit-keyframes left {
     0%   {left:0px;}
-    50%  {left:-50%;}
+    50%  {left:-150%;}
     100% {left:0px;}
 }
 
 @-webkit-keyframes right {
     0%   {right:0px;}
-    50%  {right:-50%;}
+    50%  {right:-150%;}
     100% {right:0px;}
 }
 
@@ -76,9 +98,9 @@
   outline: none !important;
 }
 
-.rather-button:visited {
-  color: @main-color;
-}
+// .rather-button:visited {
+//   color: @main-color;
+// }
 
 .rather-button:hover:focus {
     color:@font-color-1-dark;
@@ -106,11 +128,34 @@
     border-radius: 5px;
 }
 
+.btn-sucks-mobile {
+  color:@font-color-1 !important;
+  text-decoration: none !important;
+  background: @navigation-bar !important;
+}
+
 .btn-sucks-pressed {
   color:@accent-color-1 !important;
   text-decoration: none !important;
   background: @navigation-bar-dark !important;
 }
+
+.btn-sucks-default:hover {
+    color:@accent-color-1;
+    text-decoration: none;
+    background: @navigation-bar-dark;
+}
+
+.btn-sucks-default:hover:focus {
+    color:@accent-color-1;
+    outline: none !important;
+}
+
+.btn-sucks-default:focus {
+    color:@font-color-1;
+    outline: none !important;
+}
+
 
 .detail-button:hover {
     color:@accent-color-1;
@@ -140,8 +185,17 @@
     margin-right: 5px;
 }
 
+.sucks-div {
+  display: none;
+}
+
 
 /* Win/Loss Chart */
+
+.chart-doughnut {
+  max-width: 234px;
+  max-height: 156px;
+}
 
 .win-percentage {
   font-size: 50px;
@@ -172,6 +226,19 @@
     .rather-button {
         min-height: 120px;
         font-size: 15px;
+    }
+    .btn-rather-mobile {
+      min-height: 120px;
+      font-size: 15px;
+    }
+    .modal {
+      top: -60px !important;
+    }
+    .win-percentage {
+      font-size: 25px;
+    }
+    .rather-modal-body {
+      height:285px;
     }
 }
 /* s */

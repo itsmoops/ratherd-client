@@ -19,29 +19,43 @@ angular.module("RatherApp", [
 	'ui.bootstrap'
 ])
 
-// .config(["$locationProvider", function($locationProvider) {
-//   $locationProvider.html5Mode(true);
-// }])
-
 // Using ui.router stateProvider to define single page application states
-.config(['$stateProvider', 'BCConfigProvider', 'API_DOMAIN', function($stateProvider, BCConfigProvider, API_DOMAIN) {
+.config(['$stateProvider', 'BCConfigProvider', 'API_DOMAIN', '$locationProvider', function($stateProvider, BCConfigProvider, API_DOMAIN, $locationProvider) {
+	//$locationProvider.html5Mode(true);
 	$stateProvider
 	.state('landing',{
 		url: '/home',
 		templateUrl: 'landing/partials/landing.tpl.html'
 	})
 	.state('play',{
-		url:'/play?rather1&rather2',
+		url:'/play?r1&r2',
 		templateUrl: 'rathers/partials/rathers.comparison.tpl.html',
 		resolve: {
 			'comparison':function(Rather, $stateParams){
 				return Rather.$comparison({
-					rather1: $stateParams.rather1,
-					rather2: $stateParams.rather2
+					r1: $stateParams.r1,
+					r2: $stateParams.r2
 				});
 			}
 		},
-		controller: function($scope, $uibModal, Rather, ChartJs, comparison, $location){
+		controller: function($scope, $uibModal, Rather, Account, ChartJs, comparison, $location){
+			if (checkSize()) {
+				$('#btnRather1').removeClass('rather-button');
+				$('#btnRather2').removeClass('rather-button');
+				$('#btnRather1').addClass('btn-rather-mobile');
+				$('#btnRather2').addClass('btn-rather-mobile');
+			}
+			if(!Account.logged_in) {
+				$("#divStats1").removeClass("col-xs-6 col-md-4");
+				$("#divStats1").addClass("col-xs-12 col-md-8");
+				$("#divSucks1").removeClass("col-xs-6 col-md-4");
+				$("#divSucks1").addClass("col-xs-0 col-md-0 sucks-div");
+
+				$("#divStats2").removeClass("col-xs-6 col-md-4");
+				$("#divStats2").addClass("col-xs-12 col-md-8");
+				$("#divSucks2").removeClass("col-xs-6 col-md-4");
+				$("#divSucks2").addClass("col-xs-0 col-md-0 sucks-div");
+			}
 			var newRather;
 			$scope.stats = function (rather) {
 		    var modalInstance = $uibModal.open({
@@ -57,6 +71,7 @@ angular.module("RatherApp", [
 								$scope.losses = newRather[rather].losses;
 								$scope.score = newRather[rather].ratio;
 								$scope.sucks = newRather[rather].this_sucks;
+								$scope.total = newRather[rather].wins + newRather[rather].losses;
 
 								// Doughnut
 								$scope.labels = ["Wins", "Losses"];
@@ -65,6 +80,23 @@ angular.module("RatherApp", [
 							    '#5197A2',
 							    '#D63D52'
 							  ];
+
+								function applyModalClass()  {
+									if (window.innerWidth < 768) {
+										$scope.modalDefaultClass = "col-xs-12 chart-row hidden";
+										$scope.modalMobileClass = "col-xs-12 chart-row";
+										$scope.modalHeaderClass = "col-xs-12 text-center rather-modal-item remove-side-padding";
+									}
+									else {
+										$scope.modalDefaultClass = "col-xs-12 chart-row";
+										$scope.modalMobileClass = "col-xs-12 chart-row hidden";
+										$scope.modalHeaderClass = "col-xs-12 text-left rather-modal-item";
+									}
+								}
+								applyModalClass();
+								$(window).resize(function(){
+									applyModalClass();
+								});
 
 								$scope.close = function () {
 									$uibModalInstance.close();
@@ -77,23 +109,41 @@ angular.module("RatherApp", [
 			function search(Rather) {
 				$scope.comparison = Rather.rathers;
 				newRather = Rather.rathers;
-				$location.search("rather1", Rather.rathers[0].id);
-				$location.search("rather2", Rather.rathers[1].id);
+				$location.search("r1", Rather.rathers[0].id);
+				$location.search("r2", Rather.rathers[1].id);
 
 				btn1 = $("#btnSucks1");
 				btn2 = $("#btnSucks2");
 
 				if (Rather.user_sucks.rather1 > 0) {
+					if (checkSize()) {
+						btn1.removeClass("btn-sucks-default");
+					}
 					btn1.addClass("btn-sucks-pressed");
 				}
 				else {
 					btn1.removeClass("btn-sucks-pressed");
+					if (checkSize()) {
+						btn1.addClass("btn-sucks-default");
+					}
 				}
 				if (Rather.user_sucks.rather2 > 0) {
+					if (checkSize()) {
+						btn2.removeClass("btn-sucks-default");
+					}
 					btn2.addClass("btn-sucks-pressed");
 				}
 				else {
 					btn2.removeClass("btn-sucks-pressed");
+					if (checkSize()) {
+						btn2.addClass("btn-sucks-default");
+					}
+				}
+			}
+
+			function checkSize() {
+				if (window.innerWidth < 768) {
+					return true;
 				}
 			}
 
@@ -113,37 +163,22 @@ angular.module("RatherApp", [
 					Rather.$vote(comparison[1], comparison[1].id, true).then(function(comparison){
 					});
 				}
-
 				//Rather.$comparison().then(search);
-
-				// jquery animation
-				$("#divRather1").animate({
-							left: '-150%'
-					}, 200, function() {
-					$("#divRather1").animate({
-								left: '0%'
-						}, 200);
-				});
-
-				$("#divRather2").animate({
-							right: '-150%'
-					}, 200, function() {
-					$("#divRather2").animate({
-								right: '0%'
-						}, 200);
-					setTimeout(function(){ Rather.$comparison().then(search); }, 200);
-				});
-
-				// css transition classes
-				// $("#divRather1").addClass('move-left');
-				// setTimeout(function(){
-				// 	$("#divRather1").removeClass('move-left');
-				// }, 1000);
-				// $("#divRather2").addClass('move-right');
-				// setTimeout(function(){
-				// 	$("#divRather2").removeClass('move-right');
-				// }, 1200);
+				setTimeout(function(){ Rather.$comparison().then(search); }, 400);
+				animate();
 			};
+
+			function animate() {
+				// css transition classes
+				$("#divRather1").addClass('move-left');
+				setTimeout(function(){
+					$("#divRather1").removeClass('move-left');
+				}, 500);
+				$("#divRather2").addClass('move-right');
+				setTimeout(function(){
+					$("#divRather2").removeClass('move-right');
+				}, 500);
+			}
 
 			$scope.sucks = function(rather) {
 				var btn = $("#btnSucks"+(rather+1));
@@ -157,6 +192,8 @@ angular.module("RatherApp", [
 					btn.addClass("btn-sucks-pressed");
 				}
 				Rather.$sucks(comparison[rather], comparison[rather].id).then(function(comparison){
+					setTimeout(function(){ Rather.$comparison().then(search); }, 400);
+					animate();
 				});
 			};
 		}
@@ -170,6 +207,20 @@ angular.module("RatherApp", [
 			}
 		},
 		controller: function($scope, $uibModal, Rather, ranked, lodash){
+			checkSize();
+			function checkSize() {
+				if (window.innerWidth < 768) {
+					$("#divLeftBuffer").addClass("hidden");
+					$("#divRightBuffer").addClass("hidden");
+				}
+				else {
+					$("#divLeftBuffer").removeClass("hidden");
+					$("#divRightBuffer").removeClass("hidden");
+				}
+			}
+			$(window).resize(function(){
+				checkSize();
+			});
 			$scope.ranked = ranked;
 			$("#biggestWinner").focus();
 			$scope.predicate = '-ratio';
@@ -205,6 +256,7 @@ angular.module("RatherApp", [
 								$scope.losses = obj.losses;
 								$scope.score = obj.ratio;
 								$scope.sucks = obj.this_sucks;
+								$scope.total = obj.wins + obj.losses;
 
 								$scope.labels = ["Wins", "Losses"];
 								$scope.data = [obj.wins, obj.losses];
@@ -212,6 +264,23 @@ angular.module("RatherApp", [
 							    '#5197A2',
 							    '#D63D52'
 							  ];
+
+								function applyModalClass()  {
+									if (window.innerWidth < 768) {
+										$scope.modalDefaultClass = "col-xs-12 chart-row hidden";
+										$scope.modalMobileClass = "col-xs-12 chart-row";
+										$scope.modalHeaderClass = "col-xs-12 text-center rather-modal-item remove-side-padding";
+									}
+									else {
+										$scope.modalDefaultClass = "col-xs-12 chart-row";
+										$scope.modalMobileClass = "col-xs-12 chart-row hidden";
+										$scope.modalHeaderClass = "col-xs-12 text-left rather-modal-item";
+									}
+								}
+								applyModalClass();
+								$(window).resize(function(){
+									applyModalClass();
+								});
 
 								$scope.close = function () {
 									$uibModalInstance.close();
@@ -234,6 +303,20 @@ angular.module("RatherApp", [
 			}
 		},
 		controller: function ($scope, $state, Rather, Account, current_user, comparison) {
+			checkSize();
+			function checkSize() {
+				if (window.innerWidth < 768) {
+					$("#divLeftBuffer").addClass("hidden");
+					$("#divRightBuffer").addClass("hidden");
+				}
+				else {
+					$("#divLeftBuffer").removeClass("hidden");
+					$("#divRightBuffer").removeClass("hidden");
+				}
+			}
+			$(window).resize(function(){
+				checkSize();
+			});
 			if (!Account.logged_in) {
 				$state.go("otherwise");
 			}
@@ -309,6 +392,20 @@ angular.module("RatherApp", [
 		url: '/signup',
 		templateUrl: 'account/partials/account.signup.tpl.html',
 		controller: function($scope, Account, $state){
+			checkSize();
+			function checkSize() {
+				if (window.innerWidth < 768) {
+					$("#divLeftBuffer").addClass("hidden");
+					$("#divRightBuffer").addClass("hidden");
+				}
+				else {
+					$("#divLeftBuffer").removeClass("hidden");
+					$("#divRightBuffer").removeClass("hidden");
+				}
+			}
+			$(window).resize(function(){
+				checkSize();
+			});
 			var error = $("#blankSubmitError");
 			var username = $("#txtUsername");
 			var email = $("#txtEmail");
@@ -447,6 +544,20 @@ angular.module("RatherApp", [
 		url: '/login',
 		templateUrl: 'account/partials/account.login.tpl.html',
 		controller: function($scope, Account, $state){
+			checkSize();
+			function checkSize() {
+				if (window.innerWidth < 768) {
+					$("#divLeftBuffer").addClass("hidden");
+					$("#divRightBuffer").addClass("hidden");
+				}
+				else {
+					$("#divLeftBuffer").removeClass("hidden");
+					$("#divRightBuffer").removeClass("hidden");
+				}
+			}
+			$(window).resize(function(){
+				checkSize();
+			});
 			$scope.$on('USER_LOGGED_IN', function(event, data) {
 				if (Account.logged_in === true) {
 					$state.go("welcome");
@@ -516,9 +627,30 @@ angular.module("RatherApp", [
 			}
 		},
 		controller: function($scope, Account, current, $state){
+			checkSize();
+			function checkSize() {
+				if (window.innerWidth < 768) {
+					$("#divLeftBuffer").addClass("hidden");
+					$("#divRightBuffer").addClass("hidden");
+				}
+				else {
+					$("#divLeftBuffer").removeClass("hidden");
+					$("#divRightBuffer").removeClass("hidden");
+				}
+			}
+			$(window).resize(function(){
+				checkSize();
+			});
 			$scope.current = current;
 			$scope.$on('USER_LOGGED_IN', function(event, data) {
 				$scope.current = Account.current_user;
+				$scope.message = "Ok, good talk...";
+				// if (Account.update_password !== undefined) {
+				// 	$scope.message = Account.update_password;
+				// }
+				// else {
+				// 	$scope.message = "Ok, good talk...";
+				// }
 			});
 			$scope.play = function(){
 				$state.go("play");
@@ -534,6 +666,40 @@ angular.module("RatherApp", [
 			}
 		},
 		controller: function($scope, $uibModal, Account, Rather, $state, user_rathers, lodash){
+			checkSize();
+			function checkSize() {
+				if (window.innerWidth < 768) {
+					$("#divLeftBuffer").addClass("hidden");
+					$("#divRightBuffer").addClass("hidden");
+				}
+				else {
+					$("#divLeftBuffer").removeClass("hidden");
+					$("#divRightBuffer").removeClass("hidden");
+				}
+			}
+			$(window).resize(function(){
+				checkSize();
+			});
+
+			$("#biggestWinner").focus();
+			$scope.predicate = '-ratio';
+			$scope.order = function(predicate, sender) {
+				if (sender === "wins") {
+					$('#biggestWinner').removeClass('inactive-sort');
+					$('#biggestWinner').addClass('active-sort');
+					$('#biggestLoser').removeClass('active-sort');
+					$('#biggestLoser').addClass('inactive-sort');
+				}
+				else if (sender === "losses") {
+					$('#biggestWinner').removeClass('active-sort');
+					$('#biggestWinner').addClass('inactive-sort');
+					$('#biggestLoser').removeClass('inactive-sort');
+					$('#biggestLoser').addClass('active-sort');
+				}
+				$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+				$scope.predicate = predicate;
+			};
+
 			$scope.user_rathers = user_rathers;
 
 			$scope.logout = function(){
@@ -555,6 +721,7 @@ angular.module("RatherApp", [
 								$scope.losses = obj.losses;
 								$scope.score = obj.ratio;
 								$scope.sucks = obj.this_sucks;
+								$scope.total = obj.wins + obj.losses;
 								$scope.active = (obj.active) ? "Yep" : "Nope";
 
 								$scope.labels = ["Wins", "Losses"];
@@ -563,6 +730,27 @@ angular.module("RatherApp", [
 							    '#5197A2',
 							    '#D63D52'
 							  ];
+
+								function applyModalClass()  {
+									if (window.innerWidth < 768) {
+										$scope.modalClass = "modal-body user-modal-body";
+										$scope.modalDefaultClass = "col-xs-12 chart-row hidden";
+										$scope.modalMobileClass = "col-xs-12 chart-row";
+										$scope.modalHeaderClass = "col-xs-12 remove-side-padding text-center rather-modal-item";
+										$scope.modalHeaderActiveClass = "col-xs-4 text-right hidden";
+									}
+									else {
+										$scope.modalClass = "modal-body rather-modal-body";
+										$scope.modalDefaultClass = "col-xs-12 chart-row";
+										$scope.modalMobileClass = "col-xs-12 chart-row hidden";
+										$scope.modalHeaderClass = "col-xs-8 text-left rather-modal-item modal-text";
+										$scope.modalHeaderActiveClass = "col-xs-4 text-right";
+									}
+								}
+								applyModalClass();
+								$(window).resize(function(){
+									applyModalClass();
+								});
 
 								$scope.close = function () {
 									$uibModalInstance.close();
@@ -577,6 +765,20 @@ angular.module("RatherApp", [
 		url: '/resetpw',
 		templateUrl: 'account/partials/account.resetpw.tpl.html',
 		controller: function($scope, Account, $state) {
+			checkSize();
+			function checkSize() {
+				if (window.innerWidth < 768) {
+					$("#divLeftBuffer").addClass("hidden");
+					$("#divRightBuffer").addClass("hidden");
+				}
+				else {
+					$("#divLeftBuffer").removeClass("hidden");
+					$("#divRightBuffer").removeClass("hidden");
+				}
+			}
+			$(window).resize(function(){
+				checkSize();
+			});
 			var error = $('#blankSubmitError');
 			var pw1 = $("#txtPassword1");
 			var pw2 = $("#txtPassword2");
@@ -676,6 +878,20 @@ angular.module("RatherApp", [
 		url: '/recoverpw',
 		templateUrl: 'account/partials/account.recoverpw.tpl.html',
 		controller: function($scope, Account, $state) {
+			checkSize();
+			function checkSize() {
+				if (window.innerWidth < 768) {
+					$("#divLeftBuffer").addClass("hidden");
+					$("#divRightBuffer").addClass("hidden");
+				}
+				else {
+					$("#divLeftBuffer").removeClass("hidden");
+					$("#divRightBuffer").removeClass("hidden");
+				}
+			}
+			$(window).resize(function(){
+				checkSize();
+			});
 			$scope.send_email = function(){
 				var username = { username: $('#txtUsername').val() };
 				Account.$send_email(username).then(function() {
@@ -689,6 +905,20 @@ angular.module("RatherApp", [
 		url: '/sent',
 		templateUrl: 'account/partials/account.sent.tpl.html',
 		controller: function($scope, Account, $state) {
+			checkSize();
+			function checkSize() {
+				if (window.innerWidth < 768) {
+					$("#divLeftBuffer").addClass("hidden");
+					$("#divRightBuffer").addClass("hidden");
+				}
+				else {
+					$("#divLeftBuffer").removeClass("hidden");
+					$("#divRightBuffer").removeClass("hidden");
+				}
+			}
+			$(window).resize(function(){
+				checkSize();
+			});
 			if (Account.email_response === undefined) {
 				$scope.response = "How the hell did you end up here?";
 			}
@@ -709,6 +939,20 @@ angular.module("RatherApp", [
 		url: '/verify?u',
 		templateUrl: 'account/partials/account.verify.tpl.html',
 		controller: function($scope, Account, $state, $stateParams) {
+			checkSize();
+			function checkSize() {
+				if (window.innerWidth < 768) {
+					$("#divLeftBuffer").addClass("hidden");
+					$("#divRightBuffer").addClass("hidden");
+				}
+				else {
+					$("#divLeftBuffer").removeClass("hidden");
+					$("#divRightBuffer").removeClass("hidden");
+				}
+			}
+			$(window).resize(function(){
+				checkSize();
+			});
 			$scope.check_code = function(){
 				var error = $("#blankSubmitError");
 				var userId = $stateParams.u;
@@ -734,7 +978,20 @@ angular.module("RatherApp", [
 		url: '/about',
 		templateUrl: 'landing/partials/about.tpl.html',
 		controller: function() {
-
+			checkSize();
+			function checkSize() {
+				if (window.innerWidth < 768) {
+					$("#divLeftBuffer").addClass("hidden");
+					$("#divRightBuffer").addClass("hidden");
+				}
+				else {
+					$("#divLeftBuffer").removeClass("hidden");
+					$("#divRightBuffer").removeClass("hidden");
+				}
+			}
+			$(window).resize(function(){
+				checkSize();
+			});
 		}
 	})
 	.state('otherwise', {

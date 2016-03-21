@@ -1,5 +1,5 @@
 <div class="col-lg-12 flex-container">
-	<div class="col-xs-0 col-md-3">
+	<div id="divLeftBuffer" class="col-md-3">
 	</div>
 	<div class="col-xs-12 col-md-6 default-panel">
 		<p class="panelHeader">Submit a Rather</p>
@@ -7,12 +7,12 @@
 		<p>Would you rather {{comparison[0].rather_text}} OR</p>
 		<input type="text" class="submit-text-box" placeholder="...get creative" ng-model='rather.rather_text'>
 		<p id="blankSubmitError" ng-class="{toggle: errorYes}" class="errorNo">.</p>
-		<div class="col-xs-0 col-md-3"></div>
-		<div class="col-xs-0 col-md-6">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
 		<button type="button" class="btn button" ng-click='create()'>Submit!</button>
 		</div>
-		<div class="col-xs-0 col-md-3"></div>
+		<div class="col-md-3"></div>
 	</div>
-	<div class="col-xs-0 col-md-3">
+	<div id="divRightBuffer" class="col-md-3">
 	</div>
 </div>

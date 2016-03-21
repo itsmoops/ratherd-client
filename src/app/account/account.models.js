@@ -158,6 +158,7 @@ angular.module('account.models',[
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'update_password/';
 		$http({method: 'POST', url:url, data: parameters }).success(function(data, status, headers, config){
+			_constructor.update_password = "Password updated successfully!";
 			defer.resolve(data);
 		})
 		.error(function(data, status, headers, config){

@@ -4,8 +4,8 @@
             <h3 class="modal-title modal-title-text">{{header_text}}</h3>
         </div>
         <div class="modal-body rather-modal-body">
-            <div class="col-xs-12 text-left rather-modal-item">Submitted by <span class="modal-highlight">{{user}}</span> on {{date}}</div>
-            <div class="col-xs-12 chart-row">
+            <div class="{{modalHeaderClass}}">Submitted by <span class="modal-highlight">{{user}}</span> on {{date}}</div>
+            <div id="divModalDefault" class="{{modalDefaultClass}}">
                 <div class="col-xs-6">
                     <canvas id="doughnut"
                         class="chart chart-doughnut"
@@ -26,7 +26,30 @@
                     </div>
                 </div>
                 <div class="col-xs-12 rather-modal-item chart-sucks">
-                    <div class="col-xs-6">This Sucks Votes: <span class="modal-highlight">{{sucks}}</span></div>
+                    <div class="col-xs-6">Matches Played: <span class="modal-highlight">{{total}}</span></div>
+                    <div class="col-xs-6 text-right">This Sucks Votes: <span class="modal-highlight">{{sucks}}</span></div>
+                </div>
+            </div>
+
+            <div id="divModalMobile" class="{{modalMobileClass}}">
+                <div class="col-xs-12 text-center">
+                    <canvas id="doughnut"
+                        class="chart chart-doughnut"
+                        chart-data="data"
+                        chart-labels="labels"
+                        height="200" >
+                    </canvas>
+                </div>
+                <div class="col-xs-12 remove-side-padding">
+                    <div class="col-xs-12 text-center remove-side-padding modal-text">
+                        This rather wins <span class="win-percentage">{{score * 100| number :1 }}%</span> of the time
+                    </div>
+                </div>
+                <div class="col-xs-12 text-center rather-modal-item">
+                    Matches Played: <span class="modal-highlight">{{total}}</span>
+                </div>
+                <div class="col-xs-12 text-center rather-modal-item">
+                    This Sucks Votes: <span class="modal-highlight">{{sucks}}</span>
                 </div>
             </div>
         </div>
@@ -36,7 +59,7 @@
     </script>
 </div>
 <div class="col-lg-12 flex-container">
-    <div class="col-xs-0 col-md-1 col-lg-2"></div>
+    <div id="divLeftBuffer" class="col-md-1 col-lg-2"></div>
     <div class="col-xs-12 col-md-10 col-lg-8 default-panel rankPanel">
         <p class="panelHeader topHeader">Top 10 Most Rather'd</p>
         <hr/>
@@ -60,5 +83,5 @@
             </div>
         </div>
         </div>
-    <div class="col-xs-0 col-md-1 col-lg-2"></div>
+    <div id="divRightBuffer" class="col-md-1 col-lg-2"></div>
 </div>
