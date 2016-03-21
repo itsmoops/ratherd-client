@@ -19,6 +19,7 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-ng-constant');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-shell');
 
   /**
    * Load in our build configuration file.
@@ -30,6 +31,16 @@ module.exports = function ( grunt ) {
    * instructions.
    */
   var taskConfig = {
+    shell: {
+        django: {
+            options: {
+              stdout: true,
+              stdin: true,
+              stderr: true
+            },
+            command: 'cd ../wouldyourather-server/; python manage.py runserver 8080'
+        }
+    },
     ngconstant: {
 
       // targets
@@ -567,7 +578,7 @@ module.exports = function ( grunt ) {
    * before watching for changes.
    */
   grunt.renameTask( 'watch', 'delta' );
-  grunt.registerTask( 'watch', [ 'build_dev', 'karma:unit', 'delta' ] );
+  grunt.registerTask( 'watch', [ 'build_dev', 'karma:unit', 'delta', 'shell:django' ] );
   grunt.registerTask( 'build_dev', [
     'clean', 'html2js', 'jshint', 'ngconstant:development', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
