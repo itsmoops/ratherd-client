@@ -78,7 +78,7 @@
         <div class="ratherLists" ng-repeat="item in ranked | orderBy:predicate | limitTo:10">
             <div class="col-xs-12 orderedRather">
                 <div class="col-xs-1 col-sm-1 text-right">{{$index + 1}}.</div>
-                <div class="col-xs-8 col-sm-9"><a class="my-rathers" ng-click="rather_info(item.id)">{{item.rather_text}}</a></div>
+                <div class="col-xs-8 col-sm-9"><a class="my-rathers" ng-click="rather_info(item.id)" data-toggle="tooltip" uib-tooltip="Matches played: {{item.wins + item.losses}}" tooltip-popup-delay="1000">{{item.rather_text}}</a></div>
                 <div class="col-xs-2 col-sm-2 top-score">{{item.ratio * 100| number :1 }}%</div>
             </div>
         </div>

@@ -21,7 +21,9 @@ angular.module("RatherApp", [
 
 // Using ui.router stateProvider to define single page application states
 .config(['$stateProvider', 'BCConfigProvider', 'API_DOMAIN', '$locationProvider', function($stateProvider, BCConfigProvider, API_DOMAIN, $locationProvider) {
-	//$locationProvider.html5Mode(true);
+	if (window.location.hostname !== "127.0.0.1") {
+		$locationProvider.html5Mode(true);
+	}
 	$stateProvider
 	.state('landing',{
 		url: '/home',
