@@ -16,15 +16,20 @@ angular.module('navigation.directives',[
 	};
 })
 
-.controller('navigation', function($scope, Account, $rootScope, $http, ipCookie){
+.controller('navigation', function($scope, Account, $state, $rootScope, $http, ipCookie){
 		$scope.isCollapsed = true;
 		$scope.loggedInFalse = true;
 		$scope.loggedInTrue = false;
 		checkSize();
-		
+
 		$( window ).resize(function() {
 			checkSize();
 		});
+
+		$scope.logout = function(){
+			Account.$logout();
+			$state.go("play");
+		};
 
 		function checkSize() {
 			if (window.innerWidth < 768) {

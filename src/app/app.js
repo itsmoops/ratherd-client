@@ -322,6 +322,11 @@ angular.module("RatherApp", [
 			if (!Account.logged_in) {
 				$state.go("otherwise");
 			}
+			$scope.keyDown = function(e) {
+				if(e.keyCode == 13) {
+					$scope.create();
+				}
+			};
 			$scope.comparison = comparison.rathers;
 			$scope.create = function(){
 				var newRather = {
@@ -414,6 +419,11 @@ angular.module("RatherApp", [
 			var pw1 = $("#txtPassword1");
 			var pw2 = $("#txtPassword2");
 			var msg = "Please fill out required fields";
+			$scope.keyDown = function(e) {
+				if(e.keyCode == 13) {
+					$scope.save_user();
+				}
+			};
 			$scope.save_user = function() {
 				if ($scope.validates()) {
 					Account.$save_user($scope.account).then(function(data){
@@ -565,6 +575,11 @@ angular.module("RatherApp", [
 					$state.go("welcome");
 				}
 			});
+			$scope.keyDown = function(e) {
+				if(e.keyCode == 13) {
+					$scope.login();
+				}
+			};
 			$scope.login = function(){
 				Account.$login($scope.account.username, $scope.account.password).then(function(object){
 					$state.go("welcome");
@@ -611,9 +626,6 @@ angular.module("RatherApp", [
 						error.addClass('errorNo');
 					}
 				});
-			};
-			$scope.keyDown = function() {
-				alert('hey');
 			};
 			$scope.recoverPassword = function () {
 				$state.go("recoverpw");

@@ -5,10 +5,10 @@
 		<p class="panelHeader">Sign Up!</p>
 		<hr/>
 		<p class="text-center">Create an account and start submitting your own Rathers</p>
-		<input id="txtUsername" type="username" name="username" class="form-control" placeholder="Username" ng-model="account.username" required>
-		<input id="txtEmail" name="email" class="form-control top-buffer-xs" placeholder="Email Address" ng-model="account.email" required>
-		<input id="txtPassword1" type="password" class="form-control top-buffer-xs" placeholder="Password" ng-model="account.password" required>
-		<input id="txtPassword2" ng-change="passwordsMatch()" type="password" class="form-control top-buffer-xs" placeholder="Retype Password" ng-model="account.password2" required>
+		<input id="txtUsername" type="username" name="username" class="form-control" placeholder="Username" ng-model="account.username" ng-keydown="keyDown($event)" required>
+		<input id="txtEmail" name="email" class="form-control top-buffer-xs" placeholder="Email Address" ng-model="account.email" ng-keydown="keyDown($event)" required>
+		<input id="txtPassword1" type="password" class="form-control top-buffer-xs" placeholder="Password" ng-model="account.password" ng-keydown="keyDown($event)" required>
+		<input id="txtPassword2" ng-change="passwordsMatch()" type="password" class="form-control top-buffer-xs" placeholder="Retype Password" ng-model="account.password2" ng-keydown="keyDown($event)" required>
 		<button type="button" class="btn button" ng-click='save_user()'>Go!</button>
 		<p id="blankSubmitError" ng-class="{toggle: errorYes}" class="errorNo"></p>
 	</div>

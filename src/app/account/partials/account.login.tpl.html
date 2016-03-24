@@ -5,8 +5,8 @@
 		<p class="panelHeader">Login</p>
 		<hr/>
 		<p class="text-center">Oh, it's you again...</p>
-		<input id="txtUsername" auto-focus="" type="text" name="username_email" class="form-control" placeholder="Username" ng-model="account.username" required>
-		<input id="txtPassword" type="password" class="form-control top-buffer-xs" placeholder="Password" ng-model="account.password" required validate-password="keyDown()">
+		<input id="txtUsername" auto-focus="" type="text" name="username_email" class="form-control" placeholder="Username" ng-model="account.username" ng-keydown="keyDown($event)" required>
+		<input id="txtPassword" type="password" class="form-control top-buffer-xs" placeholder="Password" ng-model="account.password" ng-keydown="keyDown($event)" required>
 		<button type="button" class="btn button" ng-click='login()'>Go!</button>
 		<p id="blankSubmitError" ng-class="{toggle: errorYes}" class="errorNo"></p>
 		<div class="col-xs-12 text-right">
