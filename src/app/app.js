@@ -108,8 +108,22 @@ angular.module("RatherApp", [
 				});
 			};
 
+			$scope.share = function(e) {
+				var rather1 = comparison.rathers[0].rather_text.substr(0, 1).toLowerCase() + comparison.rathers[0].rather_text.substr(1);
+				var rather2 = comparison.rathers[1].rather_text.substr(0, 1).toLowerCase() + comparison.rathers[1].rather_text.substr(1);
+				FB.ui({
+					app_id: '1581753632138964',
+				  method: 'share',
+				  href: window.location.href,
+					title: 'Would you rather ' + rather1 + ', or ' + rather2 + '?'
+				}, function(response){});
+				debugger;
+			};
+
 			function search(Rather) {
 				$scope.comparison = Rather.rathers;
+				$scope.rather1 = Rather.rathers[0].rather_text.substr(0, 1).toLowerCase() + Rather.rathers[0].rather_text.substr(1);
+				$scope.rather2 = Rather.rathers[1].rather_text.substr(0, 1).toLowerCase() + Rather.rathers[1].rather_text.substr(1);
 				newRather = Rather.rathers;
 				$location.search("r1", Rather.rathers[0].id);
 				$location.search("r2", Rather.rathers[1].id);

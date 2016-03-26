@@ -48,6 +48,21 @@ li:before {
     text-decoration: none;
 }
 
+.fb-link {
+  background: linear-gradient(@fb-link-color, @fb-link-color-dark);
+  color: @font-color-1;
+}
+
+.fb-link:hover {
+  background: @fb-link-color-dark;
+  color: @font-color-1-dark;
+}
+
+.fb-link:visited {
+  background: linear-gradient(@fb-link-color, @fb-link-color-dark);
+  color: @font-color-1;
+}
+
 .title {
    //  margin-top: 10%;
     font-family: @title-font;
@@ -290,6 +305,14 @@ li:before {
     h2 {
         font-size: 40px;
         font-weight: 600;
+    }
+}
+@media(max-width:501px){
+    .modal-title-text {
+      font-size: 15px;
+    }
+    body {
+      font-size: 15px;
     }
 }
 /* s */

@@ -4,7 +4,13 @@
         <base href="/"></base>
         <meta charset="UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Would You Rather?</title>
+        <title>Would You Rather...</title>
+        <meta property="og:url"           content="http://wouldyourather.us" />
+    	<meta property="og:type"          content="website" />
+        <meta property="og:site_name"     content="Would You Rather..." />
+    	<meta property="og:title"         content="Would You Rather..." />
+    	<meta property="og:description"   content="Would You Rather - The community driven game of stupid questions." />
+
         <meta name="description" content="">
         <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -62,6 +68,24 @@
         </script>
     </head>
     <body>
+        <!-- Facebook SDK -->
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '1581753632138964',
+              xfbml      : true,
+              version    : 'v2.5'
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
         <!-- App -->
         <navigation-bar></navigation-bar>
         <div ui-view></div>

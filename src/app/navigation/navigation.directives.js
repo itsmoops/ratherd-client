@@ -28,7 +28,7 @@ angular.module('navigation.directives',[
 
 		$scope.logout = function(){
 			Account.$logout();
-			$state.go("play");
+			$state.go("landing");
 		};
 
 		function checkSize() {
