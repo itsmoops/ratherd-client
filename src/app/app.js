@@ -16,9 +16,13 @@ angular.module("RatherApp", [
 	'ngLodash',
 	'chart.js',
 	'ngAnimate',
-	'ui.bootstrap'
+	'ui.bootstrap',
+	'angularUtils.directives.dirPagination'
 ])
 
+.controller('RepeatController', function RepeatController($scope) {
+	$scope.number = ($scope.$index + 1) + ($scope.currentPage - 1) * $scope.pageSize;
+})
 // Using ui.router stateProvider to define single page application states
 .config(['$stateProvider', 'BCConfigProvider', 'API_DOMAIN', '$locationProvider', function($stateProvider, BCConfigProvider, API_DOMAIN, $locationProvider) {
 	if (window.location.hostname !== "127.0.0.1") {
@@ -117,7 +121,6 @@ angular.module("RatherApp", [
 				  href: window.location.href,
 					title: 'Would you rather ' + rather1 + ', or ' + rather2 + '?'
 				}, function(response){});
-				debugger;
 			};
 
 			function search(Rather) {
@@ -238,6 +241,18 @@ angular.module("RatherApp", [
 				checkSize();
 			});
 			$scope.ranked = ranked;
+
+
+			// Pagination
+			$scope.pageSize = 10;
+			$scope.number = 1;
+			$scope.currentPage = 1;
+
+			$scope.pageChangeHandler = function(num) {
+				$scope.currentPage = num;
+			};
+
+			// Classes
 			$("#biggestWinner").focus();
 			$scope.predicate = '-ratio';
 			$scope.order = function(predicate, sender) {
