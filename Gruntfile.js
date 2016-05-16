@@ -39,7 +39,7 @@ module.exports = function ( grunt ) {
               stdin: true,
               stderr: true
             },
-            command: 'cd ../wouldyourather-server/; python manage.py runserver 8080'
+            command: 'cd ../ratherd-server/; python manage.py runserver 8080'
         }
     },
     concurrent: {
@@ -55,7 +55,7 @@ module.exports = function ( grunt ) {
         options:{
           space: '  ',
           dest: '<%= build_dir %>/src/app/config.js',
-          name: 'wouldyourather.config'
+          name: 'ratherd.config'
         },
         constants: {
           ENV: 'development',
@@ -70,13 +70,13 @@ module.exports = function ( grunt ) {
         options:{
           space: '  ',
           dest: '<%= build_dir %>/src/app/config.js',
-          name: 'wouldyourather.config'
+          name: 'ratherd.config'
         },
         constants: {
           ENV: 'production',
           DEV_MODE: false,
-          API_DOMAIN: 'http://api.wouldyourather.us',
-          LOCAL_DOMAIN: 'wouldyourather.us',
+          API_DOMAIN: 'http://api.ratherd.com',
+          LOCAL_DOMAIN: 'ratherd.com',
           LOCAL_PROTOCOL: 'https'
         }
       }

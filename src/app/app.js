@@ -12,7 +12,7 @@ angular.module("RatherApp", [
 	'templates-common',
 	'ui.router',
 	'BaseClass',
-	'wouldyourather.config',
+	'ratherd.config',
 	'ngLodash',
 	'chart.js',
 	'ngAnimate',
@@ -29,10 +29,6 @@ angular.module("RatherApp", [
 		$locationProvider.html5Mode(true);
 	}
 	$stateProvider
-	.state('landing',{
-		url: '/home',
-		templateUrl: 'landing/partials/landing.tpl.html'
-	})
 	.state('play',{
 		url:'/play?r1&r2',
 		templateUrl: 'rathers/partials/rathers.comparison.tpl.html',
