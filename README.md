@@ -1,10 +1,10 @@
 # wouldyourather-client
-WYR up and running from scratch:
+Ratherd up and running from scratch:
 
 1. Create base folders:
-wouldyourather
-/wouldyourather-client
-/wouldyourather-server
+ratherd
+/ratherd-client
+/ratherd-server
 
 2. Clone client and server repos into appropriate subfolders:
 
