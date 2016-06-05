@@ -73,10 +73,12 @@ module.exports = {
       'vendor/angular-ui-router/release/angular-ui-router.js',
       'vendor/angular-ui-utils/modules/route/route.js',
       'vendor/angular-cookie/angular-cookie.js',
+      'vendor/angular-dropdowns/angular-dropdowns.js'
     ],
     css: [
       'vendor/bootstrap/dist/css/bootstrap.css',
-      'vendor/angular-chart.js/dist/angular-chart.css'
+      'vendor/angular-chart.js/dist/angular-chart.css',
+      'vendor/angular-dropdowns/angular-dropdowns.css'
     ],
     eot: [
       'vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.eot'

@@ -17,7 +17,8 @@ angular.module("RatherApp", [
 	'chart.js',
 	'ngAnimate',
 	'ui.bootstrap',
-	'angularUtils.directives.dirPagination'
+	'angularUtils.directives.dirPagination',
+	'ngDropdowns'
 ])
 
 .controller('RepeatController', function RepeatController($scope) {
@@ -25,10 +26,14 @@ angular.module("RatherApp", [
 })
 // Using ui.router stateProvider to define single page application states
 .config(['$stateProvider', 'BCConfigProvider', 'API_DOMAIN', '$locationProvider', function($stateProvider, BCConfigProvider, API_DOMAIN, $locationProvider) {
-	if (window.location.hostname !== "127.0.0.1") {
+	if (window.location.hostname !== "127.0.0.1" && window.location.hostname !== "localhost") {
 		$locationProvider.html5Mode(true);
 	}
 	$stateProvider
+	.state('landing',{
+		url: '/home',
+		templateUrl: 'landing/partials/landing.tpl.html'
+	})
 	.state('play',{
 		url:'/play?r1&r2',
 		templateUrl: 'rathers/partials/rathers.comparison.tpl.html',
@@ -218,10 +223,10 @@ angular.module("RatherApp", [
 		templateUrl:'rathers/partials/rathers.top.tpl.html',
 		resolve: {
 			'ranked':function(Rather){
-				return Rather.$ranked();
+				return Rather.$ranked(1, "winner");
 			}
 		},
-		controller: function($scope, $uibModal, Rather, ranked, lodash){
+		controller: function($scope, $uibModal, Rather, ranked, lodash, paginationService){
 			checkSize();
 			function checkSize() {
 				if (window.innerWidth < 768) {
@@ -236,36 +241,51 @@ angular.module("RatherApp", [
 			$(window).resize(function(){
 				checkSize();
 			});
-			$scope.ranked = ranked;
+			$scope.ranked = ranked.rathers;
 
+			// DropDown
+			$scope.selected = "winner";
+			$scope.ddSelectOptions = [
+	        {
+	            text: 'Biggest Winner',
+	            value: 'winner'
+	        },
+	        {
+	            text: 'Biggest Loser',
+	            value: 'loser'
+	        },
+					{
+	            text: 'Most Contested',
+	            value: 'contested'
+	        }
+	    ];
+
+	    $scope.ddSelectSelected = {
+				text: 'Biggest Winner',
+				value: 'winner'
+			};
+
+			$scope.dropDownHandler = function(selection) {
+				$scope.currentPage = 1;
+				$scope.selected = selection.value;
+				paginationService.setCurrentPage("__default", 1);
+				Rather.$ranked($scope.currentPage, selection.value).then(function(newPage){
+					$scope.ranked = newPage.rathers;
+					ranked.rathers = newPage.rathers;
+				});
+			};
 
 			// Pagination
+			$scope.paginationData = ranked.pagination;
 			$scope.pageSize = 10;
-			$scope.number = 1;
 			$scope.currentPage = 1;
 
 			$scope.pageChangeHandler = function(num) {
 				$scope.currentPage = num;
-			};
-
-			// Classes
-			$("#biggestWinner").focus();
-			$scope.predicate = '-ratio';
-			$scope.order = function(predicate, sender) {
-				if (sender === "wins") {
-					$('#biggestWinner').removeClass('inactive-sort');
-					$('#biggestWinner').addClass('active-sort');
-					$('#biggestLoser').removeClass('active-sort');
-					$('#biggestLoser').addClass('inactive-sort');
-				}
-				else if (sender === "losses") {
-					$('#biggestWinner').removeClass('active-sort');
-					$('#biggestWinner').addClass('inactive-sort');
-					$('#biggestLoser').removeClass('inactive-sort');
-					$('#biggestLoser').addClass('active-sort');
-				}
-				$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
-				$scope.predicate = predicate;
+				Rather.$ranked(num, $scope.selected).then(function(newPage){
+					$scope.ranked = newPage.rathers;
+					ranked.rathers = newPage.rathers;
+				});
 			};
 
 			$scope.rather_info = function (rather) {
@@ -273,9 +293,8 @@ angular.module("RatherApp", [
 						animation: true,
 						templateUrl: 'ratherinfo.html',
 						controller: ['$scope', '$filter', '$uibModalInstance', function($scope, $filter, $uibModalInstance) {
-								var obj = lodash.find(ranked, {"id": rather});
+								var obj = lodash.find(ranked.rathers, {"id": rather});
 								var title = obj.rather_text;
-								//$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
 								$scope.header_text = title.toUpperCase();
 								$scope.user = obj.user.username;
 								$scope.date = $filter('date')(obj.date_submitted, "MM/dd/yyyy");
@@ -605,6 +624,20 @@ angular.module("RatherApp", [
 					$scope.login();
 				}
 			};
+
+			$scope.login_fb = function() {
+				FB.login(FB.getLoginStatus(function(response) {
+					window.fb.s = response;
+					if (response.status === "connected") {
+	          FB.api('/me', function(response) {
+		          window.fb.u = response;
+	          });
+						Account.$login_fb();
+						$state.go("welcome");
+					}
+				}.bind(this)));
+			};
+
 			$scope.login = function(){
 				Account.$login($scope.account.username, $scope.account.password).then(function(object){
 					$state.go("welcome");
@@ -701,10 +734,10 @@ angular.module("RatherApp", [
 		templateUrl: 'account/partials/account.user.tpl.html',
 		resolve: {
 			'user_rathers':function(Rather){
-				return Rather.$user_data();
+				return Rather.$user_data(1, "winner");
 			}
 		},
-		controller: function($scope, $uibModal, Account, Rather, $state, user_rathers, lodash){
+		controller: function($scope, $uibModal, Account, Rather, $state, user_rathers, lodash, paginationService){
 			checkSize();
 			function checkSize() {
 				if (window.innerWidth < 768) {
@@ -721,29 +754,52 @@ angular.module("RatherApp", [
 			});
 
 			$("#biggestWinner").focus();
-			$scope.predicate = '-ratio';
-			$scope.order = function(predicate, sender) {
-				if (sender === "wins") {
-					$('#biggestWinner').removeClass('inactive-sort');
-					$('#biggestWinner').addClass('active-sort');
-					$('#biggestLoser').removeClass('active-sort');
-					$('#biggestLoser').addClass('inactive-sort');
-				}
-				else if (sender === "losses") {
-					$('#biggestWinner').removeClass('active-sort');
-					$('#biggestWinner').addClass('inactive-sort');
-					$('#biggestLoser').removeClass('inactive-sort');
-					$('#biggestLoser').addClass('active-sort');
-				}
-				$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
-				$scope.predicate = predicate;
+
+			$scope.user_rathers = user_rathers.rathers;
+
+			// DropDown
+			$scope.selected = "winner";
+			$scope.ddSelectOptions = [
+	        {
+	            text: 'Biggest Winner',
+	            value: 'winner'
+	        },
+	        {
+	            text: 'Biggest Loser',
+	            value: 'loser'
+	        },
+					{
+	            text: 'Most Contested',
+	            value: 'contested'
+	        }
+	    ];
+
+	    $scope.ddSelectSelected = {
+				text: 'Biggest Winner',
+				value: 'winner'
 			};
 
-			$scope.user_rathers = user_rathers;
+			$scope.dropDownHandler = function(selection) {
+				$scope.currentPage = 1;
+				$scope.selected = selection.value;
+				paginationService.setCurrentPage("__default", 1);
+				Rather.$user_data($scope.currentPage, selection.value).then(function(newPage){
+					$scope.user_rathers = newPage.rathers;
+					user_rathers.rathers = newPage.rathers;
+				});
+			};
 
-			$scope.logout = function(){
-				Account.$logout();
-				$state.go("play");
+			// Pagination
+			$scope.paginationData = user_rathers.pagination;
+			$scope.pageSize = 10;
+			$scope.currentPage = 1;
+
+			$scope.pageChangeHandler = function(num) {
+				$scope.currentPage = num;
+				Rather.$user_data(num, $scope.selected).then(function(newPage){
+					$scope.user_rathers = newPage.rathers;
+					user_rathers.rathers = newPage.rathers;
+				});
 			};
 
 			$scope.rather_info = function (rather) {
@@ -751,7 +807,7 @@ angular.module("RatherApp", [
 						animation: true,
 						templateUrl: 'ratherinfo.html',
 						controller: ['$scope', '$filter', '$uibModalInstance', function($scope, $filter, $uibModalInstance) {
-								var obj = lodash.find(user_rathers, {"id": rather});
+								var obj = lodash.find(user_rathers.rathers, {"id": rather});
 								var title = obj.rather_text;
 								//$scope.header_text = title.charAt(0).toUpperCase() + title.substr(1);
 								$scope.header_text = title.toUpperCase();
