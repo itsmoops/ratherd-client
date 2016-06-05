@@ -49,9 +49,15 @@ angular.module('rather.models',[
 		return defer.promise;
 	};
 
-	_constructor.$ranked = function(obj) {
+	_constructor.$ranked = function(num, sort) {
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'ranked/';
+		if (num) {
+			url += "?page=" + num;
+		}
+		if (sort) {
+			url += "&sort=" + sort;
+		}
 		$http({method: 'GET', url:url }).success(function(data, status, headers, config){
 			defer.resolve(data);
 		})
@@ -61,9 +67,15 @@ angular.module('rather.models',[
 		return defer.promise;
 	};
 
-	_constructor.$user_data = function(obj) {
+	_constructor.$user_data = function(num, sort) {
 		var defer = $q.defer();
 		var url = _constructor.apiBase + _constructor.api + 'user_rathers/';
+		if (num) {
+			url += "?page=" + num;
+		}
+		if (sort) {
+			url += "&sort=" + sort;
+		}
 		$http({method: 'GET', url:url }).success(function(data, status, headers, config){
 			defer.resolve(data);
 		})

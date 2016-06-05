@@ -69,24 +69,40 @@
     <div class="col-xs-12 col-md-10 col-lg-8 default-panel rankPanel">
         <p class="panelHeader topHeader">My Rathers</p>
         <hr/>
-        <div class="text-center"> <a id="biggestWinner" href="" class="filterBy active-sort" ng-click="order('-ratio', 'wins')">Biggest Winner</a> | <a id="biggestLoser" href="" class="filterBy" ng-click="order('ratio', 'losses')">Biggest Loser</a>
-            <!-- <a href="" class="filterBy" ng-click="order('-wins')">Most Wins Total</a> |			<a href="" class="filterBy" ng-click="order('-losses')">Most Losses Total</a> -->
-        </div>
-        <!-- repeater -->
-        <div class="col-xs-12">
+        <div>
             <div class="col-xs-12">
-                <div class="col-xs-1 col-sm-1 text-right"></div>
-                <div class="col-xs-8 col-sm-9"></div>
-                <div class="col-xs-2 col-sm-2"><u>Score</u>
+                <div class="col-xs-0 col-sm-8 col-md-9"></div>
+                <div class="col-xs-12 col-sm-4 col-sm-3">
+                    <div class="dropdown-container">
+                        <div dropdown-select="ddSelectOptions"
+                            dropdown-model="ddSelectSelected"
+                            dropdown-item-label="text"
+                            dropdown-onchange="dropDownHandler(selected)" >
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="ratherLists" ng-repeat="item in user_rathers | orderBy:predicate | limitTo:10">
+        <div>
+            <div class="col-xs-12">
+                <div class="col-xs-1 col-sm-1 text-right"></div>
+                <div class="col-xs-8 col-sm-9"></div>
+                <div class="col-xs-2 col-sm-2 score-text">Score</div>
+            </div>
+        </div>
+        <div class="ratherLists" dir-paginate="item in user_rathers | itemsPerPage:pageSize"
+        ng-controller="RepeatController" total-items="paginationData.total_count">
             <div class="col-xs-12 orderedRather">
-                <div class="col-xs-1 col-sm-1 text-right">{{$index + 1}}.</div>
+                <div class="col-xs-1 col-sm-1 text-right">{{number}}.</div>
                 <div class="col-xs-8 col-sm-9"><a class="my-rathers" ng-click="rather_info(item.id)" data-toggle="tooltip" uib-tooltip="Matches played: {{item.wins + item.losses}}" tooltip-popup-delay="1000">{{item.rather_text}}</a></div>
                 <div class="col-xs-2 col-sm-2 user-score">{{item.ratio * 100| number :1 }}%</div>
             </div>
+        </div>
+        <!-- Paginator Controls -->
+        <div class="col-xs-12 text-center">
+            <dir-pagination-controls template-url="rathers/partials/dirPagination.tpl.html" max-size="10" direction-links="true" boundary-links="true"
+            on-page-change="pageChangeHandler(newPageNumber)" ng-model="paginationData">
+            </dir-pagination-controls>
         </div>
     </div>
     <div id="divRightBuffer" class="col-md-1 col-lg-2"></div>

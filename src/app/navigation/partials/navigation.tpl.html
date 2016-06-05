@@ -18,6 +18,9 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li ui-sref-active='active'><a ui-sref='about' ng-click="isCollapsed = true">
+                    <span class="nav-icon glyphicon glyphicon-info-sign nav-about"></span>{{ info }}</a>
+                </li>
                 <li ui-sref-active='active'><a ui-sref='signup' ng-show="loggedInFalse" ng-click="isCollapsed = true">Sign up</a>
                 </li>
                 <li ui-sref-active='active'><a ui-sref='login' ng-show="loggedInFalse" ng-click="isCollapsed = true">Login</a>
@@ -26,9 +29,6 @@
                     <span class="nav-icon glyphicon glyphicon-user"></span>{{ user }}</a>
                 </li>
                 <li ui-sref-active='active'><a class="logout-link" ng-show="loggedInTrue" ng-click="logout()">Logout</a>
-                </li>
-				<li ui-sref-active='active'><a ui-sref='about' ng-click="isCollapsed = true">
-                    <span class="nav-icon glyphicon glyphicon-info-sign nav-about"></span>{{ info }}</a>
                 </li>
             </ul>
         </div>
